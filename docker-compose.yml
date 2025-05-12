@@ -47,6 +47,19 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+    phpmyadmin:
+        image: 'phpmyadmin:5.2'
+        ports:
+            - '8888:80'
+        environment:
+            PMA_HOST: mysql
+            PMA_USER: '${DB_USERNAME}'
+            PMA_PASSWORD: '${DB_PASSWORD}'
+            UPLOAD_LIMIT: '512M'
+        depends_on:
+            - mysql
+        networks:
+            - kanboard
 networks:
     kanboard:
         driver: bridge
