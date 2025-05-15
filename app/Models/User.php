@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -44,5 +45,18 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function cards(): BelongsToMany
+    {
+        return $this->belongsToMany(Card::class, 'card_members')
+            ->withTimestamps();
+    }
+
+    public function boards(): BelongsToMany
+    {
+        return $this->belongsToMany(Board::class, 'board_members')
+            ->withPivot('role', 'created_at')
+            ->withTimestamps();
     }
 }
