@@ -15,6 +15,7 @@ return new class extends Migration
             $table->integer('id', true);
             $table->string('title');
             $table->string('background_color', 50)->default('gray');
+            $table->unsignedBigInteger('created_by');
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent();
         });

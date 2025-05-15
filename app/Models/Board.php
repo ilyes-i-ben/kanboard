@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $id
  * @property string $title
  * @property string $background_color
+ * @property int $created_by
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
@@ -23,6 +25,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Board extends Model
 {
+    use HasFactory;
+
 	protected $table = 'boards';
 
 	protected $fillable = [
