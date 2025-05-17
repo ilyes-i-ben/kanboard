@@ -23,6 +23,7 @@ services:
             - kanboard
         depends_on:
             - mysql
+        restart: unless-stopped
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -47,6 +48,7 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+        restart: unless-stopped
     phpmyadmin:
         image: 'phpmyadmin:5.2'
         ports:
@@ -60,6 +62,7 @@ services:
             - mysql
         networks:
             - kanboard
+        restart: unless-stopped
 networks:
     kanboard:
         driver: bridge
