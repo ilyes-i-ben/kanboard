@@ -56,7 +56,7 @@ class User extends Authenticatable
     public function boards(): BelongsToMany
     {
         return $this->belongsToMany(Board::class, 'board_members')
-            ->withPivot('role', 'created_at')
-            ->withTimestamps();
+            ->withPivot('created_at')
+            ;
     }
 }
