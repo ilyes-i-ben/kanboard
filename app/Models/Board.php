@@ -31,8 +31,18 @@ class Board extends Model
 
 	protected $fillable = [
 		'title',
-		'background_color'
+        'description',
+		'background_color',
 	];
+
+    // we use this in order to fill automaticlly created_by...
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->created_by = auth()->id();
+        });
+    }
 
     public function members(): BelongsToMany
     {
