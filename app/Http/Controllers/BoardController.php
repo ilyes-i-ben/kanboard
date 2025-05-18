@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BoardRequest;
 use App\Models\Board;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BoardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $allBoards = Auth::user()->boards()->get();
@@ -32,9 +30,13 @@ class BoardController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BoardRequest $request)
     {
-        //
+        Auth::user()->boards()->create($request->validated());
+
+        return redirect(status: 201)
+            ->route('boards.index')
+            ->with('success', 'Board created successfully !');
     }
 
     /**
