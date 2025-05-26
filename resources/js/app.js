@@ -7,6 +7,7 @@ import 'tinymce/skins/content/default/content.css';
 import 'tinymce/icons/default/icons';
 import 'tinymce/themes/silver/theme';
 import 'tinymce/models/dom/model';
+import sort from '@alpinejs/sort'
 import Alpine from 'alpinejs';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -17,5 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+Alpine.plugin(sort)
 window.Alpine = Alpine;
 Alpine.start();
