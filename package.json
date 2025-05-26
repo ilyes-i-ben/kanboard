@@ -18,6 +18,7 @@
         "vite": "^6.2.4"
     },
     "dependencies": {
+        "@alpinejs/sort": "^3.14.9",
         "tinymce": "^7.9.0"
     }
 }

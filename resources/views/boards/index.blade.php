@@ -22,12 +22,12 @@
         {{--TODO:: move to component--}}
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                @foreach ($ownedBoards as $board)
+                @foreach ($createdBoards as $board)
                     <div
                         class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-2 border-black dark:border-gray-200"
                         style="background-color: {{ $board->background_color }}"
                     >
-                        <a href="{{ route('boards.index', ['id' => $board->id]) }}" class="block p-6">
+                        <a href="{{ route('boards.show', $board->id) }}" class="block p-6">
                             <h3 class="text-lg font-semibold text-black dark:text-white">
                                 {{ $board->title }}
                             </h3>
@@ -58,7 +58,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @foreach ($boards as $board)
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <a href="{{ route('boards.index', ['id' => $board->id]) }}" class="block p-6">
+                        <a href="{{ route('boards.show', $board->id) }}" class="block p-6">
                             <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
                                 {{ $board->name }}
                             </h3>

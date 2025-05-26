@@ -11,12 +11,13 @@ class BoardController extends Controller
 {
     public function index()
     {
-        $allBoards = Auth::user()->boards()->get();
+        $boards = auth()->user()->boards()
+            ->where('created_by', '!=', auth()->id())
+            ->get();
 
-        $ownedBoards = $allBoards->filter(fn ($b) => $b->created_by === Auth::id());
-        $boards = $allBoards->diff($ownedBoards);
+        $createdBoards = auth()->user()->createdBoards()->get();
 
-        return view('boards.index', compact('boards', 'ownedBoards'));
+        return view('boards.index', compact('boards', 'createdBoards'));
     }
 
     /**
@@ -32,7 +33,7 @@ class BoardController extends Controller
      */
     public function store(BoardRequest $request)
     {
-        Auth::user()->boards()->create($request->validated());
+        auth()->user()->boards()->create($request->validated());
 
         return redirect(status: 201)
             ->route('boards.index')
@@ -44,7 +45,7 @@ class BoardController extends Controller
      */
     public function show(Board $board)
     {
-        //
+        return view('board.show', compact('board'));
     }
 
     /**
