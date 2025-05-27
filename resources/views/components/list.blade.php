@@ -16,7 +16,6 @@
         class="cards-container flex-1 overflow-y-auto min-h-[200px] max-h-[calc(100vh-220px)]"
         x-sort="updateCardPosition($item, $position, listId)"
         x-sort:group="cards"
-        x-sort.ghost
     >
         @foreach($list->cards->sortBy('position') as $card)
             <x-card :card="$card" />
