@@ -44,7 +44,6 @@
         class="lists-container flex space-x-4 overflow-x-auto pb-4"
         x-sort="updateListPosition($item, $position)"
         x-sort:group="lists"
-        x-sort.ghost
     >
         @foreach($board->lists->sortBy('position') as $list)
             <x-list :list="$list" />
@@ -66,8 +65,6 @@
     function boardComponent() {
         return {
             updateCardPosition(cardId, position, listId) {
-                const position_value = this.calculateNewPosition(position);
-
                 fetch('/api/cards/move', {
                     method: 'PUT',
                     headers: {
@@ -75,9 +72,10 @@
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                     },
                     body: JSON.stringify({
+                        board_id: {{ $board->id }},
                         card_id: cardId,
                         list_id: listId,
-                        position: position_value
+                        position: position,
                     })
                 })
                     .then(response => response.json())
