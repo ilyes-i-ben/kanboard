@@ -22,3 +22,4 @@ Route::middleware('auth')->group(function () {
 Route::resource('/boards', \App\Http\Controllers\BoardController::class)->except('create');
 
 require __DIR__.'/auth.php';
+require __DIR__.'/api.php';
