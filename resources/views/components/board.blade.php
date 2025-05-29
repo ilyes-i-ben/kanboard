@@ -10,19 +10,19 @@
 
         <div class="flex items-center space-x-4">
             <!-- Board members display -->
-            <div class="bg-white/20 backdrop-blur-sm rounded-md px-3 py-1">
-                <div class="flex -space-x-2 overflow-hidden">
+
+            <div class="bg-white/10 backdrop-blur-sm rounded-md px-3 py-1">
+                <div class="flex p-2 -space-x-1 overflow-hidden items-center">
                     @foreach($board->members->take(5) as $member)
-                        <img
-                            src="{{ $member->profile_photo_url }}"
-                            alt="{{ $member->name }}"
-                            class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
-                        >
+                        <x-user.avatar :user="$member"/>
                     @endforeach
                     @if($board->members->count() > 5)
-                        <span class="flex items-center justify-center h-8 w-8 rounded-full bg-gray-200 text-xs font-medium text-gray-800">
-                                +{{ $board->members->count() - 5 }}
-                            </span>
+                        <span
+                            class="inline-flex items-center justify-center h-7 w-7 rounded-full bg-gray-100 text-[11px] font-semibold text-gray-800 ring-1 ring-white"
+                            style="font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;"
+                        >
+                            +{{ $board->members->count() - 5 }}
+                        </span>
                     @endif
                 </div>
             </div>
