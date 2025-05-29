@@ -3,7 +3,7 @@
 @section('content')
     <h1 style="text-align: center; margin-bottom: 24px;">Bienvenue sur Kanboard !</h1>
 
-    <p>Salut {{ $user->name }},</p>
+    <p>Salut {{ $name }},</p>
 
     <p>On est super contents de vous compter parmi nous sur Kanboard, votre nouvel espace pour organiser vos projets en toute simplicité et en équipe.</p>
 
