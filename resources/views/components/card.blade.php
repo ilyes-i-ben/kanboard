@@ -32,11 +32,7 @@
         @if($card->members->count() > 0)
             <div class="flex -space-x-2 overflow-hidden">
                 @foreach($card->members->take(3) as $member)
-                    <img
-                        src="{{ $member->profile_photo_url }}"
-                        alt="{{ $member->name }}"
-                        class="inline-block h-6 w-6 rounded-full ring-2 ring-white dark:ring-gray-700"
-                    >
+                    <x-user.avatar :user="$member"/>
                 @endforeach
                 @if($card->members->count() > 3)
                     <span class="flex items-center justify-center h-6 w-6 rounded-full bg-gray-200 dark:bg-gray-600 text-xs font-medium text-gray-800 dark:text-gray-300">
@@ -92,7 +88,7 @@
                         <div class="flex flex-wrap gap-2">
                             @forelse($card->members as $member)
                                 <div class="flex items-center space-x-2">
-                                    <img src="{{ $member->profile_photo_url }}" alt="{{ $member->name }}" class="h-8 w-8 rounded-full">
+                                    <x-user.avatar :user="$member"/>
                                     <span class="text-sm text-gray-700 dark:text-gray-300">{{ $member->name }}</span>
                                 </div>
                             @empty
