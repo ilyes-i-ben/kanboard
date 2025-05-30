@@ -2,27 +2,11 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * Class Board
- *
- * @property int $id
- * @property string $title
- * @property string $background_color
- * @property int $created_by
- * @property Carbon $created_at
- * @property Carbon $updated_at
- *
- * @property Collection|ListModel[] $lists
- *
- * @package App\Models
- */
 class Board extends Model
 {
     use HasFactory;
