@@ -3,6 +3,7 @@ import './theme.js';
 import 'tinymce/tinymce';
 import 'tinymce/skins/ui/oxide/skin.min.css';
 import 'tinymce/skins/content/default/content.min.css';
+// TODO: remove the body margin 1rem since it's causing glitch in dark mode.
 import 'tinymce/skins/content/default/content.css';
 import 'tinymce/icons/default/icons';
 import 'tinymce/themes/silver/theme';
