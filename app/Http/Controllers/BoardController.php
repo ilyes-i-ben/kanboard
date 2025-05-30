@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BoardRequest;
 use App\Models\Board;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class BoardController extends Controller
 {

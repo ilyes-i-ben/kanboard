@@ -10,8 +10,7 @@
 
         <div class="flex items-center space-x-4">
             <!-- Board members display -->
-
-            <div class="bg-white/10 backdrop-blur-sm rounded-md px-3 py-1">
+            <a href="{{ route('boards.members.index', $board) }}" class="bg-white/10 backdrop-blur-sm rounded-md px-3 py-1 hover:bg-white/20 transition">
                 <div class="flex p-2 -space-x-1 overflow-hidden items-center">
                     @foreach($board->members->take(5) as $member)
                         <x-user.avatar :user="$member"/>
@@ -25,18 +24,7 @@
                         </span>
                     @endif
                 </div>
-            </div>
-
-            <!-- Board actions dropdown placeholder -->
-            <button class="bg-white/20 backdrop-blur-sm text-white rounded-md p-2 hover:bg-white/30 transition">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
-                </svg>
-            </button>
+            </a>
         </div>
     </div>
 
