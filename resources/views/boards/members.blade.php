@@ -143,7 +143,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('boards.members.add', $board) }}">
+            <form method="POST" action="{{ route('boards.invitations.store', $board) }}">
                 @csrf
                 <div class="mb-6">
                     <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">

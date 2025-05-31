@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Board;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BoardRequest extends FormRequest
+class BoardCreateRequest extends FormRequest
 {
     public function authorize(): bool
     {
+        // all users can create boards..
         return true;
     }
 

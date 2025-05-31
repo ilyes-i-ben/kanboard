@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Board\BoardInvitationCreateRequest;
 use App\Models\Board;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,13 +17,5 @@ class BoardMemberController extends Controller
 
         return view('boards.members', compact('board'));
     }
-
-    public function add(Request $request, Board $board)
-    {
-//        return back()->with('invitation_sent', 'Invitation email sent successfully.');
-
-
-        return back()->withErrors(['email' => 'Already invited.'])->withInput();
-    }
-
+    // TODO: add the remove..
 }

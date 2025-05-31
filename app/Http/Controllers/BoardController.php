@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BoardRequest;
+use App\Http\Requests\Board\BoardCreateRequest;
 use App\Models\Board;
 use Illuminate\Http\Request;
 
@@ -30,7 +30,7 @@ class BoardController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(BoardRequest $request)
+    public function store(BoardCreateRequest $request)
     {
         auth()->user()->boards()->create($request->validated());
 
