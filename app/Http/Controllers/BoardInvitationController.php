@@ -7,15 +7,11 @@ use App\Models\Board;
 use App\Models\Invitation;
 use App\Models\User;
 use App\Notifications\BoardInvitationNotification;
+use Illuminate\Support\Facades\Notification;
 use Str;
 
 class BoardInvitationController extends Controller
 {
-    public function index()
-    {
-        dd('got it !');
-    }
-
     public function store(BoardInvitationCreateRequest $request, Board $board)
     {
         $email = $request->validated('email');
@@ -41,11 +37,11 @@ class BoardInvitationController extends Controller
 
         $invitee = User::where('email', $email)->first();
 
-        if (!empty($invitee)) {
-           $invitee->notify(new BoardInvitationNotification($board, $invitation));
+        if ($invitee) {
+            $invitee->notify(new BoardInvitationNotification($board, $invitation));
         } else {
-            // TODO: add when user doesn't exist...
-           return back()->withErrors(['email' => 'user doesnt exists'])->withInput();
+            $invitation->update(['waiting_user_registration' => true]);
+            Notification::route('mail', $email)->notify(new BoardInvitationNotification($board, $invitation));
         }
 
         return back()->with(['invitation_sent' => 'Invitation sent !'])->withInput();

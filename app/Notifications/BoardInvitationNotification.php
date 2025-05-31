@@ -32,6 +32,7 @@ class BoardInvitationNotification extends Notification implements ShouldQueue
 
     public function toMail(object $notifiable): MailMessage
     {
+        // TODO: add when notifiable is AnonymousNotifiable.
         return (new MailMessage)
             ->line('Invitationt to board')
             ->action('Notification Action', url('/'))
