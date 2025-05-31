@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property Board $board
+ */
 class Invitation extends Model
 {
     public const string STATUS_PENDING = 'pending';
@@ -15,17 +19,26 @@ class Invitation extends Model
     protected $casts = [
         'board_id' => 'int',
         'inviter_id' => 'int',
-        'expires_at' => 'datetime'
+        'waiting_user_registration' => 'boolean',
+        'expires_at' => 'datetime',
     ];
     protected $fillable = [
         'board_id',
         'email',
         'token',
         'status',
+        'waiting_user_registration',
         'inviter_id',
-        'expires_at'
+        'expires_at',
     ];
 
+    // relations
+    public function board(): BelongsTo
+    {
+        return $this->belongsTo(Board::class);
+    }
+
+    //local scopes
     #[Scope]
     protected function valid(Builder $query): Builder
     {
