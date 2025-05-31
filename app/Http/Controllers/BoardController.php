@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Board\BoardCreateRequest;
 use App\Models\Board;
+use App\Models\Invitation;
 use Illuminate\Http\Request;
 
 class BoardController extends Controller
@@ -16,7 +17,13 @@ class BoardController extends Controller
 
         $createdBoards = auth()->user()->createdBoards()->get();
 
-        return view('boards.index', compact('boards', 'createdBoards'));
+        $invitations = Invitation::query()
+            ->where('email', auth()->user()->email)
+            ->valid()
+            ->with(['board', 'inviter'])
+            ->get();
+
+        return view('boards.index', compact('boards', 'createdBoards', 'invitations'));
     }
 
     /**

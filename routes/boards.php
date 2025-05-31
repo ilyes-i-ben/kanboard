@@ -3,6 +3,7 @@
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\BoardInvitationController;
 use App\Http\Controllers\BoardMemberController;
+use App\Http\Controllers\InvitationResponseController;
 
 Route::middleware('auth')->group(function () {
     Route::prefix('boards/{board}/members')->name('boards.members.')->group(function () {
@@ -12,9 +13,12 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('boards/{board}/invitations')->name('boards.invitations.')->group(function () {
-        Route::get('/', [BoardInvitationController::class, 'index'])->name('index');
         Route::post('/', [BoardInvitationController::class, 'store'])->name('store');
-        Route::delete('{invitation}', [BoardInvitationController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('invitations')->group(function () {
+        Route::post('{invitation}/accept', [InvitationResponseController::class, 'accept'])->name('boards.invitations.accept');
+        Route::post('{invitation}/decline', [InvitationResponseController::class, 'decline'])->name('boards.invitations.decline');
     });
 
     Route::resource('/boards', BoardController::class)->except('create');
