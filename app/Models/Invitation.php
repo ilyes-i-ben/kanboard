@@ -38,6 +38,11 @@ class Invitation extends Model
         return $this->belongsTo(Board::class);
     }
 
+    public function inviter(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'inviter_id');
+    }
+
     //local scopes
     #[Scope]
     protected function valid(Builder $query): Builder
@@ -47,5 +52,12 @@ class Invitation extends Model
                 $q->whereNull('expires_at')
                     ->orWhere('expires_at', '>', now());
             });
+    }
+
+    // helper
+    public function isValid(): bool
+    {
+        return $this->status === self::STATUS_PENDING
+            && (!$this->expires_at || $this->expires_at->isFuture());
     }
 }
