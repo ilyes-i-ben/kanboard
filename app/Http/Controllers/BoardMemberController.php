@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Board\BoardInvitationCreateRequest;
 use App\Models\Board;
-use App\Models\User;
-use Illuminate\Http\Request;
 
 class BoardMemberController extends Controller
 {
