@@ -33,13 +33,18 @@
             </div>
 
             @if(auth()->id() == $board->created_by && !$isCreator)
-                <form method="POST" action="{{ route('boards.members.remove', ['board' => $board->id, 'user' => $member->id]) }}" class="inline-block">
+                <form
+                    method="POST"
+                    action="{{ route('boards.members.remove', ['board' => $board, 'user' => $member]) }}"
+                    class="inline-block"
+                    x-data="{ open: false }"
+                >
                     @csrf
                     @method('DELETE')
                     <button
                         type="submit"
                         class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 flex items-center transition"
-                        onclick="return confirm('Are you sure you want to remove this member?');"
+                        onclick="return confirm('sure ?');"
                     >
                         <x-heroicon-o-trash class="w-4 h-4 mr-1" />
                         Remove
