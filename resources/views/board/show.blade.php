@@ -5,9 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="h-[calc(100vh-64px)]">
-        <x-board :board="$board" />
-    </div>
+    <x-board :board="$board" />
 
     <style>
         /* Custom styles for the drag and drop interface */
