@@ -21,5 +21,10 @@ Route::middleware('auth')->group(function () {
         Route::post('{invitation}/decline', [InvitationResponseController::class, 'decline'])->name('boards.invitations.decline');
     });
 
-    Route::resource('/boards', BoardController::class)->except('create');
+    Route::prefix('api/boards')->group(function () {
+        Route::patch('{board}/update-title', [BoardController::class, 'update']);
+    });
+
+    Route::resource('/boards', BoardController::class)
+        ->except('create');
 });

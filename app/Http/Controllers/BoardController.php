@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Board\BoardCreateRequest;
+use App\Http\Requests\Board\BoardRenameRequest;
 use App\Models\Board;
 use App\Models\Invitation;
 use Illuminate\Http\Request;
@@ -34,9 +35,6 @@ class BoardController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(BoardCreateRequest $request)
     {
         auth()->user()->boards()->create($request->validated());
@@ -54,20 +52,17 @@ class BoardController extends Controller
         return view('board.show', compact('board'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Board $board)
+    public function update(BoardRenameRequest $request, Board $board)
     {
-        //
-    }
+        $board->update([
+            'title' => $request->validated()['title'],
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Board $board)
-    {
-
+        return response()->json([
+            'success' => true,
+            'message' => 'Board renamed !',
+            'board' => $board,
+        ]);
     }
 
     /**

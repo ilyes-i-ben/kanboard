@@ -2,16 +2,8 @@
 
 namespace App\Http\Requests\Board;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class BoardInvitationCreateRequest extends FormRequest
+class BoardInvitationCreateRequest extends OwnsBoardRequest
 {
-    public function authorize(): bool
-    {
-        $board = $this->route('board');
-        return $board->created_by === auth()->id();
-    }
-
     public function rules(): array
     {
         return [
