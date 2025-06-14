@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Board\BoardCreateRequest;
-use App\Http\Requests\Board\BoardRenameRequest;
+use App\Http\Requests\Board\BoardUpdateRequest;
 use App\Models\Board;
 use App\Models\Invitation;
 use Illuminate\Http\Request;
@@ -52,7 +52,18 @@ class BoardController extends Controller
         return view('board.show', compact('board'));
     }
 
-    public function update(BoardRenameRequest $request, Board $board)
+    public function update(BoardUpdateRequest $request, Board $board)
+    {
+        $board->update([
+            'title' => $request->validated()['title'],
+            'description' => $request->validated()['description'],
+            'background_color' => $request->validated()['background_color'],
+        ]);
+
+        return back()->with('success', 'Board updated successfully.');
+    }
+
+    public function rename(BoardUpdateRequest $request, Board $board)
     {
         $board->update([
             'title' => $request->validated()['title'],
@@ -64,12 +75,19 @@ class BoardController extends Controller
             'board' => $board,
         ]);
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Board $board)
     {
         //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Board $board)
+    {
+        return view('boards.edit', compact('board'));
     }
 }

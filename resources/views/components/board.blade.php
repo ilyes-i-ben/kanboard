@@ -60,6 +60,9 @@
                     @endif
                 </div>
             </a>
+            <a href="{{ route('boards.edit', $board) }}" class="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-full w-12 h-12 hover:bg-white/20 transition">
+                <x-heroicon-s-cog-6-tooth class="w-8 h-8 text-white" />
+            </a>
         </div>
     </div>
 
