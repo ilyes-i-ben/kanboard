@@ -17,7 +17,8 @@
                         </div>
                     </div>
 
-                    <form method="POST" action="{{ route('boards.update', $board) }}" class="space-y-8">
+                    <form method="POST" action="{{ route('boards.update', $board) }}" class="space-y-8"
+                        x-data="{ editingDescription: false }">
                         @csrf
                         @method('PUT')
                         <div class="mb-6">
@@ -45,12 +46,24 @@
                         </div>
                         <div class="mb-6">
                             <x-input-label for="description" :value="__('Description')" />
-                            <x-textarea
-                                id="description"
-                                name="description"
-                                class="tinyMce mt-2 w-full min-h-[180px] text-base"
-                            >{{ old('description', $board->description) }}</x-textarea>
-                            <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                            <div x-data="{ editing: false, get content() { if (window.tinymce && tinymce.get('description')) { return tinymce.get('description').getContent(); } return $refs.textarea ? $refs.textarea.value : ''; } }">
+                                <div x-show="!editing" class="prose dark:prose-invert bg-gray-50 dark:bg-gray-700 rounded p-4 min-h-[120px] mb-2 custom-prose-preview">
+                                    {!! old('description', $board->description) !!}
+                                </div>
+                                <button type="button" x-show="!editing" @click="editing = true; $nextTick(() => { if(window.tinymce) tinymce.init({ selector: '#description', menubar: false, plugins: 'link lists code', toolbar: 'undo redo | bold italic underline | bullist numlist | link | code' }); })" class="mb-4 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">Change Description</button>
+                                <div x-show="editing" x-cloak>
+                                    <x-textarea
+                                        id="description"
+                                        name="description"
+                                        class="tinyMce mt-2 w-full min-h-[180px] text-base"
+                                        x-ref="textarea"
+                                    >{{ old('description', $board->description) }}</x-textarea>
+                                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                                    <div class="mt-2">
+                                        <button type="button" @click="editing = false; if(window.tinymce && tinymce.get('description')) tinymce.get('description').remove();" class="px-3 py-1 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 rounded hover:bg-gray-400 dark:hover:bg-gray-700">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="flex justify-end gap-4 mt-8">
                             <x-primary-button class="ml-2">
@@ -62,4 +75,13 @@
             </div>
         </div>
     </div>
+    <style>
+        .custom-prose-preview h1 {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 700;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+    </style>
 </x-app-layout>

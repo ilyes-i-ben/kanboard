@@ -39,7 +39,7 @@
                     x-transition:leave="transition ease-in duration-300"
                     x-transition:leave-start="opacity-100 translate-y-0"
                     x-transition:leave-end="opacity-0 translate-y-2"
-                    class="fixed bottom-4 right-4 z-50 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow-lg dark:text-gray-400 dark:bg-gray-800"
+                    class="fixed bottom-4 right-4 z-50 flex items-center w-full max-w-xs p-4 mb-4 text-gray-700 bg-green-50 border border-green-200 rounded-lg shadow-lg dark:text-green-100 dark:bg-green-900 dark:border-green-700"
                     role="alert"
                 >
                     <!-- Icon -->
