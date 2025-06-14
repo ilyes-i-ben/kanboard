@@ -8,7 +8,6 @@ use App\Http\Controllers\InvitationResponseController;
 Route::middleware('auth')->group(function () {
     Route::prefix('boards/{board}/members')->name('boards.members.')->group(function () {
         Route::get('/', [BoardMemberController::class, 'index'])->name('index');
-        Route::post('/', [BoardMemberController::class, 'add'])->name('add');
         Route::delete('{user}', [BoardMemberController::class, 'remove'])->name('remove');
     });
 
@@ -21,8 +20,8 @@ Route::middleware('auth')->group(function () {
         Route::post('{invitation}/decline', [InvitationResponseController::class, 'decline'])->name('boards.invitations.decline');
     });
 
-    Route::prefix('api/boards')->group(function () {
-        Route::patch('{board}/update-title', [BoardController::class, 'update']);
+    Route::prefix('api/boards')->name('boards.api.')->group(function () {
+        Route::patch('{board}/update-title', [BoardController::class, 'rename'])->name('update-title');
     });
 
     Route::resource('/boards', BoardController::class)
