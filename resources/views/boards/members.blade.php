@@ -27,14 +27,15 @@
                         </div>
 
                         @if(auth()->id() == $board->created_by)
-                            <button
+                            <x-primary-button
                                 x-data="{}"
                                 @click="$dispatch('open-modal', 'add-member-modal')"
-                                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition flex items-center shadow-sm"
+                                type="button"
+                                class="flex items-center gap-2"
                             >
                                 <x-heroicon-o-plus class="w-5 h-5 mr-2" />
-                                Add Member
-                            </button>
+                                {{ __('Add Member') }}
+                            </x-primary-button>
                         @endif
                     </div>
 
@@ -53,14 +54,15 @@
                             <p class="mt-2 text-gray-500 dark:text-gray-400">Get started by adding a member to this board.</p>
 
                             @if(auth()->id() == $board->created_by)
-                                <button
+                                <x-primary-button
                                     x-data="{}"
                                     @click="$dispatch('open-modal', 'add-member-modal')"
-                                    class="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md transition flex items-center shadow-sm mx-auto"
+                                    type="button"
+                                    class="flex items-center gap-2 mx-auto"
                                 >
                                     <x-heroicon-o-plus class="w-5 h-5 mr-2" />
-                                    Add Your First Member
-                                </button>
+                                    {{ __('Add Your First Member') }}
+                                </x-primary-button>
                             @endif
                         </div>
                     @endif
@@ -137,15 +139,10 @@
                     >
                         Cancel
                     </button>
-                    <button
-                        type="submit"
-                        class="px-4 py-2 bg-blue-600 border border-transparent rounded-md font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition"
-                    >
-                    <span class="flex items-center">
+                    <x-primary-button type="submit" class="flex items-center gap-2">
                         <x-heroicon-o-paper-airplane class="mr-2 h-5 w-5" />
-                        Send Invitation
-                    </span>
-                    </button>
+                        {{ __('Send Invitation') }}
+                    </x-primary-button>
                 </div>
             </form>
         </div>

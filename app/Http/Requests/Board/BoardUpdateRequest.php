@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests\Board;
 
-class BoardRenameRequest extends OwnsBoardRequest
+class BoardUpdateRequest extends OwnsBoardRequest
 {
     public function rules(): array
     {
         return [
             'title' => ['required', 'string', 'max:255', 'min:4'],
+            'description' => [],
+            'background_color' => [],
         ];
     }
 
