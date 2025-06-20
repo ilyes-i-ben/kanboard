@@ -42,7 +42,19 @@
                 <x-heroicon-o-check-circle class="w-10 h-10 text-white" style="background:rgba(0,0,0,0.25);border-radius:4px;padding:2px;" />
             </button>
         </div>
-
+        <div class="flex-1 flex justify-center">
+            <div class="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-md px-2 py-1">
+                <button @click="viewType = 'kanban'" :class="viewType === 'kanban' ? 'bg-white/20' : ''" class="p-2 rounded transition hover:bg-white/20" title="Kanban view">
+                    <x-heroicon-o-table-cells class="w-6 h-6 text-white" />
+                </button>
+                <button @click="viewType = 'list'" :class="viewType === 'list' ? 'bg-white/20' : ''" class="p-2 rounded transition hover:bg-white/20" title="List view">
+                    <x-heroicon-o-bars-3-bottom-left class="w-6 h-6 text-white" />
+                </button>
+                <button @click="viewType = 'calendar'" :class="viewType === 'calendar' ? 'bg-white/20' : ''" class="p-2 rounded transition hover:bg-white/20" title="Calendar view">
+                    <x-heroicon-o-calendar-days class="w-6 h-6 text-white" />
+                </button>
+            </div>
+        </div>
         <div class="flex items-center space-x-4">
             <a href="{{ route('boards.members.index', $board) }}" class="bg-white/10 backdrop-blur-sm rounded-md px-3 py-1 hover:bg-white/20 transition">
                 <span class="text-xs font-medium text-white drop-shadow-sm mr-2">Manage members</span>
@@ -67,6 +79,7 @@
     </div>
 
     <div
+        x-show="viewType === 'kanban'"
         class="lists-container flex space-x-4 overflow-x-auto pb-4"
         x-sort="updateListPosition($item, $position)"
         x-sort:group="lists"
@@ -85,6 +98,13 @@
             </div>
         </div>
     </div>
+    <div x-show="viewType === 'list'">
+        <x-list-view :board="$board" />
+    </div>
+    <!-- Calendar view placeholder for future implementation -->
+    <div x-show="viewType === 'calendar'">
+        <div class="text-center text-gray-400 py-12 text-lg font-semibold">Calendar view coming soon...</div>
+    </div>
 </div>
 
 <script>
@@ -94,6 +114,7 @@
             title: @json($board->title),
             editingTitle: false,
             originalTitle: @json($board->title),
+            viewType: 'kanban',
             startEditTitle() {
                 this.editingTitle = true;
                 this.$nextTick(() => this.$refs.titleInput.focus());
