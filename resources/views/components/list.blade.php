@@ -1,7 +1,7 @@
 @props(['list'])
 
 <div
-    class="list bg-gray-100 dark:bg-gray-800 rounded-lg shadow p-3 w-72 flex flex-col h-full"
+    class="list bg-gray-100 dark:bg-gray-800 rounded-lg shadow p-3 w-96 flex flex-col h-full"
     x-data="{
         listId: {{ $list->id }}
     }"

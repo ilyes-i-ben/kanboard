@@ -5,7 +5,7 @@
     x-data="{
         showCardDetails: false,
     }"
-    class="card bg-white dark:bg-gray-700 rounded-md shadow-md p-3 mb-2 cursor-pointer"
+    class="card bg-white dark:bg-gray-700 rounded-md shadow-md p-3 mb-2 cursor-pointer w-72"
     :class="{
         'border-l-4 border-red-500': '{{ $card->priority }}' === 'high',
         'border-l-4 border-yellow-500': '{{ $card->priority }}' === 'medium',
