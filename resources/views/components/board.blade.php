@@ -117,6 +117,7 @@
             title: @json($board->title),
             editingTitle: false,
             originalTitle: @json($board->title),
+            // TODO:: save the last selected list mode to localStorage
             viewType: 'list',
             startEditTitle() {
                 this.editingTitle = true;
