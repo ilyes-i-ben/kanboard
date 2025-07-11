@@ -14,6 +14,7 @@
     data-deadline="{{ $card->deadline }}"
     data-finished="{{ $card->finished_at ? '1' : '0' }}"
     data-priority="{{ $card->priority }}"
+    data-list-title="{{ strtolower($card->list->title) }}"
 >
     <div class="flex justify-between items-center">
         <div class="flex flex-col gap-1">

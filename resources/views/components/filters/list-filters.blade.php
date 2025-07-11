@@ -1,3 +1,5 @@
+@props(['board'])
+
 @php
     $labelClass = 'block text-xs font-medium text-white dark:text-gray-300 mb-1';
     $inputClass = 'w-full rounded-md border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-400 focus:outline-none px-3 py-2 text-sm';
@@ -12,6 +14,15 @@
     <div class="{{ $containerClass }}">
         <label class="{{ $labelClass }}">Description</label>
         <input type="text" id="filter-card-description" placeholder="Search by description..." class="{{ $inputClass }}" />
+    </div>
+    <div class="{{ $containerClass }}">
+        <label class="{{ $labelClass }}">In list</label>
+        <select id="filter-list-title" class="{{ $inputClass }}">
+            <option value="">All Lists</option>
+            @foreach($board->lists as $list)
+                <option value="{{ strtolower($list->title) }}">{{ $list->title }}</option>
+            @endforeach
+        </select>
     </div>
     <div class="{{ $containerClass }}">
         <label class="{{ $labelClass }}">Start Date</label>
