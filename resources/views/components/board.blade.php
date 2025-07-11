@@ -98,10 +98,12 @@
             </div>
         </div>
     </div>
-    <div x-show="viewType === 'list'">
+    <div
+        class="flex justify-center"
+        x-show="viewType === 'list'"
+    >
         <x-list-view :board="$board" />
     </div>
-    <!-- Calendar view placeholder for future implementation -->
     <div x-show="viewType === 'calendar'">
         <div class="text-center text-gray-400 py-12 text-lg font-semibold">Calendar view coming soon...</div>
     </div>
@@ -109,12 +111,13 @@
 
 <script>
     // TODO:: replace the hard-coded urls with blade route() methodd.
+    // TODO:: move to a SOLID seperate JS file..
     function boardComponent() {
         return {
             title: @json($board->title),
             editingTitle: false,
             originalTitle: @json($board->title),
-            viewType: 'kanban',
+            viewType: 'list',
             startEditTitle() {
                 this.editingTitle = true;
                 this.$nextTick(() => this.$refs.titleInput.focus());

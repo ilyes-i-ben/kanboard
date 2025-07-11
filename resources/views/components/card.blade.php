@@ -30,7 +30,7 @@
 
     <div class="flex justify-between items-center mt-3">
         @if($card->members->count() > 0)
-            <div class="flex -space-x-2 overflow-hidden">
+            <div class="flex -space-x-2 overflow-hidden p-1">
                 @foreach($card->members->take(3) as $member)
                     <x-user.avatar :user="$member"/>
                 @endforeach
@@ -49,7 +49,6 @@
         @endif
     </div>
 
-    <!-- Card Detail Modal (hidden by default) -->
     <div
         x-show="showCardDetails"
         x-cloak
