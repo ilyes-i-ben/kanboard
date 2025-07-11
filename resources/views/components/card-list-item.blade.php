@@ -9,6 +9,11 @@
     }"
     @click="showCardDetails = true"
     x-data="{ showCardDetails: false }"
+    data-title="{{ strtolower($card->title) }}"
+    data-description="{{ strtolower(strip_tags($card->description ?? '')) }}"
+    data-deadline="{{ $card->deadline }}"
+    data-finished="{{ $card->finished_at ? '1' : '0' }}"
+    data-priority="{{ $card->priority }}"
 >
     <div class="flex justify-between items-center">
         <div>
@@ -34,7 +39,7 @@
     </div>
     <div class="flex items-center mt-2">
         @if($card->members->count() > 0)
-            <div class="flex -space-x-2 overflow-hidden">
+            <div class="flex -space-x-2 overflow-hidden p-1">
                 @foreach($card->members->take(3) as $member)
                     <x-user.avatar :user="$member"/>
                 @endforeach
@@ -46,7 +51,5 @@
             </div>
         @endif
     </div>
-    <!-- Modal reused from kanban card -->
     @include('components.card', ['card' => $card])
 </div>
-
