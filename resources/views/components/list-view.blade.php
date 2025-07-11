@@ -21,6 +21,10 @@
         <div class="flex-1">
             <x-filters.priority-select id="filter-priority" />
         </div>
+        <div class="flex-1">
+            <label class="block text-xs font-medium text-white dark:text-gray-300 mb-1">Status</label>
+            <x-filters.completed-status />
+        </div>
     </div>
 
     <div id="list-view-card-list" class="space-y-3">
