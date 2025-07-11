@@ -18,6 +18,9 @@
             <label class="block text-xs font-medium text-white dark:text-gray-300 mb-1">End Date</label>
             <x-date-picker-placeholder id="filter-end-date" />
         </div>
+        <div class="flex-1">
+            <x-filters.priority-select id="filter-priority" />
+        </div>
     </div>
 
     <div id="list-view-card-list" class="space-y-3">
