@@ -48,11 +48,11 @@
             <div class="{{ $sectionTitleClass }}"><x-heroicon-o-calendar-days class="w-6 h-6 mr-2 inline" />Dates</div>
             <div class="{{ $containerClass }}">
                 <label class="{{ $labelClass }}" for="filter-start-date">Start Date</label>
-                <x-date-picker-placeholder id="filter-start-date" />
+                <x-date-picker id="filter-start-date" />
             </div>
             <div class="{{ $containerClass }}">
                 <label class="{{ $labelClass }}" for="filter-end-date">End Date</label>
-                <x-date-picker-placeholder id="filter-end-date" />
+                <x-date-picker id="filter-end-date" />
             </div>
         </div>
     </div>
