@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let completedFilter = 'all';
 
+
+
     function filterCards() {
         const name = nameInput.value.trim().toLowerCase();
         const desc = descInput.value.trim().toLowerCase();
@@ -93,6 +95,19 @@ document.addEventListener('DOMContentLoaded', function () {
         completedFilter = e.detail.value;
         filterCards();
     });
+
+    window.addEventListener('reset-filters', () => {
+        nameInput.value = '';
+        descInput.value = '';
+        prioritySelect.value = '';
+        listSelect.value = '';
+        startDate.value = '';
+        deadlineStartDate.value = '';
+        deadlineEndDate.value = '';
+        completedFilter = 'all';
+        filterCards();
+    });
+
     filterCards();
 });
 
