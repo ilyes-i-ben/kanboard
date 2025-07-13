@@ -52,7 +52,7 @@
             </div>
             <div class="{{ $containerClass }}">
                 <label class="{{ $labelClass }}" for="filter-end-date">End Date</label>
-                <x-date-picker id="filter-end-date" />
+                <x-date-picker id="filter-end-date" type="range"/>
             </div>
         </div>
     </div>
