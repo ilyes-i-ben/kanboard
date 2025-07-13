@@ -26,7 +26,12 @@
                     @foreach ($createdBoards as $board)
                         <div
                             class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-2 border-black dark:border-gray-200"
-                            style="background-color: {{ $board->background_color }}"
+                            style="
+                                background:
+                                    linear-gradient(135deg, {{ $board->background_color }} 0%, {{ $board->background_color }}CC 100%),
+                                    repeating-linear-gradient(45deg, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 4px, transparent 4px, transparent 8px);
+                                background-blend-mode: overlay;
+                            "
                         >
                             <a href="{{ route('boards.show', $board->id) }}" class="block p-6">
                                 <h3 class="text-lg font-semibold text-black dark:text-white">
@@ -34,7 +39,6 @@
                                 </h3>
                                 <p
                                     class="mt-2 text-sm text-gray dark:text-gray-100"
-                                    style="background-color: {{ $board->background_color }}; opacity: 0.85;"
                                 >
                                     {{ Str::limit($board->title, 100) }}
                                 </p>
