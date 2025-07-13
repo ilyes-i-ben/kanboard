@@ -15,15 +15,10 @@
     </button>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="col-span-1 flex flex-col gap-4">
-            <div>
-                <div class="{{ $sectionTitleClass }}">Search</div>
-                <div class="{{ $containerClass }}">
-                    <label class="{{ $labelClass }}" for="filter-card-name">Card Name</label>
-                    <div class="relative">
-                        <input type="text" id="filter-card-name" placeholder="Search by name..." class="{{ $inputClass }} pr-10" />
-                        <span class="absolute right-3 top-2.5 text-gray-400 dark:text-gray-500"><x-heroicon-o-magnifying-glass class="w-4 h-4" /></span>
-                    </div>
-                </div>
+            <div class="{{ $sectionTitleClass }}"><x-heroicon-o-magnifying-glass class="w-6 h-6 mr-2 inline" />Search</div>
+            <div class="{{ $containerClass }}">
+                <label class="{{ $labelClass }}" for="filter-card-name">Card Name</label>
+                <input type="text" id="filter-card-name" placeholder="Search by name..." class="{{ $inputClass }} pr-10" />
             </div>
             <div>
                 <label class="{{ $labelClass }}" for="filter-card-description">Description</label>
@@ -31,38 +26,33 @@
             </div>
         </div>
         <div class="col-span-1 flex flex-col gap-4">
-            <div>
-                <div class="{{ $sectionTitleClass }}">Details</div>
-                <div class="{{ $containerClass }}">
-                    <label class="{{ $labelClass }}" for="filter-list-title">In list</label>
-                    <select id="filter-list-title" class="{{ $inputClass }}">
-                        <option value="">All Lists</option>
-                        @foreach($board->lists as $list)
-                            <option value="{{ strtolower($list->title) }}">{{ $list->title }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="{{ $containerClass }}">
-                    <label class="{{ $labelClass }}" for="filter-priority">Priority</label>
-                    <x-filters.priority-select id="filter-priority" />
-                </div>
+            <div class="{{ $sectionTitleClass }}"><x-heroicon-s-list-bullet class="w-6 h-6 mr-2 inline" />Details</div>
+            <div class="{{ $containerClass }}">
+                <label class="{{ $labelClass }}" for="filter-list-title">In list</label>
+                <select id="filter-list-title" class="{{ $inputClass }}">
+                    <option value="">All Lists</option>
+                    @foreach($board->lists as $list)
+                        <option value="{{ strtolower($list->title) }}">{{ $list->title }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="{{ $containerClass }}">
+                <x-filters.priority-select id="filter-priority" />
+            </div>
+            <div class="{{ $containerClass }}">
+                <label class="{{ $labelClass }}" for="filter-status">Status</label>
+                <x-filters.completed-status />
             </div>
         </div>
         <div class="col-span-1 flex flex-col gap-4">
-            <div>
-                <div class="{{ $sectionTitleClass }}">Dates & Status</div>
-                <div class="{{ $containerClass }}">
-                    <label class="{{ $labelClass }}" for="filter-start-date">Start Date</label>
-                    <x-date-picker-placeholder id="filter-start-date" />
-                </div>
-                <div class="{{ $containerClass }}">
-                    <label class="{{ $labelClass }}" for="filter-end-date">End Date</label>
-                    <x-date-picker-placeholder id="filter-end-date" />
-                </div>
-                <div class="{{ $containerClass }}">
-                    <label class="{{ $labelClass }}" for="filter-status">Status</label>
-                    <x-filters.completed-status />
-                </div>
+            <div class="{{ $sectionTitleClass }}"><x-heroicon-o-calendar-days class="w-6 h-6 mr-2 inline" />Dates</div>
+            <div class="{{ $containerClass }}">
+                <label class="{{ $labelClass }}" for="filter-start-date">Start Date</label>
+                <x-date-picker-placeholder id="filter-start-date" />
+            </div>
+            <div class="{{ $containerClass }}">
+                <label class="{{ $labelClass }}" for="filter-end-date">End Date</label>
+                <x-date-picker-placeholder id="filter-end-date" />
             </div>
         </div>
     </div>

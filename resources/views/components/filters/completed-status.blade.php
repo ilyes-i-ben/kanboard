@@ -1,5 +1,5 @@
 @props(['active'])
-<div x-data="{ active: 'all' }" class="inline-flex rounded-md shadow-xs text-sm" role="group">
+<div x-data="{ active: 'all' }" class="inline-flex rounded-md shadow-xs text-sm justify-center" role="group">
     <button type="button"
         @click="active = 'all'; $dispatch('completed-filter', { value: 'all' })"
         :class="active === 'all' ? 'bg-gray-800 text-white' : 'bg-transparent text-white'"
