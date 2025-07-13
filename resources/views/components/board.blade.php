@@ -2,7 +2,12 @@
 
 <div
     class="board-container h-full rounded-lg p-4 m-6"
-    style="background-color: {{ $board->background_color }}"
+    style="
+        background:
+            linear-gradient(135deg, {{ $board->background_color }} 0%, {{ $board->background_color }}CC 100%),
+            repeating-linear-gradient(45deg, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 4px, transparent 4px, transparent 8px);
+        background-blend-mode: overlay;
+    "
     x-data="boardComponent()"
 >
     <div class="mb-4 flex justify-between items-center">
@@ -88,7 +93,6 @@
             <x-list :list="$list" />
         @endforeach
 
-        <!-- Add list placeholder (future implementation) -->
         <div class="w-72 bg-white/20 backdrop-blur-sm rounded-lg p-3 flex items-center justify-center cursor-pointer hover:bg-white/30 transition">
             <div class="text-white flex items-center">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,7 +122,7 @@
             editingTitle: false,
             originalTitle: @json($board->title),
             // TODO:: save the last selected list mode to localStorage
-            viewType: 'list',
+            viewType: 'kanban',
             startEditTitle() {
                 this.editingTitle = true;
                 this.$nextTick(() => this.$refs.titleInput.focus());
