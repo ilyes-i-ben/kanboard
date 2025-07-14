@@ -85,6 +85,7 @@
 
     <div
         x-show="viewType === 'kanban'"
+        x-data="{ showCreateListModal: false }"
         class="lists-container flex space-x-4 overflow-x-auto pb-4"
         x-sort="updateListPosition($item, $position)"
         x-sort:group="lists"
@@ -93,21 +94,28 @@
             <x-list :list="$list" />
         @endforeach
 
-        <div class="w-72 bg-white/20 backdrop-blur-sm rounded-lg p-3 flex items-center justify-center cursor-pointer hover:bg-white/30 transition">
+        <div
+            class="w-72 bg-white/20 backdrop-blur-sm rounded-lg p-3 flex items-center justify-center cursor-pointer hover:bg-white/30 transition"
+            @click="showCreateListModal = true"
+        >
             <div class="text-white flex items-center">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                </svg>
+                <x-heroicon-s-plus class="w-6 h-6"/>
                 Add another list
             </div>
         </div>
+        <x-list.create-modal
+            show-create-list-modal="showCreateListModal"
+            onClose="() => { showCreateListModal = false }"
+            :board="$board"
+        />
     </div>
-    <div
-        class="flex justify-center"
-        x-show="viewType === 'list'"
-    >
-        <x-list-view :board="$board" />
-    </div>
+    {{-- TODO: URGENT FOR PERF: pass list view to lazy... (load on demand) --}}
+{{--    <div--}}
+{{--        class="flex justify-center"--}}
+{{--        x-show="viewType === 'list'"--}}
+{{--    >--}}
+{{--        <x-list-view :board="$board" />--}}
+{{--    </div>--}}
     <div x-show="viewType === 'calendar'">
         <div class="text-center text-gray-400 py-12 text-lg font-semibold">Calendar view coming soon...</div>
     </div>

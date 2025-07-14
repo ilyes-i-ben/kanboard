@@ -1,0 +1,16 @@
+function addList(list, html) {
+    if (!list || !html) return;
+    // Find the board container where lists are displayed
+    // You may need to adjust the selector to match your board's DOM structure
+    const boardContainer = document.querySelector('.lists-container');
+    if (boardContainer) boardContainer.insertAdjacentHTML('beforeend', html);
+}
+
+function removeList(listId) {
+    if (!listId) return;
+    const listEl = document.querySelector(`[x-sort\\:item="${listId}"]`);
+    if (listEl) listEl.remove();
+}
+
+export { addList, removeList };
+

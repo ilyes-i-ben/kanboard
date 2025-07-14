@@ -1,0 +1,103 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Board;
+use App\Models\ListModel;
+use Illuminate\Http\Request;
+
+class ListController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        // todo: move to ListCreateRequest...
+        $validated = $request->validate([
+            'list_name' => 'required|string|max:255',
+            'is_terminating' => 'nullable|boolean',
+            'board_id' => 'required|int',
+        ]);
+
+        $board = Board::find($validated['board_id']);
+
+        $list = ListModel::create([
+            'title' => $validated['list_name'],
+            'is_terminating' => $request->has('is_terminating'),
+            'board_id' => $validated['board_id'],
+            'position' => $board->lists()->max('position') + 1,
+            'created_by' => auth()->id(),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'List created successfully!',
+            'list' => $list,
+        ]);
+    }
+
+    /**
+     * Render the specified list as HTML (for AJAX UI update).
+     */
+    public function render(ListModel $list)
+    {
+        $list = ListModel::with([
+            'board.members',
+        ])->find($list->id);
+
+        $html = view('components.list', compact('list'))->render();
+        return response()->json([
+            'success' => true,
+            'html' => $html,
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(ListModel $listModel)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(ListModel $listModel)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, ListModel $listModel)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(ListModel $listModel)
+    {
+        //
+    }
+}
