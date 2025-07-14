@@ -6,6 +6,7 @@
     x-transition
     class="fixed inset-0 z-100 overflow-auto bg-black bg-opacity-50 flex items-center justify-center"
     @keydown.escape.window="showCreateCardModal = false; if (typeof onClose === 'function') onClose()"
+    x-on:close-create-card-modal.window="showCreateCardModal = false"
 >
     <div
         class="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-xl mx-4 overflow-hidden border border-gray-200 dark:border-gray-700 animate-fadeIn"
@@ -24,7 +25,7 @@
                 <x-heroicon-o-x-mark class="w-6 h-6"/>
             </button>
         </div>
-        <form method="POST" action="{{ route('cards.store') }}" class="p-3 space-y-3">
+        <form method="POST" action="{{ route('cards.store') }}" class="card-create-modal-form p-3 space-y-3">
             @csrf
             <input type="hidden" name="board_id" value="{{ $list->board_id }}">
             <input type="hidden" name="list_id" value="{{ $list->id }}" />
@@ -51,6 +52,7 @@
                 <input
                     type="date"
                     id="deadline"
+                    value="2025-07-22"
                     name="deadline"
                     class="w-full rounded-md border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-400 focus:outline-none px-3 py-2 text-sm placeholder-gray-400 dark:placeholder-gray-500"
                     placeholder="Select date..."

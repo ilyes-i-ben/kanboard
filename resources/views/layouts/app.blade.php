@@ -28,6 +28,7 @@
                 </header>
             @endisset
 
+            {{-- TODO:: move success and error Toasts to component--}}
             @if (session()->has('success'))
                 <div
                     x-data="{ show: true }"
@@ -61,7 +62,6 @@
                     </button>
                 </div>
             @endif
-            {{-- TODO:: move to component--}}
             @if (session()->has('error'))
                 <div
                     x-data="{ show: true }"
