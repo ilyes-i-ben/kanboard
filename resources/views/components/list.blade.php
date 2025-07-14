@@ -12,11 +12,11 @@
 
     <div
         class="cards-container flex-1 overflow-y-auto min-h-[200px] max-h-[calc(100vh-220px)]"
-        x-sort="updateCardPosition($item, $position, listId)"
+        x-sort="updateCardPosition($item, $position, '{{ $list->id }}')"
         x-sort:group="cards"
     >
         @foreach($list->cards->sortBy('position') as $card)
-            <x-card :card="$card" />
+            <x-card :card="$card"/>
         @endforeach
     </div>
 
@@ -24,9 +24,14 @@
         class="mt-2 w-full flex items-center justify-center text-sm text-gray-600 dark:text-gray-400 py-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition"
         @click="showCreateCardModal = true"
     >
-        <x-heroicon-s-plus class="w-6 h-6" />
+        <x-heroicon-s-plus class="w-6 h-6"/>
         {{ __("Add a card") }}
     </button>
 
-    <x-card.create-modal :list="$list" :board="$list->board" show-create-card-modal="showCreateCardModal" onClose="() => { showCreateCardModal = false }" />
+    <x-card.create-modal
+        :list="$list"
+        :board="$list->board"
+        show-create-card-modal="showCreateCardModal"
+        onClose="() => { showCreateCardModal = false }"
+    />
 </div>
