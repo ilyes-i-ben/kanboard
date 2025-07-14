@@ -36,14 +36,15 @@ async function createCard(url, formData) {
         const data = await response.json();
 
         if (data.success && data.card) {
+            showSuccessToast(data.message || 'Card created successfully!');
             return data.card;
         } else {
-            alert(data.message || 'Error creating card');
+            showErrorToast(data.message || 'Error creating card');
             return null;
         }
     } catch (error) {
         console.error('Error creating card:', error);
-        alert('Unexpected error');
+        showErrorToast('Unexpected error occurred while creating card');
         return null;
     }
 }
