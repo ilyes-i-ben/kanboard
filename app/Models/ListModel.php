@@ -17,6 +17,7 @@ class ListModel extends Model
 		'board_id' => 'int',
 		'position' => 'float',
         'is_terminal' => 'boolean',
+        'created_by' => 'int',
 	];
 
 	protected $fillable = [
@@ -24,7 +25,13 @@ class ListModel extends Model
 		'title',
         'is_terminal',
 		'position',
+        'created_by',
 	];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 
 	public function board(): BelongsTo
 	{
