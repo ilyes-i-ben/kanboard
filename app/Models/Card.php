@@ -32,7 +32,7 @@ class Card extends Model
 		'created_by',
 	];
 
-	public function user()
+	public function user(): BelongsTo
 	{
 		return $this->belongsTo(User::class, 'created_by');
 	}
