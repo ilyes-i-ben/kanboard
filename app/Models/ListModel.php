@@ -15,13 +15,15 @@ class ListModel extends Model
 
 	protected $casts = [
 		'board_id' => 'int',
-		'position' => 'float'
+		'position' => 'float',
+        'is_terminal' => 'boolean',
 	];
 
 	protected $fillable = [
 		'board_id',
 		'title',
-		'position'
+        'is_terminal',
+		'position',
 	];
 
 	public function board(): BelongsTo
