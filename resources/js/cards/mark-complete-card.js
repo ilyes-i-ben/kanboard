@@ -1,9 +1,15 @@
+import toast from "../toast.js";
+
 window.addEventListener('card-completed', async (event) => {
     const cardId = event.detail.cardId;
     if (!cardId) return;
 
-    markCardAsCompleted(cardId);
+    let already = markCardAsCompleted(cardId);
     markModalAsCompleted(cardId);
+
+    if (!already) {
+        toast.addToast('success', 'Card marked as completed');
+    }
 });
 
 function markCardAsCompleted(cardId) {
@@ -11,7 +17,7 @@ function markCardAsCompleted(cardId) {
     if (!cardElement) return;
 
     const existingCompletedSpan = cardElement.querySelector('.completed-badge');
-    if (existingCompletedSpan) return;
+    if (existingCompletedSpan) return true;
 
     const completedSpan = document.createElement('span');
     completedSpan.className = 'completed-badge text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-2 py-1 rounded-full';
