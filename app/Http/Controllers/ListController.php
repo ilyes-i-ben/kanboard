@@ -32,19 +32,25 @@ class ListController extends Controller
         // todo: move to ListCreateRequest...
         $validated = $request->validate([
             'list_name' => 'required|string|max:255',
-            'is_terminating' => 'nullable|boolean',
+            'is_terminal' => 'nullable|boolean',
             'board_id' => 'required|int',
         ]);
 
         $board = Board::find($validated['board_id']);
-
+        $isTerminal = $request->has('is_terminal');
         $list = ListModel::create([
             'title' => $validated['list_name'],
-            'is_terminating' => $request->has('is_terminating'),
+            'is_terminal' => $isTerminal,
             'board_id' => $validated['board_id'],
             'position' => $board->lists()->max('position') + 1,
             'created_by' => auth()->id(),
         ]);
+
+        if ($isTerminal) {
+            $board->lists()
+                ->where('id', '!=', $list->id)
+                ->update(['is_terminal' => false]);
+        }
 
         return response()->json([
             'success' => true,

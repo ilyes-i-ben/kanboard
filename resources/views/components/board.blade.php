@@ -95,6 +95,7 @@
         @endforeach
 
         <div
+            id="add-list-section"
             class="w-72 bg-white/20 backdrop-blur-sm rounded-lg p-3 flex items-center justify-center cursor-pointer hover:bg-white/30 transition"
             @click="showCreateListModal = true"
         >
