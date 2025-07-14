@@ -55,7 +55,7 @@ class CardController extends Controller
         $request = $createRequest->validated();
 
         $list = ListModel::find($request['list_id']);
-        Card::create([
+        $card = Card::create([
             'list_id' => $request['list_id'],
             'title' => $request['title'],
             'description' => $request['description'],
@@ -64,6 +64,14 @@ class CardController extends Controller
             'deadline' => $request['deadline'],
             'created_by' => auth()->id(),
         ]);
+
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Card created successfully!',
+                'card' => $card,
+            ]);
+        }
 
         return back()->with('success', 'Card created successfully !');
     }
@@ -90,5 +98,14 @@ class CardController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function render(Card $card)
+    {
+        $html = view('components.card', ['card' => $card])->render();
+        return response()->json([
+            'success' => true,
+            'html' => $html,
+        ]);
     }
 }
