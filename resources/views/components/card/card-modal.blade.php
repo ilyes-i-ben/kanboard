@@ -41,6 +41,7 @@
                 <span class="text-xs font-medium text-gray-500 dark:text-gray-400 mr-2">Created by</span>
                 <x-user.avatar :user="$card->user" />
                 <span class="text-sm text-gray-800 dark:text-gray-200 font-medium">{{ $card->user->name }}</span>
+                <span class="text-xs text-gray-500 dark:text-gray-400 ml-2">on {{ $card->created_at->format('M d, Y H:i') }}</span>
             </div>
 
             @if($card->description)
