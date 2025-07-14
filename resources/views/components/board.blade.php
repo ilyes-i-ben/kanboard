@@ -188,14 +188,15 @@
 
             updateListPosition(listId, position) {
                 fetch('/api/lists/move', {
-                    method: 'POST',
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                     },
                     body: JSON.stringify({
+                        board_id: {{ $board->id }},
                         list_id: listId,
-                        position: (position + 1) * 100
+                        position: position
                     })
                 })
                     .then(response => response.json())
