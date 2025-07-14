@@ -37,6 +37,11 @@
                 <x-heroicon-o-rectangle-group class="w-5 h-5 text-blue-400" />
                 <span class="font-medium">In list:</span> <span class="font-semibold text-gray-900 dark:text-gray-100">{{ $card->list->title }}</span>
             </div>
+            <div class="flex items-center gap-2 bg-gray-100 dark:bg-gray-700 rounded-full px-3 py-1 shadow-sm mb-2">
+                <span class="text-xs font-medium text-gray-500 dark:text-gray-400 mr-2">Created by</span>
+                <x-user.avatar :user="$card->user" />
+                <span class="text-sm text-gray-800 dark:text-gray-200 font-medium">{{ $card->user->name }}</span>
+            </div>
 
             @if($card->description)
                 <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 mb-2 border border-gray-100 dark:border-gray-800">
