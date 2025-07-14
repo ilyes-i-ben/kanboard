@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (data.terminal) {
                         updateTerminal(data.listId);
                     }
+                    window.showSuccessToast(data.message);
                 } else {
                     const data = await response.json();
                     window.showErrorToast('Error updating list');

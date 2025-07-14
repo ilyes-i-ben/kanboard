@@ -151,6 +151,7 @@
                     },
                     body: JSON.stringify({ title: this.title })
                 }).then(() => {
+                    window.showSuccessToast('Board title updated successfully!');
                 });
             },
 
