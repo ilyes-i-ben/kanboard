@@ -28,4 +28,10 @@ class CardService
             'position' => $newPosition,
         ]);
     }
+
+    public function nextPosition(ListModel $list): float
+    {
+        $max = $list->cards()->max('position') ?? 0;
+        return $max + 1000.0;
+    }
 }

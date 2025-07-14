@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Card\CardCreateRequest;
 use App\Http\Requests\Card\CardMoveRequest;
 use App\Models\Card;
 use App\Models\ListModel;
@@ -49,9 +50,22 @@ class CardController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CardCreateRequest $createRequest)
     {
+        $request = $createRequest->validated();
 
+        $list = ListModel::find($request['list_id']);
+        Card::create([
+            'list_id' => $request['list_id'],
+            'title' => $request['title'],
+            'description' => $request['description'],
+            'priority' => $request['priority'],
+            'position' => $this->cardService->nextPosition($list),
+            'deadline' => $request['deadline'],
+            'created_by' => auth()->id(),
+        ]);
+
+        return back()->with('success', 'Card created successfully !');
     }
 
     /**
