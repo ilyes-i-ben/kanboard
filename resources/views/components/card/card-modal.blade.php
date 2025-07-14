@@ -17,9 +17,20 @@
                 <x-heroicon-o-clipboard-document-list class="w-7 h-7 text-blue-500 dark:text-blue-400" />
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ $card->title }}</h2>
             </div>
+            <div class="flex items-center gap-2">
+            @can('delete', $card)
+                <button
+                    class="rounded-full p-2 text-red-400 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition"
+                    title="Delete"
+                    @click="window.dispatchEvent(new CustomEvent('delete-card', { detail: { cardId: {{ $card->id }} } }))"
+                >
+                    <x-heroicon-o-trash class="w-6 h-6" />
+                </button>
+            @endcan
             <button @click="showCardDetails = false; if (typeof onClose === 'function') onClose()" class="rounded-full p-2 text-gray-400 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition">
                 <x-heroicon-o-x-mark class="w-6 h-6" />
             </button>
+            </div>
         </div>
         <div class="p-6 space-y-6">
             <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-2">
