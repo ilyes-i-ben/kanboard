@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Card;
 use App\Models\ListModel;
+use Carbon\Carbon;
 
 class CardService
 {
@@ -26,10 +27,11 @@ class CardService
         $card->update([
             'list_id' => $targetList->id,
             'position' => $newPosition,
+            'finished_at' => $targetList->is_terminal ? Carbon::now() : null,
         ]);
     }
 
-    public function nextPosition(ListModel $list): float
+    public function newNextPosition(ListModel $list): float
     {
         $max = $list->cards()->max('position') ?? 0;
         return $max + 1000.0;

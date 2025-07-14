@@ -169,9 +169,12 @@
                     })
                 })
                     .then(response => response.json())
-                    .then(data => {
-                        if (!data.success) {
+                    .then(responseData => {
+                        if (!responseData.success) {
                             console.error('Error updating card position');
+                        }
+                        if (responseData.completed) {
+                            window.dispatchEvent(new CustomEvent('card-completed', { detail: {cardId} }))
                         }
                     })
                     .catch(error => {

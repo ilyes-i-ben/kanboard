@@ -1,6 +1,7 @@
 @props(['card', 'showCardDetails' => false, 'onClose'])
 
 <div
+    id="kanboard-card-modal-{{ $card->id }}"
     x-show="showCardDetails"
     x-cloak
     x-transition
@@ -79,7 +80,10 @@
                         <x-heroicon-o-information-circle class="w-5 h-5 text-blue-400" />
                         Details
                     </h3>
-                    <dl class="space-y-3">
+                    <dl
+                        id="kanboard-card-modal-data-{{ $card->id }}"
+                        class="space-y-3"
+                    >
                         <div class="flex justify-between items-center">
                             <dt class="text-gray-500 dark:text-gray-400">Priority</dt>
                             <dd class="font-semibold rounded px-2 py-1 text-xs
