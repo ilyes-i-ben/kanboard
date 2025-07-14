@@ -50,6 +50,15 @@ class BoardController extends Controller
      */
     public function show(Board $board)
     {
+        $board = Board::with([
+            'members',
+            'lists.cards.members',
+            'lists.cards.user',
+            'lists.cards.list.board',
+            'lists.user',
+            'lists.board',
+        ])->find($board->id);
+
         return view('board.show', compact('board'));
     }
 
