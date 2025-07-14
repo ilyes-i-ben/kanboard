@@ -28,7 +28,6 @@ class ToastManager {
     createToast(type, message, duration) {
         const toastId = 'toast-' + Date.now();
 
-        // Get type-specific styles
         const styles = this.getToastStyles(type);
 
         const toast = document.createElement('div');
@@ -77,13 +76,13 @@ class ToastManager {
                 darkIconColor: 'dark:text-green-200'
             },
             error: {
-                bgColor: 'bg-red-50',
-                borderColor: 'border border-red-200',
+                bgColor: 'bg-red-500',
+                borderColor: 'border border-red-700',
                 darkTextColor: 'dark:text-red-100',
                 darkBgColor: 'dark:bg-red-900',
                 darkBorderColor: 'dark:border-red-700',
-                iconColor: 'text-red-500',
-                iconBgColor: 'bg-red-100',
+                iconColor: 'text-red-100',
+                iconBgColor: 'bg-red-700',
                 darkIconBgColor: 'dark:bg-red-800',
                 darkIconColor: 'dark:text-red-200'
             },
