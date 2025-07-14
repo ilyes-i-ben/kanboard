@@ -3,7 +3,12 @@ function addList(list, html) {
     // Find the board container where lists are displayed
     // You may need to adjust the selector to match your board's DOM structure
     const boardContainer = document.querySelector('.lists-container');
-    if (boardContainer) boardContainer.insertAdjacentHTML('beforeend', html);
+    const addListSection = document.getElementById('add-list-section');
+    if (addListSection) {
+        addListSection.insertAdjacentHTML('beforebegin', html);
+    } else if (boardContainer) {
+        boardContainer.insertAdjacentHTML('beforeend', html);
+    }
 }
 
 function removeList(listId) {
