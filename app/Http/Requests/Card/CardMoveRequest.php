@@ -2,16 +2,8 @@
 
 namespace App\Http\Requests\Card;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class CardMoveRequest extends FormRequest
+class CardMoveRequest extends CardRequest
 {
-    public function authorize(): bool
-    {
-        $boardId = $this->input('board_id');
-        return auth()->user() && auth()->user()->boards()->where('id', $boardId)->exists();
-    }
-
     public function rules(): array
     {
         return [
