@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\List\ListMoveRequest;
 use App\Models\Board;
 use App\Models\ListModel;
+use App\Services\ListService;
 use Illuminate\Http\Request;
 
 class ListController extends Controller
 {
+    public function __construct(
+        private readonly ListService $listService,
+    ) {
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -22,6 +29,25 @@ class ListController extends Controller
     public function create()
     {
         //
+    }
+
+    public function move(ListMoveRequest $moveRequest)
+    {
+        $request = $moveRequest->validated();
+
+        $board = Board::findOrFail($request['board_id']);
+        $list = ListModel::findOrFail($request['list_id']);
+
+        $this->listService->move(
+            board: $board,
+            list: $list,
+            newPosition: $request['position'],
+        );
+
+        return response()->json([
+            'success' => true,
+            'message' => 'List moved successfully.',
+        ]);
     }
 
     /**

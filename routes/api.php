@@ -7,6 +7,9 @@ Route::prefix('api')->group(function () {
     Route::put('/cards/move', [CardController::class, 'move'])
         ->name('cards.move');
 
+    Route::put('/lists/move', [ListController::class, 'move'])
+        ->name('lists.move');
+
     Route::get('/cards/{card}/render', [CardController::class, 'render'])->name('cards.render');
     Route::get('/lists/{list}/render', [ListController::class, 'render'])->name('lists.render');
 
