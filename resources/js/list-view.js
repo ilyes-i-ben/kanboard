@@ -13,8 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let completedFilter = 'all';
 
-
-
     function filterCards() {
         const name = nameInput.value.trim().toLowerCase();
         const desc = descInput.value.trim().toLowerCase();
