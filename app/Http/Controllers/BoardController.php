@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 
 class BoardController extends Controller
 {
-    // TODO: fix N+1 problem
     public function index()
     {
         $boards = auth()->user()->boards()
