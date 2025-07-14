@@ -54,7 +54,6 @@ class CardController extends Controller
     {
         $request = $createRequest->validated();
 
-        // TODO: fix priority always set to medium in db...
         $list = ListModel::find($request['list_id']);
         $card = Card::create([
             'list_id' => $request['list_id'],

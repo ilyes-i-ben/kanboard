@@ -44,7 +44,7 @@ async function createCard(url, formData) {
         }
     } catch (error) {
         console.error('Error creating card:', error);
-        showErrorToast('Unexpected error occurred while creating card');
+        showErrorToast('Error occurred on card creation');
         return null;
     }
 }

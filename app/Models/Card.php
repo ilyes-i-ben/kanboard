@@ -26,6 +26,7 @@ class Card extends Model
 		'title',
 		'description',
 		'position',
+        'priority',
 		'deadline',
 		'finished_at',
 		'created_by',
