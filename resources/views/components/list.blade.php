@@ -1,13 +1,29 @@
 @props(['list'])
 
 <div
-    x-data="{ showCreateCardModal: false }"
+    x-data="{ showCreateCardModal: false, showEditListModal: false }"
     class="list bg-gray-100 dark:bg-gray-800 rounded-lg shadow p-3 w-96 flex flex-col h-full"
     x-sort:item="{{ $list->id }}"
 >
     <div class="flex justify-between items-center mb-3">
-        <h2 class="font-bold text-gray-800 dark:text-gray-200">{{ $list->title }}</h2>
-        <div class="text-xs text-gray-500 dark:text-gray-400">{{ $list->cards->count() }} cards</div>
+        <div class="flex items-center gap-2">
+            <h2
+                id="title-list-{{ $list->id }}"
+                class="font-bold text-gray-800 dark:text-gray-200"
+            >{{ $list->title }}</h2>
+            <span
+                id="terminal-badge-{{ $list->id }}"
+                class="terminal-badge {{ !$list->is_terminal ? 'hidden ' : '' }} ml-2 px-2 py-0.5 rounded bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs font-semibold shadow"
+            >Terminal</span>
+        </div>
+        <button
+            type="button"
+            class="flex items-center justify-center"
+            title="Edit list"
+            @click="showEditListModal = true"
+        >
+            <x-heroicon-o-pencil-square class="w-8 h-8 text-white" style="background:rgba(0,0,0,0.25);border-radius:4px;padding:2px;" />
+        </button>
     </div>
 
     <div
@@ -42,5 +58,10 @@
         :board="$list->board"
         show-create-card-modal="showCreateCardModal"
         onClose="() => { showCreateCardModal = false }"
+    />
+    <x-list.edit-modal
+        :list="$list"
+        :board="$list->board"
+        show-edit-list-modal="showEditListModal"
     />
 </div>

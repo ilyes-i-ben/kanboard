@@ -20,4 +20,11 @@ class ListService
             $l->update(['position' => $index]);
         }
     }
+
+    public function newTerminal(ListModel $listModel): void
+    {
+        $listModel->board->lists()
+            ->where('id', '!=', $listModel->id)
+            ->update(['is_terminal' => false]);
+    }
 }

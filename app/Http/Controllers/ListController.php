@@ -120,9 +120,32 @@ class ListController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ListModel $listModel)
+    public function update(Request $request, ListModel $list)
     {
-        //
+        $validated = $request->validate([
+            'list_name' => 'required|string|max:255',
+            'board_id' => 'required|int',
+            'is_terminal' => 'nullable|boolean',
+        ]);
+
+        $isTerminal = $request->has('is_terminal');
+
+        $list->update([
+            'title' => $validated['list_name'],
+            'is_terminal' => $isTerminal,
+        ]);
+
+        if ($isTerminal) {
+            $this->listService->newTerminal($list);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'List updated successfully!',
+            'listId' => $list->id,
+            'terminal' => $isTerminal,
+            'title' => $list->title,
+        ]);
     }
 
     /**
