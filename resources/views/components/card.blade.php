@@ -1,6 +1,7 @@
 @props(['card'])
 
 <div
+    id="kanboard-card-{{ $card->id }}"
     x-sort:item="{{ $card->id }}"
     x-data="{ showCardDetails: false }"
     class="card bg-white dark:bg-gray-700 rounded-md shadow-md p-3 mb-2 cursor-pointer w-72"
@@ -26,7 +27,10 @@
         </p>
     @endif
 
-    <div class="flex justify-between items-center mt-3">
+    <div
+        id="kanboard-card-data-{{ $card->id }}"
+        class="flex justify-between items-center mt-3"
+    >
         @if($card->members->count() > 0)
             <div class="flex -space-x-2 overflow-hidden p-1">
                 @foreach($card->members->take(3) as $member)
@@ -41,7 +45,9 @@
         @endif
 
         @if($card->finished_at)
-            <span class="text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-2 py-1 rounded-full">
+            <span
+                class="completed-badge text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-2 py-1 rounded-full"
+            >
                 Completed
             </span>
         @endif

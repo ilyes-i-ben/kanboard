@@ -36,6 +36,7 @@ class CardController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Carte déplacée avec succès.',
+            'completed' => $targetList->is_terminal,
         ]);
     }
 
@@ -60,7 +61,7 @@ class CardController extends Controller
             'title' => $request['title'],
             'description' => $request['description'],
             'priority' => $request['priority'],
-            'position' => $this->cardService->nextPosition($list),
+            'position' => $this->cardService->newNextPosition($list),
             'deadline' => $request['deadline'],
             'created_by' => auth()->id(),
         ]);
