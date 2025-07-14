@@ -28,7 +28,7 @@ class Card extends Model
 		'position',
 		'deadline',
 		'finished_at',
-		'created_by'
+		'created_by',
 	];
 
 	public function user()
