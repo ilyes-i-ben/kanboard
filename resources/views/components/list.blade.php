@@ -15,9 +15,18 @@
         x-sort="updateCardPosition($item, $position, '{{ $list->id }}')"
         x-sort:group="cards"
     >
-        @foreach($list->cards->sortBy('position') as $card)
-            <x-card :card="$card"/>
-        @endforeach
+        @if($list->cards->isEmpty())
+            <div class="text-center text-gray-800 dark:text-gray-400 py-8 text-sm flex items-center">
+                <x-heroicon-s-no-symbol class="w-10 h-10 mb-2" />
+                <span>
+                    No cards in this list.
+                </span>
+            </div>
+        @else
+            @foreach($list->cards->sortBy('position') as $card)
+                <x-card :card="$card"/>
+            @endforeach
+        @endif
     </div>
 
     <button

@@ -71,7 +71,7 @@
             <section>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Assignees</label>
                 <div class="flex flex-wrap gap-3">
-                    @foreach($board->members as $member)
+                    @foreach($board?->members as $member)
                         <label class="flex items-center gap-2 bg-gray-100 dark:bg-gray-700 rounded-full px-3 py-1 shadow-sm cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900 transition">
                             <input
                                 type="checkbox"
