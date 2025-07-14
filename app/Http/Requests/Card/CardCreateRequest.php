@@ -12,9 +12,9 @@ class CardCreateRequest extends CardRequest
             'title' => 'required|string',
             'priority' => 'required|string|in:low,medium,high',
             'description' => 'nullable|string',
-            'members' => 'nullable|array',
+            'assignees' => 'nullable|array',
             'deadline' => 'nullable|date',
-            'members.*' => 'integer|exists:users,id',
+            'assignees.*' => 'integer|exists:users,id',
         ];
     }
 }

@@ -65,15 +65,13 @@ class CardController extends Controller
             'created_by' => auth()->id(),
         ]);
 
-        if (request()->expectsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Card created successfully!',
-                'card' => $card,
-            ]);
-        }
+        $card->members()->sync($request['assignees']);
 
-        return back()->with('success', 'Card created successfully !');
+        return response()->json([
+            'success' => true,
+            'message' => 'Card created successfully!',
+            'card' => $card,
+        ]);
     }
 
     /**
