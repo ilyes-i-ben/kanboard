@@ -54,6 +54,7 @@ class CardController extends Controller
     {
         $request = $createRequest->validated();
 
+        // TODO: fix priority always set to medium in db...
         $list = ListModel::find($request['list_id']);
         $card = Card::create([
             'list_id' => $request['list_id'],
@@ -90,12 +91,21 @@ class CardController extends Controller
         dd($request);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Card $card)
     {
-        //
+        if (!auth()->user()->can('delete', $card)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'You don\'t have the right to delete.',
+            ], 403);
+        }
+
+        $card->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Card deleted successfully.',
+        ]);
     }
 
     public function render(Card $card)

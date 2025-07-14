@@ -1,6 +1,5 @@
 class ToastManager {
-    // TODO:
-    // idea: make blade components, generate the toasts from the backend when possible (online)
+    // TODO: idea: make blade components, generate the toasts from the backend when possible (online)
     // if not, generate them at JS level, like now..
 
     constructor() {
@@ -46,12 +45,10 @@ class ToastManager {
         toast.className = `flex items-center w-full max-w-xs p-4 mb-4 text-gray-700 ${styles.bgColor} ${styles.borderColor} rounded-lg shadow-lg ${styles.darkTextColor} ${styles.darkBgColor} ${styles.darkBorderColor}`;
         toast.setAttribute('role', 'alert');
 
-        // TODO:
         toast.innerHTML = `
             <div class="inline-flex items-center justify-center shrink-0 w-8 h-8 ${styles.iconColor} ${styles.iconBgColor} rounded-lg ${styles.darkIconBgColor} ${styles.darkIconColor}">
                 ${this.getIcon(type)}
             </div>
-            // TODO:
 
             <div class="ms-3 text-sm font-normal">${message}</div>
 
@@ -143,7 +140,6 @@ class ToastManager {
     }
 }
 
-// Initialize toast manager
 const toastManager = new ToastManager();
 
 // Global functions

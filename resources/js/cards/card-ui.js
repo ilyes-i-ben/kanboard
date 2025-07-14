@@ -5,16 +5,10 @@ function addCard(card, html) {
     if (container) container.insertAdjacentHTML('beforeend', html);
 }
 
-function resetForm(form) {
-    if (form) form.reset();
+function removeCard(cardId) {
+    if (!cardId) return;
+    const cardEl = document.querySelector(`[x-sort\\:item="${cardId}"]`);
+    if (cardEl) cardEl.remove();
 }
 
-function closeModal() {
-    window.dispatchEvent(new CustomEvent('close-create-card-modal'));
-}
-
-function showError(msg) {
-    alert(msg || 'Error');
-}
-
-export { addCard, resetForm, closeModal, showError };
+export { addCard, removeCard };
