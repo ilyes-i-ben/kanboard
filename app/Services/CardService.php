@@ -27,7 +27,7 @@ class CardService
         $card->update([
             'list_id' => $targetList->id,
             'position' => $newPosition,
-            'finished_at' => $targetList->is_terminal ? Carbon::now() : null,
+            'finished_at' => $targetList->is_terminal ? Carbon::now() : $card->finished_at,
         ]);
     }
 

@@ -16,7 +16,7 @@
         <div class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
             <div class="flex items-center gap-3">
                 <x-heroicon-o-clipboard-document-list class="w-7 h-7 text-blue-500 dark:text-blue-400" />
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ $card->title }}</h2>
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ $card->title }} ({{ $card->id }})</h2>
             </div>
             <div class="flex items-center gap-2">
             @can('delete', $card)
@@ -103,7 +103,7 @@
                         @endif
 
                         @if($card->finished_at)
-                            <div class="flex justify-between items-center">
+                            <div class="completed-entry flex justify-between items-center">
                                 <dt class="text-gray-500 dark:text-gray-400">Completed</dt>
                                 <dd class="font-semibold px-2 py-1 rounded text-xs bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300">
                                     {{ Carbon\Carbon::parse($card->finished_at)->format('M d, Y') }}
