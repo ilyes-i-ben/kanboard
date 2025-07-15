@@ -175,7 +175,13 @@
                             console.error('Error updating card position');
                         }
                         if (responseData.completed) {
-                            window.dispatchEvent(new CustomEvent('card-completed', { detail: {cardId} }))
+                            window.dispatchEvent(new CustomEvent('card-completed', { detail: {cardId} }));
+                        }
+                        if (responseData.original?.emptied) {
+                            window.dispatchEvent(new CustomEvent('list-emptied', { detail: {listId: responseData.original.id} }));
+                        }
+                        if (responseData.target?.wasEmpty) {
+                            window.dispatchEvent(new CustomEvent('list-was-empty', { detail: {listId: responseData.target.id} }));
                         }
                     })
                     .catch(error => {

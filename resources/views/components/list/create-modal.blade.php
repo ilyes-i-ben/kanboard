@@ -4,7 +4,7 @@
     x-show="showCreateListModal"
     x-cloak
     x-transition
-    class="fixed inset-0 z-150 overflow-auto bg-black bg-opacity-50 flex items-center justify-center"
+    class="fixed inset-0 z-250 overflow-auto bg-black bg-opacity-50 flex items-center justify-center"
     @keydown.escape.window="showCreateListModal = false; if (typeof onClose === 'function') onClose()"
     x-on:close-create-list-modal.window="showCreateListModal = false"
     @click.away="showCreateListModal = false; if (typeof onClose === 'function') onClose()"
@@ -30,9 +30,8 @@
             @csrf
             <input type="hidden" name="board_id" value="{{ $board->id }}">
             <section>
-                <label for="list_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">List name</label>
-                <input type="text" name="list_name" id="list_name" class="w-full rounded-md border px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="List name">
-            </section>
+                <label for="create_list_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">List name</label>
+                <input type="text" name="list_name" id="create_list_name" class="w-full rounded-md border px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="List name" @click="$nextTick(() => $refs.createListNameInput.focus())" x-ref="createListNameInput">            </section>
             <section>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Mark as terminating</label>
                 <label class="inline-flex items-center cursor-pointer">
