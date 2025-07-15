@@ -55,6 +55,11 @@ class Board extends Model
         return $this->hasMany(ListModel::class);
 	}
 
+    public function categories(): HasMany
+    {
+        return $this->hasMany(Category::class);
+    }
+
     public function hasMember($user): bool
     {
         $id = $user instanceof User ? $user->id : $user;

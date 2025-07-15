@@ -47,4 +47,9 @@ class Card extends Model
     {
         return $this->belongsTo(ListModel::class, 'list_id');
     }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }
