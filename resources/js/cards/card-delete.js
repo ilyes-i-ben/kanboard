@@ -4,6 +4,16 @@ window.addEventListener('delete-card', async (event) => {
     const cardId = event.detail.cardId;
     if (!cardId) return;
 
+    const confirm = await window.showConfirmationModalAsync({
+        title: "Delete card ?",
+        message: 'Are you sure about deleting the card',
+    });
+
+    if (!confirm) {
+        window.showErrorToast('Deletion canceled.');
+        return;
+    }
+
     try {
         const response = await fetch(`/api/cards/${cardId}`, {
             method: 'DELETE',
