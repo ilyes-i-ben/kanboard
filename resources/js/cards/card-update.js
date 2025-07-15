@@ -3,12 +3,13 @@ import { updateCardUI } from "./card-ui.js";
 
 async function sendUpdateCard(url, formData) {
     try {
+        console.log(formData.get('_token'))
         const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'Accept': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                'X-CSRF-TOKEN': formData.get('_token'),
             },
             body: formData,
         });
