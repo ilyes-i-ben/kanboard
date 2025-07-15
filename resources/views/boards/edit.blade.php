@@ -91,7 +91,8 @@
                             <div id="categories-list" class="space-y-3">
                                 @if($board->categories->count() > 0)
                                     @foreach($board->categories as $category)
-                                        <div class="flex items-center gap-2">
+                                        <div class="flex items-center gap-2" data-category-id="{{ $category->id }}">
+                                            <input type="hidden" name="category_ids[]" value="{{ $category->id }}" />
                                             <input type="text" name="categories[]" class="w-full rounded-md border px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Category name" value="{{ $category->name }}" />
                                             <button type="button" class="remove-category rounded-full p-2 text-red-400 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition" title="Remove" style="{{ $board->categories->count() > 1 ? '' : 'display:none' }}">
                                                 <x-heroicon-o-x-mark class="w-5 h-5" />
@@ -100,6 +101,7 @@
                                     @endforeach
                                 @else
                                     <div class="flex items-center gap-2">
+                                        <input type="hidden" name="category_ids[]" value="" />
                                         <input type="text" name="categories[]" class="w-full rounded-md border px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Category name" />
                                         <button type="button" class="remove-category rounded-full p-2 text-red-400 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition" title="Remove" style="display:none">
                                             <x-heroicon-o-x-mark class="w-5 h-5" />
@@ -162,7 +164,8 @@
 
                 var div = document.createElement('div');
                 div.className = 'flex items-center gap-2';
-                div.innerHTML = '<input type="text" name="categories[]" class="w-full rounded-md border px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Category name" />' +
+                div.innerHTML = '<input type="hidden" name="category_ids[]" value="" />' +
+                    '<input type="text" name="categories[]" class="w-full rounded-md border px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Category name" />' +
                     '<button type="button" class="remove-category rounded-full p-2 text-red-400 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition" title="Remove"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button>';
                 list.appendChild(div);
                 updateRemoveButtons();
