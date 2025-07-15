@@ -60,7 +60,7 @@
 
                             <div x-data="{ editing: false }">
                                 <div x-show="!editing" class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 min-h-[120px] mb-4 border border-gray-100 dark:border-gray-800">
-                                    <div class="prose dark:prose-invert max-w-none">
+                                    <div class="prose dark:prose-invert max-w-none [&_*]:text-gray-900 dark:[&_*]:text-gray-100">
                                         {!! old('description', $board->description) !!}
                                     </div>
                                 </div>
