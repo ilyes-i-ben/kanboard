@@ -18,6 +18,8 @@ class BoardCreateRequest extends FormRequest
             'title' => ['required', 'string', 'max:255', 'min:4'],
             'description' => [],
             'background_color' => [],
+            'categories' => ['array', 'nullable'],
+            'categories.*' => ['string', 'nullable', 'max:255'],
         ];
     }
 
