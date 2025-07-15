@@ -96,7 +96,19 @@ class BoardController extends Controller
      */
     public function destroy(Board $board)
     {
-        //
+        if (auth()->id() !== $board->created_by) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Youre not allowed to delete the baord',
+            ], 403);
+        }
+
+        $board->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Board deleted',
+        ]);
     }
 
     /**
