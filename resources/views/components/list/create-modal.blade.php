@@ -25,7 +25,6 @@
                 <x-heroicon-o-x-mark class="w-6 h-6"/>
             </button>
         </div>
-        {{-- TODO: fix name focusing only on label-click --}}
         <form method="POST" action="{{ route('lists.store') }}" class="list-create-modal-form p-4 space-y-4">
             @csrf
             <input type="hidden" name="board_id" value="{{ $board->id }}">

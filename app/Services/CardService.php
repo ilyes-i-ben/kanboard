@@ -12,6 +12,12 @@ class CardService
     {
         $cards = $targetList->cards()->orderBy('position')->get()->values();
 
+        if ($card->list_id === $targetList->id) {
+            $cards = $cards->filter(function($item) use ($card) {
+                return $item->id !== $card->id;
+            })->values();
+        }
+
         if ($cards->isEmpty()) {
             $newPosition = 1000.0;
         } elseif ($targetPosition <= 0) {
