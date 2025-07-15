@@ -6,10 +6,14 @@ use App\Http\Requests\Board\BoardCreateRequest;
 use App\Http\Requests\Board\BoardUpdateRequest;
 use App\Models\Board;
 use App\Models\Invitation;
-use Illuminate\Http\Request;
+use App\Services\BoardService;
 
 class BoardController extends Controller
 {
+    public function __construct(
+        private readonly BoardService $boardService,
+    ) {
+    }
     public function index()
     {
         $boards = auth()->user()->boards()
@@ -75,6 +79,14 @@ class BoardController extends Controller
             'description' => $request->validated()['description'],
             'background_color' => $request->validated()['background_color'],
         ]);
+
+        $keepIds = $this->boardService->keepIds(
+            board: $board,
+            categoryIds: $request->input('category_ids', []),
+            categoryNames: $request->input('categories', []),
+        );
+
+        $board->categories()->whereNotIn('id', $keepIds)->delete();
 
         return back()->with('success', 'Board updated successfully.');
     }
