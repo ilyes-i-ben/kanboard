@@ -18,12 +18,23 @@
                 <x-heroicon-o-pencil-square class="w-7 h-7 text-blue-500 dark:text-blue-400"/>
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Edit List</h2>
             </div>
-            <button
-                @click="showEditListModal = false"
-                class="rounded-full p-2 text-gray-400 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition"
-            >
-                <x-heroicon-o-x-mark class="w-6 h-6"/>
-            </button>
+            <div class="flex items-center gap-2">
+                @can('delete', $list)
+                    <button
+                        class="rounded-full p-2 text-red-400 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition"
+                        title="Delete"
+                        @click="window.dispatchEvent(new CustomEvent('delete-list', { detail: { listId: {{ $list->id }} } }))"
+                    >
+                        <x-heroicon-o-trash class="w-6 h-6"/>
+                    </button>
+                @endcan
+                <button
+                    @click="showEditListModal = false"
+                    class="rounded-full p-2 text-gray-400 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition"
+                >
+                    <x-heroicon-o-x-mark class="w-6 h-6"/>
+                </button>
+            </div>
         </div>
         <form method="POST" action="{{ route('lists.update', $list->id) }}" class="list-edit-modal-form p-4 space-y-4">
             @csrf
@@ -51,4 +62,3 @@
         </form>
     </div>
 </div>
-
