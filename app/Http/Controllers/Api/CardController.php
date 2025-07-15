@@ -74,6 +74,7 @@ class CardController extends Controller
             'priority' => $request['priority'],
             'position' => $this->cardService->newNextPosition($list),
             'deadline' => $request['deadline'],
+            'category_id' => $request['category_id'] ?: null,
             'created_by' => auth()->id(),
         ]);
 

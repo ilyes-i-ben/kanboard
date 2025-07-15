@@ -104,6 +104,13 @@
                         class="space-y-3"
                     >
                         <div class="flex justify-between items-center">
+                            <dt class="text-gray-500 dark:text-gray-400">Category</dt>
+                            <dd class="font-semibold rounded px-2 py-1 text-xs
+                                {{ $card->category ? 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300' : 'bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-400' }}">
+                                {{ $card->category ? $card->category->name : 'No category' }}
+                            </dd>
+                        </div>
+                        <div class="flex justify-between items-center">
                             <dt class="text-gray-500 dark:text-gray-400">Priority</dt>
                             <dd class="font-semibold rounded px-2 py-1 text-xs
                                 {{ $card->priority === 'high' ? 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300' :
@@ -170,6 +177,15 @@
                     <section>
                         <label for="edit-description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
                         <textarea name="description" id="edit-description" rows="3" class="w-full rounded-md border px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Card description">{{ $card->description }}</textarea>
+                    </section>
+                    <section>
+                        <label for="edit-category" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category</label>
+                        <select name="category_id" id="edit-category" class="w-full rounded-md border px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none pr-10">
+                            <option value="">Select a category</option>
+                            @foreach($card->list->board->categories as $category)
+                                <option value="{{ $category->id }}" @if($card->category_id == $category->id) selected @endif>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </section>
                     <section>
                         <label for="edit-deadline" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Deadline</label>

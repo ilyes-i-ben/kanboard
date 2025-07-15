@@ -38,6 +38,15 @@
                 <textarea name="description" id="description" rows="3" class="w-full rounded-md border px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Card description"></textarea>
             </section>
             <section>
+                <label for="category_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category</label>
+                <select name="category_id" id="category_id" class="w-full rounded-md border px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none pr-10">
+                    <option value="">Select a category</option>
+                    @foreach($board->categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </section>
+            <section>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">In list</label>
                 <div class="flex items-center gap-2 bg-gray-100 dark:bg-gray-700 rounded px-3 py-2">
                     <x-heroicon-o-rectangle-group class="w-5 h-5 text-blue-400" />

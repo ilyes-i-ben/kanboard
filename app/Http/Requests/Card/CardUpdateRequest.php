@@ -13,6 +13,7 @@ class CardUpdateRequest extends CardRequest
             'deadline' => 'nullable|date',
             'assignees' => 'array',
             'assignees.*' => 'exists:users,id',
+            'category_id' => 'nullable|integer',
         ];
     }
 }
