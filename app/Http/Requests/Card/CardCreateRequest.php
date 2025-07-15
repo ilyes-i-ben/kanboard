@@ -15,6 +15,7 @@ class CardCreateRequest extends CardRequest
             'assignees' => 'nullable|array',
             'deadline' => 'nullable|date',
             'assignees.*' => 'integer|exists:users,id',
+            'category_id' => 'nullable|integer',
         ];
     }
 }

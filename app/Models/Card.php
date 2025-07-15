@@ -29,6 +29,7 @@ class Card extends Model
         'priority',
 		'deadline',
 		'finished_at',
+        'category_id',
 		'created_by',
 	];
 
