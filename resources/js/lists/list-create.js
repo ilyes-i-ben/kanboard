@@ -1,4 +1,5 @@
 import { addList } from "./list-ui";
+import {updateTerminal} from "./list-edit.js";
 
 async function renderList(listId) {
     try {
@@ -36,6 +37,12 @@ async function createList(url, formData) {
 
         if (data.success && data.list) {
             showSuccessToast(data.message || 'List created successfully!');
+            if (data.terminal) {
+                try {
+                    updateTerminal(data.list.id);
+                } catch (e) {
+                }
+            }
             return data.list;
         } else {
             showErrorToast(data.message || 'Error creating list');

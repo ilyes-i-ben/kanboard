@@ -19,7 +19,6 @@ class ToastManager {
         const toast = this.createToast(type, message, duration);
         this.container.appendChild(toast);
 
-        // Auto-remove toast after duration
         setTimeout(() => {
             this.removeToast(toast);
         }, duration);

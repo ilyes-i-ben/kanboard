@@ -82,6 +82,7 @@ class ListController extends Controller
             'success' => true,
             'message' => 'List created successfully!',
             'list' => $list,
+            'terminal' => $isTerminal,
         ]);
     }
 

@@ -1,7 +1,5 @@
 function addList(list, html) {
     if (!list || !html) return;
-    // Find the board container where lists are displayed
-    // You may need to adjust the selector to match your board's DOM structure
     const boardContainer = document.querySelector('.lists-container');
     const addListSection = document.getElementById('add-list-section');
     if (addListSection) {

@@ -27,6 +27,8 @@ class CardController extends Controller
         $card = Card::findOrFail($request['card_id']);
         $targetList = ListModel::findOrFail($request['list_id']);
 
+        $original = $card->list;
+
         $this->cardService->move(
             card: $card,
             targetList: $targetList,
@@ -35,8 +37,16 @@ class CardController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Carte déplacée avec succès.',
+            'message' => 'Card moved successfully.',
             'completed' => $targetList->is_terminal,
+            'original' => [
+                'id' => $original->id,
+                'emptied' => $original->cards()->count() === 0,
+            ],
+            'target' => [
+                'id' => $targetList->id,
+                'wasEmpty' => $targetList->cards()->count() === 1,
+            ],
         ]);
     }
 

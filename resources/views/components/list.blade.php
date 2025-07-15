@@ -27,12 +27,13 @@
     </div>
 
     <div
+        id="list-cards-container-{{ $list->id }}"
         class="cards-container flex-1 overflow-y-auto min-h-[200px] max-h-[calc(100vh-220px)]"
         x-sort="updateCardPosition($item, $position, '{{ $list->id }}')"
         x-sort:group="cards"
     >
         @if($list->cards->isEmpty())
-            <div class="text-center text-gray-800 dark:text-gray-400 py-8 text-sm flex items-center">
+            <div class="empty-list text-center text-gray-800 dark:text-gray-400 py-8 text-sm flex items-center">
                 <x-heroicon-s-no-symbol class="w-10 h-10 mb-2" />
                 <span>
                     No cards in this list.
