@@ -43,12 +43,10 @@ class BoardController extends Controller
     {
         $board = auth()->user()->boards()->create($request->validated());
 
-        $categories = $request->input('categories', []);
-        foreach ($categories as $catName) {
-            if ($catName && trim($catName) !== '') {
-                $board->categories()->create(['name' => trim($catName)]);
-            }
-        }
+        $this->boardService->createCategories(
+            board: $board,
+            categories: $request->input('categories', []),
+        );
 
         return redirect(status: 201)
             ->route('boards.index')

@@ -35,4 +35,13 @@ class BoardService
 
         return $keepIds;
     }
+
+    public function createCategories(Board $board, array $categories): void
+    {
+        foreach ($categories as $catName) {
+            if ($catName && trim($catName) !== '') {
+                $board->categories()->create(['name' => trim($catName)]);
+            }
+        }
+    }
 }
