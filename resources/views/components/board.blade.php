@@ -11,7 +11,7 @@
     x-data="boardComponent()"
 >
     <div class="mb-4 flex justify-between items-center">
-        <div class="flex items-center space-x-2">
+        <div x-cloak class="flex items-center space-x-2">
             <template x-if="!editingTitle">
                 <h1
                     class="text-2xl font-bold text-white drop-shadow select-text"

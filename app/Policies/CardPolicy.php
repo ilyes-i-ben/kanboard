@@ -13,4 +13,12 @@ class CardPolicy
             $card->created_by === $user->id
             || $card->list?->board?->created_by === $user->id;
     }
+
+    public function update(User $user, Card $card): bool
+    {
+        return
+            $card->members->contains($user)
+            || $card->created_by === $user->id
+            || $card->list?->board?->created_by === $user->id;
+    }
 }
