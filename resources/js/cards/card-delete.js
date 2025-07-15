@@ -1,5 +1,7 @@
 import { removeCard } from './card-ui.js';
 
+
+
 window.addEventListener('delete-card', async (event) => {
     const cardId = event.detail.cardId;
     if (!cardId) return;

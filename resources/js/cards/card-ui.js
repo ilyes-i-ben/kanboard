@@ -11,4 +11,17 @@ function removeCard(cardId) {
     if (cardEl) cardEl.remove();
 }
 
-export { addCard, removeCard };
+function updateCardUI(cardId, html) {
+    if (!cardId || !html) return;
+    const cardEl = document.getElementById(`kanboard-card-modal-${cardId}`);
+    if (cardEl) {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+        const newCardEl = tempDiv.firstElementChild;
+        if (newCardEl) {
+            cardEl.replaceWith(newCardEl);
+        }
+    }
+}
+
+export { addCard, removeCard, updateCardUI };

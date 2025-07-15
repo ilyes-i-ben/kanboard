@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Card\CardCreateRequest;
 use App\Http\Requests\Card\CardMoveRequest;
+use App\Http\Requests\Card\CardUpdateRequest;
 use App\Models\Card;
 use App\Models\ListModel;
 use App\Services\CardService;
@@ -96,9 +97,28 @@ class CardController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CardUpdateRequest $request, Card $card)
     {
-        dd($request);
+        if (!auth()->user()->can('update', $card)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'You don\'t have the right to update.',
+            ], 403);
+        }
+
+        $validated = $request->validated();
+
+        $card->fill($validated);
+        $card->save();
+
+        if (isset($validated['assignees'])) {
+            $card->members()->sync($validated['assignees']);
+        }
+
+        return response()->json([
+            'success' => true,
+            'card' => $card->load('members', 'user', 'list'),
+        ]);
     }
 
     public function destroy(Card $card)

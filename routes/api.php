@@ -13,6 +13,9 @@ Route::prefix('api')->group(function () {
     Route::get('/cards/{card}/render', [CardController::class, 'render'])->name('cards.render');
     Route::get('/lists/{list}/render', [ListController::class, 'render'])->name('lists.render');
 
+
+    Route::post('/cards/{card}/update', [CardController::class, 'update'])->name('cards.update.post');
+
     Route::apiResource('cards', CardController::class);
     Route::apiResource('lists', ListController::class);
 });
