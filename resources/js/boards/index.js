@@ -1,1 +1,2 @@
-import './categories.js';
+import './categories.js'
+import './delete.js';

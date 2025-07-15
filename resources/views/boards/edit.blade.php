@@ -71,6 +71,29 @@
                             </x-primary-button>
                         </div>
                     </form>
+
+                    <div class="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8">
+                        <div class="flex items-center gap-3 mb-4">
+                            <x-heroicon-o-exclamation-triangle class="w-7 h-7 text-red-500" />
+                            <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100">{{ __('Danger Zone') }}</h2>
+                        </div>
+
+                        <div x-data class="bg-red-50 dark:bg-gray-900 border border-red-200 dark:border-red-800 rounded-lg p-6">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                <div>
+                                    <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">Delete this board</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Once deleted, this board and all its data will be permanently removed.</p>
+                                </div>
+                                <button
+                                    type="button"
+                                    @click="window.dispatchEvent(new CustomEvent('delete-board', { detail: { boardId: {{ $board->id }} } }))"
+                                    class="px-4 py-2 bg-white dark:bg-gray-800 border border-red-300 dark:border-red-700 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-gray-700 font-medium shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                                >
+                                    Delete Board
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
