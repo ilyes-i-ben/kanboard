@@ -152,6 +152,7 @@
                     method="POST"
                     class="edit-card-modal-class p-6 space-y-4"
                 >
+                    @csrf
                     <input type="hidden" name="board_id" value="{{ $card->list->board->id }}">
                     <section>
                         <label for="edit-title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Title</label>

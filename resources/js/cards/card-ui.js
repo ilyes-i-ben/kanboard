@@ -13,14 +13,9 @@ function removeCard(cardId) {
 
 function updateCardUI(cardId, html) {
     if (!cardId || !html) return;
-    const cardEl = document.getElementById(`kanboard-card-modal-${cardId}`);
+    const cardEl = document.getElementById(`kanboard-card-${cardId}`);
     if (cardEl) {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-        const newCardEl = tempDiv.firstElementChild;
-        if (newCardEl) {
-            cardEl.replaceWith(newCardEl);
-        }
+        cardEl.outerHTML = html;
     }
 }
 
