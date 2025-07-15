@@ -48,7 +48,7 @@ class ToastManager {
                 ${this.getIcon(type)}
             </div>
 
-            <div class="ms-3 text-sm font-normal">${message}</div>
+            <div class="ms-3 mr-2 text-sm font-normal">${message}</div>
 
             <button @click="show = false" type="button" class="ms-auto text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
                 <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2">
