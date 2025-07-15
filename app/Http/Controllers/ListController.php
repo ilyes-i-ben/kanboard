@@ -7,6 +7,7 @@ use App\Models\Board;
 use App\Models\ListModel;
 use App\Services\ListService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ListController extends Controller
 {
@@ -152,8 +153,23 @@ class ListController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ListModel $listModel)
+    public function destroy(ListModel $list)
     {
-        //
+        Gate::authorize('delete', $list);
+
+        $wasTerminal = $list->is_terminal;
+        if ($wasTerminal) {
+            $doneList = $list->board->lists()->whereRaw('LOWER(title) = ?', ['done'])->first();
+            $doneList?->update(['is_terminal' => true]);
+        }
+
+        $list->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'List deleted successfully!',
+            'listId' => $list->id,
+            'wasTerminal' => $wasTerminal,
+            'newTerminalId' => $wasTerminal ? $doneList->id : null,
+        ]);
     }
 }

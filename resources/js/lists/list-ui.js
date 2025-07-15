@@ -11,7 +11,7 @@ function addList(list, html) {
 
 function removeList(listId) {
     if (!listId) return;
-    const listEl = document.querySelector(`[x-sort\\:item="${listId}"]`);
+    const listEl = document.querySelector(`#list-id-${listId}`);
     if (listEl) listEl.remove();
 }
 
