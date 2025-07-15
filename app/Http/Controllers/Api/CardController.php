@@ -94,6 +94,30 @@ class CardController extends Controller
         //
     }
 
+    public function markIncomplete(Card $card)
+    {
+        if (!auth()->user()->can('update', $card)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'You don\'t have the right to update.',
+            ], 403);
+        }
+
+        if ($card->finished_at === null) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Card is incomplete already !',
+            ]);
+        }
+
+        $card->update(['finished_at' => null]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Card marked incomplete !',
+        ]);
+    }
+
     /**
      * Update the specified resource in storage.
      */
