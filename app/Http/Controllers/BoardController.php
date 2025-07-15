@@ -37,7 +37,14 @@ class BoardController extends Controller
 
     public function store(BoardCreateRequest $request)
     {
-        auth()->user()->boards()->create($request->validated());
+        $board = auth()->user()->boards()->create($request->validated());
+
+        $categories = $request->input('categories', []);
+        foreach ($categories as $catName) {
+            if ($catName && trim($catName) !== '') {
+                $board->categories()->create(['name' => trim($catName)]);
+            }
+        }
 
         return redirect(status: 201)
             ->route('boards.index')

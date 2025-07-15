@@ -160,6 +160,26 @@
                         class="tinyMce"
                     >{{ old('description') ?? '' }}</x-textarea>
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                    <div id="categories-section" class="mt-6">
+                        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow border border-gray-200 dark:border-gray-700 p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <x-heroicon-o-clipboard-document-list class="w-6 h-6 text-blue-500 dark:text-blue-400" />
+                                <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">Categories (optional)</h3>
+                            </div>
+                            <div id="categories-list">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <input type="text" name="categories[]" class="w-full rounded-md border px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Category name" />
+                                    <button type="button" class="remove-category rounded-full p-2 text-red-400 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition" style="display:none" title="Remove">
+                                        <x-heroicon-o-x-mark class="w-5 h-5" />
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="button" id="add-category" class="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-md mt-2 hover:bg-blue-600 transition">
+                                <x-heroicon-o-plus class="w-5 h-5" />
+                                Add Category
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="mt-4 flex justify-end gap-4">
                     <x-secondary-button @click="$dispatch('close-modal', 'create-board-modal')">
