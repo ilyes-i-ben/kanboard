@@ -14,7 +14,9 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6">
                     <div class="mb-6">
-                        <a href="{{ route('boards.show', $board) }}" class="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition">
+                        <a
+                            href="{{ route('boards.show', $board) }}?view={{ request('view') ?: 'kanban' }}"
+                            class="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition">
                             <x-heroicon-o-arrow-left class="w-5 h-5 mr-2" />
                             Back to board
                         </a>

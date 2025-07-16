@@ -14,6 +14,7 @@
     data-created-at="{{ $card->created_at ? Carbon\Carbon::parse($card->created_at)->toDateString() : '' }}"
     data-deadline="{{ $card->deadline ? Carbon\Carbon::parse($card->deadline)->toDateString() : '' }}"
     data-finished="{{ $card->finished_at ? '1' : '0' }}"
+    data-late="{{ $card->deadline && Carbon\Carbon::parse($card->deadline)->isPast() && !$card->finished_at ? '1' : '0' }}"
     data-priority="{{ $card->priority }}"
     data-list-title="{{ strtolower($card->list->title) }}"
 >
