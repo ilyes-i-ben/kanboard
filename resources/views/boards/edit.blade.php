@@ -130,7 +130,7 @@
                             <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100">{{ __('Danger Zone') }}</h2>
                         </div>
 
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div x-data class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <div>
                                 <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">{{ __('Delete this board') }}</h3>
                                 <p class="text-sm text-gray-600 dark:text-gray-400">{{ __('Once deleted, this board and all its data will be permanently removed.') }}</p>
