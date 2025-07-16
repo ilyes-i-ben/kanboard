@@ -19,22 +19,30 @@
             backdrop-filter: blur(10px);"
     @endif
 >
+    <div class="flex items-center justify-end mb-4 z-20 relative gap-3">
+        <span class="inline-flex items-center gap-2 bg-white/20 dark:bg-black/30 rounded-xl px-4 py-1.5 text-sm font-semibold text-blue-900 dark:text-white shadow border border-white/20">
+            <x-heroicon-o-rectangle-stack class="w-5 h-5 text-blue-700 dark:text-blue-300" />
+            <span id="total-cards-count">{{ $board->lists->sum(fn($list) => $list->cards()->count()) }}</span> Cards
+        </span>
+        <button
+            data-tooltip-target="reset-filters-tooltip"
+            type="button"
+            class="ml-2 px-2 py-1 rounded-xl bg-white/20 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 border-2 border-white/30 dark:border-blue-400 text-xs font-semibold shadow-lg focus:ring-2 focus:ring-blue-400 transition-colors z-20 hover:bg-white/40 hover:scale-105"
+            style="position: static; top: auto; right: auto;"
+            onclick="window.dispatchEvent(new CustomEvent('reset-filters'))"
+        >
+            <x-heroicon-o-arrow-path class="h-6 w-6" />
+        </button>
+        <div id="reset-filters-tooltip" role="tooltip" class="absolute z-30 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-slate-800">
+            Reset filters
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+    </div>
+
     <div class="absolute inset-0 opacity-20 pointer-events-none select-none">
         <div class="absolute top-8 left-8 w-24 h-24 rounded-full bg-white/10 blur-xl animate-pulse dark:bg-white/10"></div>
         <div class="absolute top-1/3 right-16 w-16 h-16 rounded-full bg-white/15 blur-lg animate-pulse delay-1000 dark:bg-white/15"></div>
         <div class="absolute bottom-10 left-1/3 w-12 h-12 rounded-full bg-white/12 blur-md animate-pulse delay-2000 dark:bg-white/12"></div>
-    </div>
-    <button
-        data-tooltip-target="reset-filters-tooltip"
-        type="button"
-        class="absolute top-6 right-6 px-2 py-1 rounded-xl bg-white/20 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 border-2 border-white/30 dark:border-blue-400 text-xs font-semibold shadow-lg focus:ring-2 focus:ring-blue-400 transition-colors z-20 hover:bg-white/40 hover:scale-105"
-        onclick="window.dispatchEvent(new CustomEvent('reset-filters'))"
-    >
-        <x-heroicon-o-arrow-path class="h-6 w-6" />
-    </button>
-    <div id="reset-filters-tooltip" role="tooltip" class="absolute z-30 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-slate-800">
-        Reset filters
-        <div class="tooltip-arrow" data-popper-arrow></div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">

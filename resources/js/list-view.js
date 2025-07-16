@@ -84,6 +84,16 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             noCardsMessage.classList.add('hidden');
         }
+        updateTotalCardsCount();
+    }
+
+    function updateTotalCardsCount() {
+        const cards = cardListContainer.querySelectorAll('.card-list-item');
+        let visibleCount = 0;
+        cards.forEach(card => {
+            if (card.style.display !== 'none') visibleCount++;
+        });
+        document.getElementById('total-cards-count').textContent = visibleCount;
     }
 
     nameInput.addEventListener('input', filterCards);
@@ -119,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     filterCards();
+    updateTotalCardsCount();
 });
 
 // little helpers...:
