@@ -73,17 +73,21 @@ class CardController extends Controller
             'description' => $request['description'],
             'priority' => $request['priority'],
             'position' => $this->cardService->newNextPosition($list),
-            'deadline' => $request['deadline'],
+            'deadline' => $request['deadline'] ?: null,
             'category_id' => $request['category_id'] ?: null,
             'created_by' => auth()->id(),
         ]);
 
-        $card->members()->sync($request['assignees']);
+        $card->members()->sync($request['assignees'] ?? []);
 
         return response()->json([
             'success' => true,
             'message' => 'Card created successfully!',
             'card' => $card,
+            'list' => [
+                'id' => $list->id,
+                'wasEmpty' => $list->cards()->count() === 1,
+            ],
         ]);
     }
 
@@ -155,11 +159,16 @@ class CardController extends Controller
             ], 403);
         }
 
+        $list = $card->list;
         $card->delete();
 
         return response()->json([
             'success' => true,
             'message' => 'Card deleted successfully.',
+            'list' => [
+                'id' => $list->id,
+                'emptied' => $list->cards()->count() === 0,
+            ],
         ]);
     }
 

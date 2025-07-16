@@ -16,7 +16,8 @@ window.addEventListener('DOMContentLoaded', () => {
     tinymce.init({
         selector: 'textarea',
         skin: false,
-        content_css: false
+        content_css: false,
+        height: 200,
     });
 });
 
