@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <x-board :board="$board" />
+    <x-board :board="$board" :view-type="$view" />
 
     <style>
         /* Custom styles for the drag and drop interface */
