@@ -141,7 +141,7 @@
                 </a>
 
                 <a
-                    href="{{ route('boards.edit', $board) }}"
+                    href="{{ route('boards.edit', $board) }}?view={{ request('view') ?: 'kanban' }}"
                     class="group flex items-center justify-center bg-white/15 backdrop-blur-lg rounded-xl w-11 h-11 hover:bg-white/25 transition-all duration-300 shadow-xl border border-white/20"
                     title="Board Settings"
                 >
