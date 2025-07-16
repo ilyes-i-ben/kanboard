@@ -3,7 +3,9 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-2xl sm:rounded-2xl border border-gray-200 dark:border-gray-700">
                 <div class="flex justify-center items-center p-6 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 relative">
-                    <a href="{{ route('boards.show', $board) }}" class="absolute left-6 inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition">
+                    <a
+                        href="{{ route('boards.show', $board) }}?view={{ request('view') ?: 'kanban' }}"
+                        class="absolute left-6 inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition">
                         <x-heroicon-o-arrow-left class="w-5 h-5 mr-2" />
                         Back to board
                     </a>
