@@ -37,6 +37,9 @@ async function createCard(url, formData) {
 
         if (data.success && data.card) {
             showSuccessToast(data.message || 'Card created successfully!');
+            if (data.list?.wasEmpty) {
+                window.dispatchEvent(new CustomEvent('list-was-empty', { detail: {listId: data.list.id} }));
+            }
             return data.card;
         } else {
             showErrorToast(data.message || 'Error creating card');

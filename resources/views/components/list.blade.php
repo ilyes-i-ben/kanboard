@@ -34,7 +34,7 @@
         x-sort:group="cards"
     >
         @if($list->cards->isEmpty())
-            <div class="empty-list text-center text-gray-800 dark:text-gray-400 py-8 text-sm flex items-center">
+            <div class="empty-list flex flex-col items-center justify-center text-gray-800 dark:text-gray-400 py-8 text-sm">
                 <x-heroicon-s-no-symbol class="w-10 h-10 mb-2" />
                 <span>
                     No cards in this list.

@@ -30,6 +30,10 @@ window.addEventListener('delete-card', async (event) => {
         if (response.ok) {
             window.showSuccessToast('Card deleted successfully!');
             removeCard(cardId);
+            const data = await response.json();
+            if (data.list.emptied) {
+                window.dispatchEvent(new CustomEvent('list-emptied', { detail: {listId: data.list.id} }));
+            }
         } else {
             const error = await response.json();
             window.showErrorToast(error.message || 'Failed to delete card.');

@@ -42,6 +42,23 @@ class Board extends Model
         static::creating(function ($model) {
             $model->created_by = auth()->id();
         });
+
+        static::created(function ($model) {
+            $lists = [
+                ['title' => 'To do', 'position' => 0, 'is_terminal' => false],
+                ['title' => 'In Progress', 'position' => 1, 'is_terminal' => false],
+                ['title' => 'Done', 'position' => 2, 'is_terminal' => true],
+                ['title' => 'Cancelled', 'position' => 3, 'is_terminal' => false],
+            ];
+            foreach ($lists as $list) {
+                $model->lists()->create([
+                    'title' => $list['title'],
+                    'position' => $list['position'],
+                    'is_terminal' => $list['is_terminal'],
+                    'created_by' => $model->created_by,
+                ]);
+            }
+        });
     }
 
     public function members(): BelongsToMany
