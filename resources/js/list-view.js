@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const cardCreatedAtDate = (card.getAttribute('data-created-at') || '');
             const cardDeadline = (card.getAttribute('data-deadline') || '');
+            const cardLate = card.getAttribute('data-late') === '1';
 
             const nameMatch = !name || cardTitle.includes(name);
             const descMatch = !desc || cardDesc.includes(desc);
@@ -53,7 +54,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 deadlineMatch = cardDeadline <= deadlineEnd;
             }
 
-            const completedMatch = checkCompletedMatch(completedFilter, cardFinished);
+            let completedMatch = checkCompletedMatch(completedFilter, cardFinished);
+            if (completedFilter === 'late') {
+                completedMatch = cardLate;
+            }
+
             if (
                 nameMatch &&
                 descMatch &&
@@ -111,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // little helpers...:
 function checkCompletedMatch(filter, finished) {
+    if (filter === 'late') return 'late';
     if (filter === 'not') return !finished;
     if (filter === 'yes') return finished;
     return true;

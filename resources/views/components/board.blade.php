@@ -118,7 +118,7 @@
 
             <div class="flex items-center space-x-3">
                 <a
-                    href="{{ route('boards.members.index', $board) }}"
+                    href="{{ route('boards.members.index', $board) }}?view={{ request('view') ?: 'kanban' }}"
                     class="group flex items-center space-x-3 bg-white/15 backdrop-blur-lg rounded-xl px-4 py-2 hover:bg-white/25 transition-all duration-300 shadow-xl border border-white/20"
                 >
                     <div class="flex flex-col items-start">
