@@ -158,10 +158,16 @@ class ListController extends Controller
     {
         Gate::authorize('delete', $list);
 
+        if ($list->board->lists()->count() === 1) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Board must have at least one list',
+            ], 400);
+        }
+
         $wasTerminal = $list->is_terminal;
         if ($wasTerminal) {
-            $doneList = $list->board->lists()->whereRaw('LOWER(title) = ?', ['done'])->first();
-            $doneList?->update(['is_terminal' => true]);
+            $doneList = $this->listService->processWasTerminal($list);
         }
 
         $list->delete();

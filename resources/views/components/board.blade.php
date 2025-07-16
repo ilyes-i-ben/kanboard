@@ -1,7 +1,7 @@
 @props(['board'])
 
 <div
-    class="board-container h-full rounded-3xl p-6 m-4 relative overflow-hidden shadow-2xl border border-white/20"
+    class="board-container h-full rounded-3xl p-4 m-4 relative overflow-hidden shadow-2xl border border-white/20"
     style="
         background:
             radial-gradient(circle at 20% 20%, rgba(255,255,255,0.15) 0%, transparent 50%),
@@ -18,19 +18,18 @@
         <div class="absolute bottom-20 left-1/3 w-20 h-20 rounded-full bg-white/12 blur-md animate-pulse delay-2000"></div>
     </div>
 
-    <div class="mb-8 relative z-10">
-        <!-- Board Title and Stats Row -->
-        <div class="flex justify-between items-start mb-6">
+    <div class="mb-6 relative z-10">
+        <div class="flex justify-between items-start mb-4">
             <div class="flex-1">
-                <div x-cloak class="flex items-center space-x-4 mb-4">
+                <div x-cloak class="flex items-center space-x-4 mb-3">
                     <div class="flex items-center space-x-3">
-                        <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg">
-                            <x-heroicon-o-rectangle-group class="w-7 h-7 text-white" />
+                        <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg">
+                            <x-heroicon-o-rectangle-group class="w-6 h-6 text-white" />
                         </div>
                         <div>
                             <template x-if="!editingTitle">
                                 <h1
-                                    class="text-4xl font-black text-white drop-shadow-lg select-text tracking-tight"
+                                    class="text-3xl font-black text-white drop-shadow-lg select-text tracking-tight"
                                     x-text="title"
                                 ></h1>
                             </template>
@@ -40,7 +39,7 @@
                                     x-model="title"
                                     @keydown.enter.prevent="confirmEditTitle"
                                     @keydown.escape="cancelEditTitle"
-                                    class="text-4xl font-black text-white drop-shadow-lg bg-transparent border-b-2 border-white focus:outline-none px-2 tracking-tight"
+                                    class="text-3xl font-black text-white drop-shadow-lg bg-transparent border-b-2 border-white focus:outline-none px-2 tracking-tight"
                                     style="min-width: 200px; max-width: 600px;"
                                 />
                             </template>
@@ -50,83 +49,80 @@
                         <button
                             x-show="!editingTitle"
                             @click="startEditTitle"
-                            class="p-3 rounded-xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                            class="p-2 rounded-xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                             title="Edit title"
                         >
-                            <x-heroicon-o-pencil-square class="w-6 h-6 text-white" />
+                            <x-heroicon-o-pencil-square class="w-5 h-5 text-white" />
                         </button>
                     @endif
                     <button
                         x-show="editingTitle"
                         @click="confirmEditTitle"
-                        class="p-3 rounded-xl bg-green-500/20 backdrop-blur-sm hover:bg-green-500/30 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                        class="p-2 rounded-xl bg-green-500/20 backdrop-blur-sm hover:bg-green-500/30 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                         title="Confirm"
                     >
-                        <x-heroicon-o-check-circle class="w-6 h-6 text-white" />
+                        <x-heroicon-o-check-circle class="w-5 h-5 text-white" />
                     </button>
                 </div>
 
-                <!-- Board Stats -->
-                <div class="flex items-center space-x-6 text-white/90">
-                    <div class="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-                        <x-heroicon-o-rectangle-group class="w-5 h-5" />
-                        <span class="text-sm font-semibold"><span id="board-list-count">{{ $board->lists->count() }}</span> Lists</span>
+                <div class="flex items-center space-x-4 text-white/90">
+                    <div class="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 shadow-lg">
+                        <x-heroicon-o-rectangle-group class="w-4 h-4" />
+                        <span class="text-xs font-semibold"><span id="board-list-count">{{ $board->lists->count() }}</span> Lists</span>
                     </div>
-                    <div class="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-                        <x-heroicon-o-users class="w-5 h-5" />
-                        <span class="text-sm font-semibold">{{ $board->members->count() }} Members</span>
+                    <div class="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 shadow-lg">
+                        <x-heroicon-o-users class="w-4 h-4" />
+                        <span class="text-xs font-semibold">{{ $board->members->count() }} Members</span>
                     </div>
-                    <div class="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-                        <x-heroicon-o-clock class="w-5 h-5" />
-                        <span class="text-sm font-semibold">Created {{ $board->created_at->diffForHumans() }}</span>
+                    <div class="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 shadow-lg">
+                        <x-heroicon-o-clock class="w-4 h-4" />
+                        <span class="text-xs font-semibold">Created {{ $board->created_at->diffForHumans() }}</span>
                     </div>
-                    <div class="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-                        <span class="text-sm font-semibold">Owner:</span>
+                    <div class="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 shadow-lg">
+                        <span class="text-xs font-semibold">Owner:</span>
                         <x-user.avatar :user="$board->creator" />
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- View Controls and Actions Row -->
         <div class="flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <div class="flex items-center space-x-1 bg-white/15 backdrop-blur-lg rounded-2xl p-2 shadow-xl border border-white/20">
+                <div class="flex items-center space-x-1 bg-white/15 backdrop-blur-lg rounded-xl p-1.5 shadow-xl border border-white/20">
                     <button
                         @click="viewType = 'kanban'"
                         :class="viewType === 'kanban' ? 'bg-white/30 shadow-lg scale-105' : 'hover:bg-white/20'"
-                        class="p-3 rounded-xl transition-all duration-300 hover:scale-105"
+                        class="p-2 rounded-lg transition-all duration-300 hover:scale-105"
                         title="Kanban view"
                     >
-                        <x-heroicon-o-table-cells class="w-6 h-6 text-white" />
+                        <x-heroicon-o-table-cells class="w-5 h-5 text-white" />
                     </button>
                     <button
                         @click="viewType = 'list'"
                         :class="viewType === 'list' ? 'bg-white/30 shadow-lg scale-105' : 'hover:bg-white/20'"
-                        class="p-3 rounded-xl transition-all duration-300 hover:scale-105"
+                        class="p-2 rounded-lg transition-all duration-300 hover:scale-105"
                         title="List view"
                     >
-                        <x-heroicon-o-bars-3-bottom-left class="w-6 h-6 text-white" />
+                        <x-heroicon-o-bars-3-bottom-left class="w-5 h-5 text-white" />
                     </button>
                     <button
                         @click="viewType = 'calendar'"
                         :class="viewType === 'calendar' ? 'bg-white/30 shadow-lg scale-105' : 'hover:bg-white/20'"
-                        class="p-3 rounded-xl transition-all duration-300 hover:scale-105"
+                        class="p-2 rounded-lg transition-all duration-300 hover:scale-105"
                         title="Calendar view"
                     >
-                        <x-heroicon-o-calendar-days class="w-6 h-6 text-white" />
+                        <x-heroicon-o-calendar-days class="w-5 h-5 text-white" />
                     </button>
                 </div>
             </div>
 
-            <div class="flex items-center space-x-4">
-                <!-- Members Section -->
+            <div class="flex items-center space-x-3">
                 <a
                     href="{{ route('boards.members.index', $board) }}"
-                    class="group flex items-center space-x-4 bg-white/15 backdrop-blur-lg rounded-2xl px-6 py-3 hover:bg-white/25 transition-all duration-300 shadow-xl border border-white/20 hover:scale-105"
+                    class="group flex items-center space-x-3 bg-white/15 backdrop-blur-lg rounded-xl px-4 py-2 hover:bg-white/25 transition-all duration-300 shadow-xl border border-white/20"
                 >
                     <div class="flex flex-col items-start">
-                        <span class="text-sm font-bold text-white mb-1">Team Members</span>
+                        <span class="text-sm font-bold text-white">Team Members</span>
                         <span class="text-xs text-white/80">Manage access & permissions</span>
                     </div>
                     <div class="flex -space-x-2">
@@ -136,27 +132,25 @@
                             </div>
                         @endforeach
                         @if($board->members->count() > 4)
-                            <div class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-white/20 backdrop-blur-sm text-xs font-bold text-white ring-2 ring-white/30 transition-transform group-hover:scale-110">
+                                <div class="flex items-center justify-center h-6 w-6 rounded-full bg-gray-200 dark:bg-gray-600 text-xs font-medium text-gray-800 dark:text-gray-300 group-hover:scale-110">
                                 +{{ $board->members->count() - 4 }}
                             </div>
                         @endif
                     </div>
-                    <x-heroicon-o-chevron-right class="w-5 h-5 text-white/70 group-hover:text-white transition-colors" />
+                    <x-heroicon-o-chevron-right class="w-4 h-4 text-white/70 group-hover:text-white transition-colors" />
                 </a>
 
-                <!-- Settings Button -->
                 <a
                     href="{{ route('boards.edit', $board) }}"
-                    class="group flex items-center justify-center bg-white/15 backdrop-blur-lg rounded-2xl w-14 h-14 hover:bg-white/25 transition-all duration-300 shadow-xl border border-white/20 hover:scale-105"
+                    class="group flex items-center justify-center bg-white/15 backdrop-blur-lg rounded-xl w-11 h-11 hover:bg-white/25 transition-all duration-300 shadow-xl border border-white/20"
                     title="Board Settings"
                 >
-                    <x-heroicon-o-cog-6-tooth class="w-7 h-7 text-white group-hover:rotate-180 transition-transform duration-500" />
+                    <x-heroicon-o-cog-6-tooth class="w-6 h-6 text-white group-hover:rotate-180 transition-transform duration-500" />
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Board Content -->
     <div class="relative z-10">
         <div
             x-show="viewType === 'kanban'"
@@ -172,12 +166,12 @@
 
             <div
                 id="add-list-section"
-                class="min-w-80 bg-white/15 backdrop-blur-lg rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer hover:bg-white/25 transition-all duration-300 shadow-xl border border-white/20 hover:scale-105 group"
+                class="min-w-80 bg-white/15 backdrop-blur-lg rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer hover:bg-white/25 transition-colors duration-200 shadow-xl border border-white/20"
                 @click="showCreateListModal = true"
             >
                 <div class="text-white flex flex-col items-center space-y-3">
-                    <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-all duration-300">
-                        <x-heroicon-s-plus class="w-8 h-8 group-hover:scale-110 transition-transform"/>
+                    <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
+                        <x-heroicon-s-plus class="w-8 h-8"/>
                     </div>
                     <div class="text-center">
                         <div class="text-lg font-bold mb-1">Add New List</div>
