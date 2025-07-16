@@ -1,4 +1,4 @@
-@props(['board'])
+@props(['board', 'viewType' => 'kanban'])
 
 <div
     class="board-container h-full rounded-3xl p-4 m-4 relative overflow-hidden shadow-2xl border border-white/20"
@@ -88,26 +88,26 @@
 
         <div class="flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <div class="flex items-center space-x-1 bg-white/15 backdrop-blur-lg rounded-xl p-1.5 shadow-xl border border-white/20">
+                <div x-data class="flex items-center space-x-1 bg-white/15 backdrop-blur-lg rounded-xl p-1.5 shadow-xl border border-white/20">
                     <button
-                        @click="viewType = 'kanban'"
-                        :class="viewType === 'kanban' ? 'bg-white/30 shadow-lg scale-105' : 'hover:bg-white/20'"
+                        @click="window.location.href = '{{ route('boards.show', [$board, 'view' => 'kanban']) }}'"
+                        :class="@if($viewType === 'kanban') 'bg-white/30 shadow-lg scale-105' @else 'hover:bg-white/20' @endif"
                         class="p-2 rounded-lg transition-all duration-300 hover:scale-105"
                         title="Kanban view"
                     >
                         <x-heroicon-o-table-cells class="w-5 h-5 text-white" />
                     </button>
                     <button
-                        @click="viewType = 'list'"
-                        :class="viewType === 'list' ? 'bg-white/30 shadow-lg scale-105' : 'hover:bg-white/20'"
+                        @click="window.location.href = '{{ route('boards.show', [$board, 'view' => 'list']) }}'"
+                        :class="@if($viewType === 'list') 'bg-white/30 shadow-lg scale-105' @else 'hover:bg-white/20' @endif"
                         class="p-2 rounded-lg transition-all duration-300 hover:scale-105"
                         title="List view"
                     >
                         <x-heroicon-o-bars-3-bottom-left class="w-5 h-5 text-white" />
                     </button>
                     <button
-                        @click="viewType = 'calendar'"
-                        :class="viewType === 'calendar' ? 'bg-white/30 shadow-lg scale-105' : 'hover:bg-white/20'"
+                        @click="window.location.href = '{{ route('boards.show', [$board, 'view' => 'calendar']) }}'"
+                        :class="@if($viewType === 'calendar') 'bg-white/30 shadow-lg scale-105' @else 'hover:bg-white/20' @endif"
                         class="p-2 rounded-lg transition-all duration-300 hover:scale-105"
                         title="Calendar view"
                     >
@@ -152,49 +152,59 @@
     </div>
 
     <div class="relative z-10">
-        <div
-            x-show="viewType === 'kanban'"
-            x-data="{ showCreateListModal: false }"
-            class="lists-container flex space-x-6 overflow-x-auto pb-6 scroll-smooth"
-            x-sort="updateListPosition($item, $position)"
-            x-sort:group="lists"
-            style="scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.3) transparent;"
-        >
-            @foreach($board->lists->sortBy('position') as $list)
-                <x-list :list="$list" />
-            @endforeach
-
+        @if ($viewType === 'kanban')
             <div
-                id="add-list-section"
-                class="min-w-80 bg-white/15 backdrop-blur-lg rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer hover:bg-white/25 transition-colors duration-200 shadow-xl border border-white/20"
-                @click="showCreateListModal = true"
+                x-data="{ showCreateListModal: false }"
+                class="lists-container flex space-x-6 overflow-x-auto pb-6 scroll-smooth"
+                x-sort="updateListPosition($item, $position)"
+                x-sort:group="lists"
+                style="scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.3) transparent;"
             >
-                <div class="text-white flex flex-col items-center space-y-3">
-                    <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
-                        <x-heroicon-s-plus class="w-8 h-8"/>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-lg font-bold mb-1">Add New List</div>
-                        <div class="text-sm text-white/80">Create another list for your board</div>
-                    </div>
-                </div>
-            </div>
-            <x-list.create-modal
-                show-create-list-modal="showCreateListModal"
-                onClose="() => { showCreateListModal = false }"
-                :board="$board"
-            />
-        </div>
+                @foreach($board->lists->sortBy('position') as $list)
+                    <x-list :list="$list" />
+                @endforeach
 
-        <div x-show="viewType === 'calendar'" class="text-center py-20">
-            <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-12 shadow-2xl border border-white/20 max-w-md mx-auto">
-                <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <x-heroicon-o-calendar-days class="w-10 h-10 text-white" />
+                <div
+                    id="add-list-section"
+                    class="min-w-80 bg-white/15 backdrop-blur-lg rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer hover:bg-white/25 transition-colors duration-200 shadow-xl border border-white/20"
+                    @click="showCreateListModal = true"
+                >
+                    <div class="text-white flex flex-col items-center space-y-3">
+                        <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
+                            <x-heroicon-s-plus class="w-8 h-8"/>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-lg font-bold mb-1">Add New List</div>
+                            <div class="text-sm text-white/80">Create another list for your board</div>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="text-2xl font-bold text-white mb-3">Calendar View</h3>
-                <p class="text-white/80 text-lg">Coming soon with advanced scheduling features!</p>
+                <x-list.create-modal
+                    show-create-list-modal="showCreateListModal"
+                    onClose="() => { showCreateListModal = false }"
+                    :board="$board"
+                />
             </div>
-        </div>
+        @endif
+        @if ($viewType === 'list')
+{{--                 TODO: URGENT FOR PERF: pass list view to lazy... (load on demand) --}}
+            <div
+                class="flex justify-center"
+            >
+                <x-list-view :board="$board" />
+            </div>
+        @endif
+        @if($viewType === 'calendar')
+            <div class="text-center py-20">
+                <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-12 shadow-2xl border border-white/20 max-w-md mx-auto">
+                    <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <x-heroicon-o-calendar-days class="w-10 h-10 text-white" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3">Calendar View</h3>
+                    <p class="text-white/80 text-lg">Coming soon with advanced scheduling features!</p>
+                </div>
+            </div>
+        @endif
     </div>
 </div>
 

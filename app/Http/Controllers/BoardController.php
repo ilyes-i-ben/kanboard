@@ -58,6 +58,8 @@ class BoardController extends Controller
      */
     public function show(Board $board)
     {
+        $view = request()->query('view', 'kanban');
+
         $board = Board::with([
             'members',
             'lists.cards.members',
@@ -67,7 +69,7 @@ class BoardController extends Controller
             'lists.board',
         ])->find($board->id);
 
-        return view('board.show', compact('board'));
+        return view('board.show', compact('board', 'view'));
     }
 
     public function update(BoardUpdateRequest $request, Board $board)
