@@ -84,6 +84,7 @@ class ListController extends Controller
             'message' => 'List created successfully!',
             'list' => $list,
             'terminal' => $isTerminal,
+            'listsCount' => $list->board->lists()->count(),
         ]);
     }
 
@@ -170,6 +171,7 @@ class ListController extends Controller
             'listId' => $list->id,
             'wasTerminal' => $wasTerminal,
             'newTerminalId' => $wasTerminal ? $doneList->id : null,
+            'listsCount' => $list->board->lists()->count(),
         ]);
     }
 }
