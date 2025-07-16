@@ -43,6 +43,7 @@ async function createList(url, formData) {
                 } catch (e) {
                 }
             }
+            document.querySelector('#board-list-count').innerHTML = data.listsCount;
             return data.list;
         } else {
             showErrorToast(data.message || 'Error creating list');
