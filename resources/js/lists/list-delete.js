@@ -32,6 +32,7 @@ window.addEventListener('delete-list', async ({detail: {listId}}) => {
                 updateTerminal(responseData.newTerminalId)
                 window.showSuccessToast("The list 'Done' is now terminal.", 6000);
             }
+            document.querySelector('#board-list-count').innerHTML = responseData.listsCount;
         } else {
             const error = await response.json();
             window.showErrorToast(error.message || 'Failed to delete list.');
