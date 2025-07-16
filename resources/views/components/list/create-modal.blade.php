@@ -4,7 +4,7 @@
     x-show="showCreateListModal"
     x-cloak
     x-transition
-    class="fixed inset-0 z-250 overflow-auto bg-black bg-opacity-50 flex items-center justify-center"
+    class="fixed inset-0 z-[9999] overflow-auto bg-black bg-opacity-50 flex items-center justify-center"
     @keydown.escape.window="showCreateListModal = false; if (typeof onClose === 'function') onClose()"
     x-on:close-create-list-modal.window="showCreateListModal = false"
     @click.away="showCreateListModal = false; if (typeof onClose === 'function') onClose()"
@@ -49,3 +49,4 @@
         </form>
     </div>
 </div>
+

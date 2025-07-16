@@ -29,8 +29,11 @@ window.addEventListener('delete-list', async ({detail: {listId}}) => {
             removeList(listId);
             const responseData = await response.json();
             if (responseData.wasTerminal && responseData.newTerminalId) {
-                updateTerminal(responseData.newTerminalId)
-                window.showSuccessToast("The list 'Done' is now terminal.", 6000);
+                try {
+                    updateTerminal(responseData.newTerminalId)
+                    window.showSuccessToast("The list 'Done' is now terminal.", 6000);
+                } catch (e) {
+                }
             }
             document.querySelector('#board-list-count').innerHTML = responseData.listsCount;
         } else {

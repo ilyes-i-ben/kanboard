@@ -27,4 +27,12 @@ class ListService
             ->where('id', '!=', $listModel->id)
             ->update(['is_terminal' => false]);
     }
+
+    public function processWasTerminal(ListModel $list): ListModel
+    {
+        $doneList = $list->board->lists()->whereRaw('LOWER(title) = ?', ['done'])->first();
+        $doneList?->update(['is_terminal' => true]);
+
+        return $doneList;
+    }
 }

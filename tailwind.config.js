@@ -17,6 +17,10 @@ export default {
             fontFamily: {
                 sans: ['Poppins', ...defaultTheme.fontFamily.sans],
             },
+            zIndex: {
+                250: '250',
+                9999: '9999',
+            }
         },
     },
 

@@ -4,7 +4,7 @@
     x-show="showEditListModal"
     x-cloak
     x-transition
-    class="fixed inset-0 z-150 overflow-auto bg-black bg-opacity-50 flex items-center justify-center"
+    class="fixed inset-0 z-[9999] overflow-auto bg-black bg-opacity-50 flex items-center justify-center"
     @keydown.escape.window="showEditListModal = false"
     x-on:close-edit-list-modal.window="showEditListModal = false"
     @click.away="showEditListModal = false"

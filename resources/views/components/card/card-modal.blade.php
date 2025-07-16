@@ -144,7 +144,7 @@
             x-show="showEditCardModal"
             x-cloak
             x-transition
-            class="fixed inset-0 z-60 overflow-auto bg-black bg-opacity-50 flex items-center justify-center"
+            class="fixed inset-0 z-[9999] overflow-auto bg-black bg-opacity-50 flex items-center justify-center"
         >
             <div
                 class="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-xl mx-4 overflow-hidden border border-gray-200 dark:border-gray-700 animate-fadeIn"
