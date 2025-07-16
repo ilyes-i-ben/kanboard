@@ -218,7 +218,7 @@
                         </div>
                     </section>
                     <section class="flex justify-end gap-3">
-                        <button type="button" class="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition" onclick="this.closest('.fixed').style.display='none'">Cancel</button>
+                        <button type="button" class="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition" @click="showEditCardModal = false">Cancel</button>
                         <x-primary-button type="submit" class="flex items-center gap-2">
                             <x-heroicon-o-pencil-square class="mr-2 h-5 w-5" />
                             {{ __('Update Card') }}

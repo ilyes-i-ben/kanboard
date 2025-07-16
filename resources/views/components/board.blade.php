@@ -152,6 +152,7 @@
                     body: JSON.stringify({ title: this.title })
                 }).then(() => {
                     window.showSuccessToast('Board title updated successfully!');
+                    document.querySelector("#board-title-{{ $board->id }}").innerHTML = this.title;
                 });
             },
 
