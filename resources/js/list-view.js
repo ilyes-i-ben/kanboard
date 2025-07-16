@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const descInput = document.getElementById('filter-card-description');
     const prioritySelect = document.getElementById('filter-priority');
     const listSelect = document.getElementById('filter-list-title');
+    const categorySelect = document.getElementById('filter-category');
 
     const startDate = document.getElementById('filter-start-date');
 
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const desc = descInput.value.trim().toLowerCase();
         const priority = prioritySelect.value;
         const listTitle = listSelect.value;
+        const category = categorySelect.value;
 
         const createdAtDate = startDate.value;
         const deadlineStart = deadlineStartDate.value;
@@ -30,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const cardDesc = card.getAttribute('data-description') || '';
             const cardPriority = (card.getAttribute('data-priority') || '').toLowerCase();
             const cardListTitle = (card.getAttribute('data-list-title') || '').toLowerCase();
+            const cardCategory = (card.getAttribute('data-category') || '').toLowerCase();
             const cardFinished = card.getAttribute('data-finished') === '1';
 
             const cardCreatedAtDate = (card.getAttribute('data-created-at') || '');
@@ -40,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const descMatch = !desc || cardDesc.includes(desc);
             const priorityMatch = !priority || cardPriority === priority;
             const listMatch = !listTitle || cardListTitle === listTitle;
+            const categoryMatch = !category || (category === 'uncategorized' ? cardCategory === '' || cardCategory === 'uncategorized' : cardCategory === category);
 
             let createdAtDateMatch = true;
             if (createdAtDate) {
@@ -64,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 descMatch &&
                 priorityMatch &&
                 listMatch &&
+                categoryMatch &&
                 completedMatch &&
                 createdAtDateMatch &&
                 deadlineMatch
@@ -85,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
     descInput.addEventListener('input', filterCards);
     prioritySelect.addEventListener('change', filterCards);
     listSelect.addEventListener('change', filterCards);
+    categorySelect.addEventListener('change', filterCards);
 
     startDate.addEventListener('changeDate', filterCards);
 
@@ -104,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
         descInput.value = '';
         prioritySelect.value = '';
         listSelect.value = '';
+        categorySelect.value = '';
         startDate.value = '';
         deadlineStartDate.value = '';
         deadlineEndDate.value = '';
