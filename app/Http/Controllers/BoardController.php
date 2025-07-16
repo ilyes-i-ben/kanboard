@@ -63,6 +63,7 @@ class BoardController extends Controller
         $board = Board::with([
             'members',
             'lists.cards.members',
+            'lists.cards.category',
             'lists.cards.user',
             'lists.cards.list.board',
             'lists.user',
