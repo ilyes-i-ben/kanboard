@@ -52,6 +52,17 @@
                 @endif
             </div>
         @endif
+        @if($card->category)
+            <span class="ml-2 font-semibold rounded px-2 py-1 text-xs bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300 flex items-center gap-1">
+                <x-heroicon-o-tag class="w-4 h-4 text-purple-400" />
+                {{ $card->category->name }}
+            </span>
+        @else
+            <span class="ml-2 font-semibold rounded px-2 py-1 text-xs bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-400 flex items-center gap-1">
+                <x-heroicon-o-tag class="w-4 h-4 text-gray-400" />
+                No category
+            </span>
+        @endif
     </div>
     <div class="flex justify-between items-center text-xs text-gray-400 dark:text-gray-500 mt-2">
         <span>List: <span class="font-medium text-gray-700 dark:text-gray-300">{{ $card->list->title }}</span></span>
