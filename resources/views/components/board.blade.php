@@ -12,14 +12,12 @@
     "
     x-data="boardComponent()"
 >
-    <!-- Animated background elements -->
     <div class="absolute inset-0 opacity-20">
         <div class="absolute top-10 left-10 w-32 h-32 rounded-full bg-white/10 blur-xl animate-pulse"></div>
         <div class="absolute top-1/3 right-20 w-24 h-24 rounded-full bg-white/15 blur-lg animate-pulse delay-1000"></div>
         <div class="absolute bottom-20 left-1/3 w-20 h-20 rounded-full bg-white/12 blur-md animate-pulse delay-2000"></div>
     </div>
 
-    <!-- Enhanced Header Section -->
     <div class="mb-8 relative z-10">
         <!-- Board Title and Stats Row -->
         <div class="flex justify-between items-start mb-6">
@@ -81,6 +79,10 @@
                     <div class="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
                         <x-heroicon-o-clock class="w-5 h-5" />
                         <span class="text-sm font-semibold">Created {{ $board->created_at->diffForHumans() }}</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
+                        <span class="text-sm font-semibold">Owner:</span>
+                        <x-user.avatar :user="$board->creator" />
                     </div>
                 </div>
             </div>
