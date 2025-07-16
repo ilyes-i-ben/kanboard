@@ -70,6 +70,16 @@
                 <x-filters.priority-select id="filter-priority" />
             </div>
             <div class="flex flex-col gap-2">
+                <label class="text-xs font-semibold text-white/80 dark:text-gray-200 mb-1" for="filter-category">Category</label>
+                <select id="filter-category" class="w-full rounded-xl border border-white/30 dark:border-gray-700 bg-white/80 dark:bg-black/80 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:outline-none px-4 py-2 text-sm shadow transition-all duration-150">
+                    <option value="">All Categories</option>
+                    <option value="uncategorized">Not specified</option>
+                    @foreach($board->categories as $category)
+                        <option value="{{ strtolower($category->name) }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="flex flex-col gap-2">
                 <label class="text-xs font-semibold text-white/80 dark:text-gray-200 mb-1" for="filter-status">Status</label>
                 <x-filters.completed-status />
             </div>

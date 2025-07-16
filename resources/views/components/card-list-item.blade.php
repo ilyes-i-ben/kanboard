@@ -17,6 +17,7 @@
     data-late="{{ $card->deadline && Carbon\Carbon::parse($card->deadline)->isPast() && !$card->finished_at ? '1' : '0' }}"
     data-priority="{{ $card->priority }}"
     data-list-title="{{ strtolower($card->list->title) }}"
+    data-category="{{ $card->category ? strtolower($card->category->name) : 'uncategorized' }}"
 >
     <div class="flex justify-between items-center">
         <div class="flex flex-col gap-1">
