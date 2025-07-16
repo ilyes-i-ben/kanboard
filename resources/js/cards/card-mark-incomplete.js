@@ -7,7 +7,6 @@ window.addEventListener('mark-as-incomplete', async ({ detail: { cardId } }) => 
     });
 
     if (!confirm) {
-        window.showErrorToast('Cancelled.');
         return;
     }
 

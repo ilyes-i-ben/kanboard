@@ -12,7 +12,6 @@ window.addEventListener('delete-card', async (event) => {
     });
 
     if (!confirm) {
-        window.showErrorToast('Deletion canceled.');
         return;
     }
 

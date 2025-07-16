@@ -10,7 +10,6 @@ window.addEventListener('delete-list', async ({detail: {listId}}) => {
     });
 
     if (!confirm) {
-        window.showErrorToast('Deletion canceled.');
         return;
     }
 

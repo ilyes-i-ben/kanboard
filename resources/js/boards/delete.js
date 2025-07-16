@@ -9,7 +9,6 @@ window.addEventListener('delete-board', async (event) => {
     });
 
     if (!confirm) {
-        window.showErrorToast('Board deletion canceled.');
         return;
     }
 
