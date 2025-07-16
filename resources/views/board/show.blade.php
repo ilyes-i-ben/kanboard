@@ -13,7 +13,9 @@
             opacity: 0.5 !important;
             background-color: #e2e8f0 !important;
         }
-
+        .dark .sortable-ghost {
+            background-color: #334155 !important;
+        }
         body.sorting {
             cursor: grabbing !important;
         }
