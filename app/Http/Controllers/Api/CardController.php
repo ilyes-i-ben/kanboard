@@ -108,6 +108,13 @@ class CardController extends Controller
         return view('card.show', compact('card'));
     }
 
+    public function shared(string $token)
+    {
+        $card = Card::where('public_token', $token)->firstOrFail();
+
+        return view('card.show', compact('card'));
+    }
+
     public function markIncomplete(Card $card)
     {
         if (!auth()->user()->can('update', $card)) {

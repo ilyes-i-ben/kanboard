@@ -18,6 +18,9 @@ Route::middleware('auth')->group(function () {
 
 //Route::get('/boards', [\App\Http\Controllers\BoardController::class, 'index'])->name('board.index');
 
+// for public cards...
+
+Route::get('/share/card/{token}', [\App\Http\Controllers\Api\CardController::class, 'shared'])->name('cards.shared');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/api.php';
