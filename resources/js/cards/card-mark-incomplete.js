@@ -48,4 +48,6 @@ function markModalAsIncomplete(cardId) {
     if (!modalDataElement) return;
     const completedEntry = modalDataElement.querySelector('.completed-entry');
     if (completedEntry) completedEntry.remove();
+    const markIncompleteButton = document.getElementById(`mark-as-incomplete-button-${cardId}`);
+    if (markIncompleteButton) markIncompleteButton.remove();
 }

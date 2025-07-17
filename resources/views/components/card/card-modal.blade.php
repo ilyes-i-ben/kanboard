@@ -35,6 +35,7 @@
                 @endcan
                 @if ($card->finished_at !== null)
                     <button
+                        id="mark-as-incomplete-button-{{ $card->id }}"
                         class="rounded-full p-2 text-yellow-400 hover:text-yellow-700 dark:text-yellow-400 dark:hover:text-yellow-300 transition"
                         title="Mark as Incomplete"
                         @click="window.dispatchEvent(new CustomEvent('mark-as-incomplete', { detail: { cardId: {{ $card->id }} } }))"
