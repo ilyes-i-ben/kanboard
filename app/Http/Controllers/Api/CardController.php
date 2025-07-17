@@ -91,6 +91,15 @@ class CardController extends Controller
         ]);
     }
 
+    public function modal(Card $card)
+    {
+        $html = view('components.card.card-modal', ['card' => $card, 'readonly' => true])->render();
+        return response()->json([
+            'success' => true,
+            'html' => $html,
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */
