@@ -1,12 +1,9 @@
 @props(['board'])
 
 <div class="day-view h-full flex flex-col">
-    <!-- Day Header -->
     <div class="flex border-b border-white/20 mb-4">
-        <!-- Empty space for time column -->
         <div class="w-20 flex-shrink-0"></div>
 
-        <!-- Day Header -->
         <div class="flex-1 text-center py-4">
             <div class="text-white/80 text-sm font-medium" x-text="currentDay.dayName"></div>
             <div
@@ -20,10 +17,8 @@
         </div>
     </div>
 
-    <!-- Time Grid -->
     <div class="flex-1 overflow-y-auto">
         <div class="flex">
-            <!-- Time Column -->
             <div class="w-20 flex-shrink-0">
                 <template x-for="hour in hours" :key="`day-hour-${hour}`">
                     <div class="h-24 flex items-start justify-end pr-3 border-b border-white/10">
@@ -32,7 +27,6 @@
                 </template>
             </div>
 
-            <!-- Day Content -->
             <div class="flex-1 border-l border-white/10">
                 <template x-for="hour in hours" :key="`day-content-hour-${hour}`">
                     <div class="h-24 border-b border-white/10 p-3 relative">
@@ -41,7 +35,6 @@
                             <x-calendar.card x-bind:card="card" size="large" />
                         </template>
 
-                        <!-- All-day cards for this day (if hour is 6 AM, show all-day cards) -->
                         <template x-if="hour === 6">
                             <template x-for="card in getAllDayCards(currentDay.date)" :key="`day-allday-${card.id}`">
                                 <div
