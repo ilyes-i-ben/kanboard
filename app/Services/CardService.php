@@ -64,24 +64,50 @@ class CardService
         ];
 
         foreach ($cards as $card) {
-            $fullSharedUrl = route('shared-content.card', ['token' => $this->getOrGeneratePublicToken($card)]);
+            if (!$card->deadline) continue;
+            $url = route('shared-content.card', ['token' => $this->getOrGeneratePublicToken($card)]);
+
+            $start = Carbon::parse($card->deadline)->utc();
+            $end = $start->copy()->addHour();
+
             $lines[] = 'BEGIN:VEVENT';
-            $lines[] = 'UID:card-'.$card->public_token.'@kanboard';
-            $lines[] = 'SUMMARY:'.addcslashes($card->title, ',;');
-            $lines[] = 'DESCRIPTION:'. "see card detail on: " . $fullSharedUrl . addcslashes(($card->description ?? ''), ',;');
-            $lines[] = 'DTSTART:'.Carbon::parse($card->created_at)->format('Ymd\THis\Z');
-            if ($card->deadline) {
-                $lines[] = 'DTEND:'.Carbon::parse($card->deadline)->format('Ymd\THis\Z');
+            $lines[] = 'UID:card-' . $card->public_token . '@kanboard';
+            $lines = array_merge($lines, $this->foldLine('SUMMARY:' . addcslashes($card->title, ',;')));
+
+            $descriptionText = 'see card detail on: ' . $url;
+            if (!empty($card->description)) {
+                $desc = preg_replace('/\s+/', ' ', $card->description);
+                $descriptionText .= ' ' . addcslashes($desc, ',;');
             }
+            $lines = array_merge($lines, $this->foldLine('DESCRIPTION:' . $descriptionText));
+
+            $lines[] = 'DTSTART:' . $start->format('Ymd\THis\Z');
+            $lines[] = 'DTEND:' . $end->format('Ymd\THis\Z');
+            $lines[] = 'DTSTAMP:' . now()->utc()->format('Ymd\THis\Z');
+
             if ($card->finished_at) {
-                $lines[] = 'COMPLETED:'.Carbon::parse($card->finished_at)->format('Ymd\THis\Z');
+                $lines[] = 'COMPLETED:' . Carbon::parse($card->finished_at)->utc()->format('Ymd\THis\Z');
             }
-            $lines[] = 'URL:' . $fullSharedUrl;
+
+            $lines = array_merge($lines, $this->foldLine('URL:' . $url));
+
             $lines[] = 'END:VEVENT';
         }
 
         $lines[] = 'END:VCALENDAR';
 
-        return implode("\r\n", $lines);
+        return implode("\r\n", $lines) . "\r\n";
+    }
+
+    private function foldLine(string $line): array
+    {
+        $output = [];
+        $max = 75;
+        $len = strlen($line);
+        for ($i = 0; $i < $len; $i += $max) {
+            $chunk = substr($line, $i, $max);
+            $output[] = ($i === 0) ? $chunk : ' ' . $chunk;
+        }
+        return $output;
     }
 }

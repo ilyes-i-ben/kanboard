@@ -55,4 +55,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Board::class, 'created_by');
     }
+
+    public function normalize(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+        ];
+    }
 }

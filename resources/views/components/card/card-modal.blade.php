@@ -50,7 +50,6 @@
                     <x-heroicon-o-pencil-square class="w-6 h-6" />
                 </button>
             @endif
-            @if(!$card->public_token)
                 <button
                     id="share-card-modal-button-{{ $card->id }}"
                     @click="window.dispatchEvent(new CustomEvent('card-share-requested', { detail: { cardId: {{ $card->id }} } }))"
@@ -59,16 +58,14 @@
                 >
                     <x-heroicon-o-share class="w-6 h-6" />
                 </button>
-            @else
                 <button
                     id="external-open-card-modal-button-{{ $card->id }}"
-                    @click="window.open('{{ route('shared-content.card', ['token' => $card->public_token]) }}', '_blank')"
+                    @click="window.open('{{ route('cards.show', $card) }}', '_blank')"
                     class="rounded-full p-2 text-green-500 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 transition"
                     title="Open external"
                 >
                     <x-heroicon-o-arrow-top-right-on-square class="w-6 h-6" />
                 </button>
-            @endif
             <button id="close-card-modal-button-{{ $card->id }}" @click="showCardDetails = false; if (typeof onClose === 'function') onClose()" class="rounded-full p-2 text-gray-400 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition">
                 <x-heroicon-o-x-mark class="w-6 h-6" />
             </button>
