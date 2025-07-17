@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Str;
 
 class Card extends Model
 {
@@ -31,6 +32,7 @@ class Card extends Model
 		'finished_at',
         'category_id',
 		'created_by',
+        'public_token',
 	];
 
 	public function user(): BelongsTo
@@ -52,5 +54,13 @@ class Card extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function generatePublicToken(): void
+    {
+        if (!$this->public_token) {
+            $this->public_token = Str::uuid();
+            $this->save();
+        }
     }
 }
