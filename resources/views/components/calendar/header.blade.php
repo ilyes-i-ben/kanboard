@@ -1,5 +1,4 @@
 <div class="calendar-header flex justify-between items-center mb-6">
-    <!-- Navigation Controls -->
     <div class="flex items-center space-x-4">
         <div class="flex items-center space-x-2 bg-white/15 backdrop-blur-lg rounded-xl p-2 shadow-lg border border-white/20">
             <button
@@ -31,7 +30,6 @@
         </button>
     </div>
 
-    <!-- View Mode Selector -->
     <div class="flex items-center space-x-1 bg-white/15 backdrop-blur-lg rounded-xl p-1.5 shadow-lg border border-white/20">
         <button
             @click="setView('day')"
