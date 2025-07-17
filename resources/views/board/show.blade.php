@@ -6,7 +6,7 @@
     </x-slot>
 
     <x-board :board="$board" :view-type="$view" />
-
+    <div id="card-modal-container"></div>
     <style>
         /* Custom styles for the drag and drop interface */
         .sortable-ghost {

@@ -2,13 +2,12 @@
 
 <div
     class="card-list-item bg-white dark:bg-gray-800 rounded-xl shadow-lg p-5 mb-3 cursor-pointer hover:shadow-xl transition border-l-8 flex flex-col gap-2"
+    data-card-id="{{ $card->id }}"
     :class="{
         'border-red-500': '{{ $card->priority }}' === 'high',
         'border-yellow-500': '{{ $card->priority }}' === 'medium',
         'border-blue-500': '{{ $card->priority }}' === 'low'
     }"
-    @click="showCardDetails = true"
-    x-data="{ showCardDetails: false }"
     data-title="{{ strtolower($card->title) }}"
     data-description="{{ strtolower(strip_tags($card->description ?? '')) }}"
     data-created-at="{{ $card->created_at ? Carbon\Carbon::parse($card->created_at)->toDateString() : '' }}"
@@ -71,5 +70,4 @@
             ($card->priority === 'medium' ? 'text-yellow-600 dark:text-yellow-400' : 'text-blue-600 dark:text-blue-400')
         }}">{{ ucfirst($card->priority) }}</span></span>
     </div>
-    <x-card.card-modal :card="$card" show-card-details="showCardDetails" />
 </div>

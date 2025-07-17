@@ -1,7 +1,5 @@
-@props(['board'])
-<div class="list-view w-5/6 bg-white/5 dark:bg-gray-900 rounded-lg p-4">
+<div id="list-view-root" class="list-view w-5/6 bg-white/5 dark:bg-gray-900 rounded-lg p-4">
     <x-filters.list-filters :board="$board"/>
-
     <div id="list-view-card-list" class="space-y-3">
         @foreach($board->lists as $list)
             @foreach($list->cards as $card)
@@ -16,7 +14,3 @@
         </div>
     </div>
 </div>
-
-@push('scripts')
-    @vite('resources/js/app.js')
-@endpush
