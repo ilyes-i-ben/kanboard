@@ -21,6 +21,6 @@ class CardCalendarController extends Controller
 
         return response($ics, 200)
             ->header('Content-Type', 'text/calendar')
-            ->header('Content-Disposition', 'attachment; filename="board-'.$board->id.'.ics"');
+            ->header('Content-Disposition', 'attachment; filename="board-calendar-export-'.$board->id.'.ics"');
     }
 }
