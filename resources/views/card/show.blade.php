@@ -10,7 +10,9 @@
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ $card->title }}</h1>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Card {{ $card->id }} • {{ $card->list->title }}</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                            Card <span class="text-xs text-gray-400 dark:text-gray-500">{{ $card->public_token ?? $card->id }}</span> • {{ $card->list->title }}
+                        </p>
                     </div>
                 </div>
             </div>

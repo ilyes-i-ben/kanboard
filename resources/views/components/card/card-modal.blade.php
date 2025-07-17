@@ -16,7 +16,6 @@
     <div
         class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-2xl mx-4 overflow-hidden border border-gray-200 dark:border-gray-700 animate-fadeIn"
         @click.stop
-        @click.away="showCardDetails = false; if (typeof onClose === 'function') onClose()"
     >
         <div class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
             <div class="flex items-center gap-3">
@@ -51,6 +50,14 @@
                     <x-heroicon-o-pencil-square class="w-6 h-6" />
                 </button>
             @endif
+            <button
+                id="share-card-modal-button-{{ $card->id }}"
+                @click="window.dispatchEvent(new CustomEvent('card-share-requested', { detail: { cardId: {{ $card->id }} } }))"
+                class="rounded-full p-2 text-green-500 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 transition"
+                title="Share"
+            >
+                <x-heroicon-o-share class="w-6 h-6" />
+            </button>
             <button id="close-card-modal-button-{{ $card->id }}" @click="showCardDetails = false; if (typeof onClose === 'function') onClose()" class="rounded-full p-2 text-gray-400 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition">
                 <x-heroicon-o-x-mark class="w-6 h-6" />
             </button>
