@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     var addBtn = document.getElementById('add-category');
     var list = document.getElementById('categories-list');
-    addBtn.addEventListener('click', function() {
+    addBtn?.addEventListener('click', function() {
         var inputs = list.querySelectorAll('input[name="categories[]"]');
         if (inputs.length > 0 && inputs[inputs.length - 1].value.trim() === '') {
             inputs[inputs.length - 1].focus();
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         list.appendChild(div);
         updateRemoveButtons();
     });
-    list.addEventListener('click', function(e) {
+    list?.addEventListener('click', function(e) {
         var btn = e.target.closest('.remove-category');
         if (btn) {
             btn.parentElement.remove();

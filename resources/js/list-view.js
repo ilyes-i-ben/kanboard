@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const viewParam = urlParams.get('view');
+    if (viewParam !== 'list') return;
+
     const cardListContainer = document.getElementById('list-view-card-list');
     const noCardsMessage = document.getElementById('no-cards-message');
     const nameInput = document.getElementById('filter-card-name');
