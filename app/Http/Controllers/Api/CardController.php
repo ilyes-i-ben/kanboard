@@ -108,11 +108,16 @@ class CardController extends Controller
         return view('card.show', compact('card'));
     }
 
-    public function shared(string $token)
+    public function share(Card $card)
     {
-        $card = Card::where('public_token', $token)->firstOrFail();
+        $publicToken = $this->cardService->getOrGeneratePublicToken($card);
 
-        return view('card.show', compact('card'));
+        return response()->json([
+            'success' => true,
+            'message' => 'Card unique public link generated successfully !',
+            'public_token' => $publicToken,
+            'full_shared_url' => route('shared-content.card', ['token' => $publicToken]),
+        ], 201);
     }
 
     public function markIncomplete(Card $card)

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SharedContentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 
@@ -20,7 +21,7 @@ Route::middleware('auth')->group(function () {
 
 // for public cards...
 
-Route::get('/share/card/{token}', [\App\Http\Controllers\Api\CardController::class, 'shared'])->name('cards.shared');
+Route::get('/shared-content/card/{token}', [SharedContentController::class, 'showCard'])->name('shared-content.card');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/api.php';

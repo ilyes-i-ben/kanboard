@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Card;
 use App\Models\ListModel;
 use Carbon\Carbon;
+use Str;
 
 class CardService
 {
@@ -41,5 +42,14 @@ class CardService
     {
         $max = $list->cards()->max('position') ?? 0;
         return $max + 1000.0;
+    }
+
+    public function getOrGeneratePublicToken(Card $card): string
+    {
+        if (!$card->public_token) {
+            $card->public_token = Str::uuid();
+            $card->save();
+        }
+        return $card->public_token;
     }
 }

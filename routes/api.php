@@ -19,6 +19,8 @@ Route::prefix('api')->group(function () {
     Route::post('/cards/{card}/update', [CardController::class, 'update'])->name('cards.update.post');
     Route::post('/cards/{card}/mark-incomplete', [CardController::class, 'markIncomplete'])->name('cards.mark-incomplete');
 
+    Route::post('/cards/{card}/share', [CardController::class, 'share'])->name('cards.share');
+
     Route::apiResource('cards', CardController::class);
     Route::apiResource('lists', ListController::class);
 });

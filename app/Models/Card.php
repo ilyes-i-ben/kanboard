@@ -55,12 +55,4 @@ class Card extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
-
-    public function generatePublicToken(): void
-    {
-        if (!$this->public_token) {
-            $this->public_token = Str::uuid();
-            $this->save();
-        }
-    }
 }
