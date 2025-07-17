@@ -11,7 +11,7 @@
                     <div>
                         <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ $card->title }}</h1>
                         <p class="text-sm text-gray-600 dark:text-gray-400">
-                            Card <span class="text-xs text-gray-400 dark:text-gray-500">{{ $card->public_token ?? $card->id }}</span> • {{ $card->list->title }}
+                            Card <span class="text-xs text-gray-400 dark:text-gray-500">{{ $card->public_token ?? $card->id }}</span> • List : <i><b>{{ $card->list->title }}</b></i> • Board : <i><b>{{ $card->list->board->title }}</b></i>
                         </p>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Card;
 use App\Models\ListModel;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Str;
 
 class CardService
@@ -51,5 +52,36 @@ class CardService
             $card->save();
         }
         return $card->public_token;
+    }
+
+    /** @param Card[] $cards */
+    public function generateICS($cards): string
+    {
+        $lines = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//kanboard//EN',
+        ];
+
+        foreach ($cards as $card) {
+            $fullSharedUrl = route('shared-content.card', ['token' => $this->getOrGeneratePublicToken($card)]);
+            $lines[] = 'BEGIN:VEVENT';
+            $lines[] = 'UID:card-'.$card->public_token.'@kanboard';
+            $lines[] = 'SUMMARY:'.addcslashes($card->title, ',;');
+            $lines[] = 'DESCRIPTION:'. "see card detail on: " . $fullSharedUrl . addcslashes(($card->description ?? ''), ',;');
+            $lines[] = 'DTSTART:'.Carbon::parse($card->created_at)->format('Ymd\THis\Z');
+            if ($card->deadline) {
+                $lines[] = 'DTEND:'.Carbon::parse($card->deadline)->format('Ymd\THis\Z');
+            }
+            if ($card->finished_at) {
+                $lines[] = 'COMPLETED:'.Carbon::parse($card->finished_at)->format('Ymd\THis\Z');
+            }
+            $lines[] = 'URL:' . $fullSharedUrl;
+            $lines[] = 'END:VEVENT';
+        }
+
+        $lines[] = 'END:VCALENDAR';
+
+        return implode("\r\n", $lines);
     }
 }
