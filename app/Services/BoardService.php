@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Board;
+use App\Models\Card;
 
 class BoardService
 {
@@ -43,5 +44,17 @@ class BoardService
                 $board->categories()->create(['name' => trim($catName)]);
             }
         }
+    }
+
+    public function normalizedCards(Board $board): array
+    {
+        return
+            $board->lists()->with(['cards.members', 'cards.list'])
+            ->get()
+            ->flatMap
+            ->cards
+            ->filter(fn($card) => $card->deadline)
+            ->map(fn (Card $card) => $card->normalize())
+            ->toArray();
     }
 }

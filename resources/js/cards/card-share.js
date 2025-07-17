@@ -26,6 +26,7 @@ window.addEventListener('card-share-requested', async (event) => {
             const {full_shared_url} = await response.json();
             if (full_shared_url) {
                 window.showShareLinkModal({ link: full_shared_url });
+                window.showSuccessToast('Card shared !')
             } else {
                 window.showErrorToast('Failed to get share link.');
             }
