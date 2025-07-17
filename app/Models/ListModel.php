@@ -42,4 +42,13 @@ class ListModel extends Model
 	{
 		return $this->hasMany(Card::class, 'list_id');
 	}
+
+    public function normalize(): array
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'is_terminal' => $this->is_terminal,
+        ];
+    }
 }

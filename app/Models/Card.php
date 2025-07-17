@@ -54,4 +54,18 @@ class Card extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    public function normalize(): array
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description ? strip_tags($this->description) : null,
+            'deadline' => $this->deadline,
+            'priority' => $this->priority,
+            'finished_at' => $this->finished_at,
+            'list' => $this->list->normalize(),
+            'members' => $this->members->map(fn (User $m) => $m->normalize())->toArray(),
+        ];
+    }
 }

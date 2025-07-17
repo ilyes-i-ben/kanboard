@@ -131,4 +131,14 @@ class BoardController extends Controller
     {
         return view('boards.edit', compact('board'));
     }
+
+    public function calendarData(Board $board)
+    {
+        $cards = $this->boardService->normalizedCards($board);
+
+        return response()->json([
+            'success' => true,
+            'cards' => array_values($cards),
+        ]);
+    }
 }
