@@ -1,4 +1,4 @@
-function addTransition(modal, show = true, callback) {
+export function addTransition(modal, show = true, callback) {
     if (show) {
         modal.style.opacity = 0;
         modal.style.transform = 'scale(0.96)';
