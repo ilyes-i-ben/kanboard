@@ -187,7 +187,6 @@
             </div>
         @endif
         @if ($viewType === 'list')
-{{--                 TODO: URGENT FOR PERF: pass list view to lazy... (load on demand) --}}
             <div
                 class="flex justify-center"
             >
@@ -195,18 +194,22 @@
             </div>
         @endif
         @if($viewType === 'calendar')
-            <div class="text-center py-20">
-                <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-12 shadow-2xl border border-white/20 max-w-md mx-auto">
-                    <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <x-heroicon-o-calendar-days class="w-10 h-10 text-white" />
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">Calendar View</h3>
-                    <p class="text-white/80 text-lg">Coming soon with advanced scheduling features!</p>
-                </div>
+            <div class="calendar-view-container">
+                <x-calendar :board="$board" />
             </div>
         @endif
     </div>
 </div>
+
+<!-- Calendar Data for JavaScript -->
+@if($viewType === 'calendar')
+<script>
+    window.boardCalendarData = {
+        boardId: {{ $board->id }},
+        apiEndpoint: '{{ route("api.boards.calendar-data", $board->id) }}'
+    };
+</script>
+@endif
 
 <style>
     /* Custom scrollbar for lists container */
