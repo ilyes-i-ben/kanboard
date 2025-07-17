@@ -3,8 +3,9 @@ import { CalendarNavigation } from './calendar-navigation.js';
 import { CalendarViews } from './calendar-views.js';
 import { CalendarUtils } from './calendar-utils.js';
 
-window.calendarComponent = function() {
+window.calendarComponent = function(boardId) {
     return {
+        boardId: boardId,
         currentView: 'month',
         currentDate: new Date(),
         cards: [],
@@ -79,6 +80,10 @@ window.calendarComponent = function() {
 
         openCardModal(card) {
             CalendarUtils.openCardModal(card);
+        },
+
+        exportCalendar() {
+            CalendarUtils.exportCalendar(this.boardId);
         }
     };
 };

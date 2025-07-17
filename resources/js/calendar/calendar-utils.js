@@ -37,5 +37,15 @@ export const CalendarUtils = {
         window.dispatchEvent(new CustomEvent('open-card-modal', {
             detail: { cardId: card.id }
         }));
+    },
+
+    exportCalendar(boardId) {
+        const link = document.createElement('a');
+        link.href = `/boards/${boardId}/calendar.ics`;
+        link.download = `board-calendar-export-${boardId}.ics`;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
 };
