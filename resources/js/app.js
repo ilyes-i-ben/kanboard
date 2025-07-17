@@ -25,6 +25,7 @@ import './list-view.js';
 import './lists/index.js';
 import './cards/index.js';
 import './boards/index.js';
+import './calendar-view.js';
 
 import './toast.js';
 import './confirmationModal.js';
