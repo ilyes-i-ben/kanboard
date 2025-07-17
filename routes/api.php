@@ -22,7 +22,7 @@ Route::prefix('api')->group(function () {
 
     Route::post('/cards/{card}/share', [CardController::class, 'share'])->name('cards.share');
 
-    Route::get('/boards/{board}/calendar-data', [BoardController::class, 'getCalendarData'])->name('api.boards.calendar-data');
+    Route::get('/boards/{board}/calendar-data', [BoardController::class, 'calendarData'])->name('api.boards.calendar-data');
 
     Route::apiResource('cards', CardController::class);
     Route::apiResource('lists', ListController::class);
