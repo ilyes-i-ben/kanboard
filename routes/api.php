@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CardController;
 use App\Http\Controllers\ListController;
+use App\Http\Controllers\BoardController;
 
 Route::prefix('api')->group(function () {
     Route::put('/cards/move', [CardController::class, 'move'])
@@ -20,6 +21,8 @@ Route::prefix('api')->group(function () {
     Route::post('/cards/{card}/mark-incomplete', [CardController::class, 'markIncomplete'])->name('cards.mark-incomplete');
 
     Route::post('/cards/{card}/share', [CardController::class, 'share'])->name('cards.share');
+
+    Route::get('/boards/{board}/calendar-data', [BoardController::class, 'getCalendarData'])->name('api.boards.calendar-data');
 
     Route::apiResource('cards', CardController::class);
     Route::apiResource('lists', ListController::class);
