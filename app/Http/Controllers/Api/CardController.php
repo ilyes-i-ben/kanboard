@@ -103,9 +103,9 @@ class CardController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Card $card)
     {
-        //
+        return view('card.show', compact('card'));
     }
 
     public function markIncomplete(Card $card)
