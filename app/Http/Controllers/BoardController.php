@@ -20,7 +20,13 @@ class BoardController extends Controller
             ->where('created_by', '!=', auth()->id())
             ->get();
 
-        $createdBoards = auth()->user()->createdBoards()->get();
+        $createdBoards = auth()->user()
+            ->createdBoards()
+            ->with([
+                'members',
+                'lists',
+            ])
+            ->get();
 
         $invitations = Invitation::query()
             ->where('email', auth()->user()->email)
