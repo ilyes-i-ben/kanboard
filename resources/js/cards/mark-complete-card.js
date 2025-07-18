@@ -23,6 +23,9 @@ function markCardAsCompleted(cardId) {
     completedSpan.className = 'completed-badge text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-2 py-1 rounded-full';
     completedSpan.textContent = 'Completed';
 
+    const markIncompleteButton = document.getElementById(`mark-as-incomplete-button-${cardId}`);
+    markIncompleteButton?.classList.remove('hidden');
+
     const flexContainer = cardElement.querySelector(`#kanboard-card-data-${cardId}`);
 
     flexContainer.appendChild(completedSpan);
