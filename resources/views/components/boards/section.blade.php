@@ -3,10 +3,13 @@
 <div class="max-w-7xl mx-auto px-6 lg:px-8 mb-16">
     <div class="flex items-center justify-between mb-8">
         <div class="flex items-center space-x-4">
-            <div class="w-12 h-12 rounded-xl dark:bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg border border-gray-900/10 dark:border-white/20">
+            <div class="relative w-12 h-12 rounded-xl dark:bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg border border-gray-900/10 dark:border-white/20">
                 <x-dynamic-component :component="$icon" class="w-7 h-7 {{ $iconColor }}" />
+                @if($title === 'Board Invitations')
+                    <div class="absolute -top-1 -right-1 w-4 h-4 bg-red-600 rounded-full shadow-md ring-1 ring-red-300 dark:ring-red-400/50"></div>
+                @endif
             </div>
-            <div>
+            <div class="relative">
                 <h2 class="text-3xl font-bold text-gray-900 dark:text-white drop-shadow-lg">{{ $title }}</h2>
                 <p class="text-gray-600 dark:text-white/70">{{ $count }} {{ $count === 1 ? Str::singular($title) : Str::plural($title) }}</p>
             </div>

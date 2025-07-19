@@ -58,6 +58,8 @@ services:
             PMA_USER: '${DB_USERNAME}'
             PMA_PASSWORD: '${DB_PASSWORD}'
             UPLOAD_LIMIT: '512M'
+        volumes:
+            - /home/ibenameur/School/blueberry:/var/www/html/themes/blueberry
         depends_on:
             - mysql
         networks:

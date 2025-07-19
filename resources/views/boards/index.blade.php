@@ -19,6 +19,21 @@
                 @endif
                 }"
             >
+                <!-- Invitations Section -->
+                @if(isset($invitations) && $invitations->count())
+                    <x-boards.section
+                        title="{{ __('Board Invitations') }}"
+                        :count="$invitations->count()"
+                        icon="heroicon-o-envelope"
+                        icon-color="text-blue-400"
+                    >
+                        @foreach($invitations as $invitation)
+                            <x-boards.invitation-card :invitation="$invitation" />
+                            <x-boards.invitation-modal :invitation="$invitation" />
+                        @endforeach
+                    </x-boards.section>
+                @endif
+
                 <!-- Owned Boards Section -->
                 @if($createdBoards?->count())
                     <x-boards.section
@@ -43,20 +58,7 @@
                     />
                 @endif
 
-                <!-- Invitations Section -->
-                @if(isset($invitations) && $invitations->count())
-                    <x-boards.section
-                        title="{{ __('Board Invitations') }}"
-                        :count="$invitations->count()"
-                        icon="heroicon-o-envelope"
-                        icon-color="text-blue-400"
-                    >
-                        @foreach($invitations as $invitation)
-                            <x-boards.invitation-card :invitation="$invitation" />
-                            <x-boards.invitation-modal :invitation="$invitation" />
-                        @endforeach
-                    </x-boards.section>
-                @endif
+
 
                 <!-- Member Boards Section -->
                 @if($boards?->count())

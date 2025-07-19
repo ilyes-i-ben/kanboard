@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Notifications\VerifyEmailNotification;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -54,6 +55,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function createdBoards(): HasMany
     {
         return $this->hasMany(Board::class, 'created_by');
+    }
+
+    public function invitations(): HasMany
+    {
+        return $this->hasMany(Invitation::class, 'email', 'email');
+    }
+
+    public function pendingInvitations(): HasMany
+    {
+        return $this->invitations()->valid()->with(['board', 'inviter']);
     }
 
     public function normalize(): array
