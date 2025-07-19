@@ -89,14 +89,14 @@
             </div>
 
             @if(session('invitation_sent'))
-                <div class="mb-4 p-4 rounded-md bg-green-100 border border-green-300 text-green-800 flex items-center">
-                    <x-heroicon-o-check-circle class="h-5 w-5 mr-2 text-green-600" />
+                <div class="mb-4 p-4 rounded-md bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-500/50 text-green-800 dark:text-green-300 flex items-center shadow-sm">
+                    <x-heroicon-o-check-circle class="h-5 w-5 mr-2 text-green-600 dark:text-green-400" />
                     <span>{{ session('invitation_sent') }}</span>
                 </div>
             @endif
             @if($errors->any())
-                <div class="mb-4 p-4 rounded-md bg-red-100 border border-red-300 text-red-800 flex items-center">
-                    <x-heroicon-o-exclamation-circle class="h-5 w-5 mr-2 text-red-600 mt-1" />
+                <div class="mb-4 p-4 rounded-md bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-500/50 text-red-800 dark:text-red-300 flex items-center shadow-sm">
+                    <x-heroicon-o-exclamation-circle class="h-5 w-5 mr-2 text-red-600 dark:text-red-400 mt-1" />
                     @foreach ($errors->all() as $error)
                         {{ $error }}
                     @endforeach
