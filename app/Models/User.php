@@ -57,6 +57,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Board::class, 'created_by');
     }
 
+    public function invitations(): HasMany
+    {
+        return $this->hasMany(Invitation::class, 'email', 'email');
+    }
+
+    public function pendingInvitations(): HasMany
+    {
+        return $this->invitations()->valid()->with(['board', 'inviter']);
+    }
+
     public function normalize(): array
     {
         return [
