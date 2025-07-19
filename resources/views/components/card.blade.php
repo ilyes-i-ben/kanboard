@@ -1,5 +1,5 @@
 @props(['card'])
-
+{{--TODO: important - add the category tag on the card itself.--}}
 <div
     id="kanboard-card-{{ $card->id }}"
     x-sort:item="{{ $card->id }}"
