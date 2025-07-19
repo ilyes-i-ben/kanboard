@@ -5,7 +5,7 @@ use App\Http\Controllers\BoardInvitationController;
 use App\Http\Controllers\BoardMemberController;
 use App\Http\Controllers\InvitationResponseController;
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('boards/{board}/members')->name('boards.members.')->group(function () {
         Route::get('/', [BoardMemberController::class, 'index'])->name('index');
         Route::delete('{user}', [BoardMemberController::class, 'remove'])->name('remove');

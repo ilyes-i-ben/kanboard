@@ -20,14 +20,14 @@
     @endif
 >
     <div class="flex items-center justify-end mb-4 z-20 relative gap-3">
-        <span class="inline-flex items-center gap-2 bg-white/20 dark:bg-black/30 rounded-xl px-4 py-1.5 text-sm font-semibold text-blue-900 dark:text-white shadow border border-white/20">
-            <x-heroicon-o-rectangle-stack class="w-5 h-5 text-blue-700 dark:text-blue-300" />
+        <span class="inline-flex items-center gap-2 bg-white/20 dark:bg-black/30 rounded-xl px-4 py-1.5 text-sm font-semibold text-white dark:text-white shadow border border-white/20">
+            <x-heroicon-o-rectangle-stack class="w-5 h-5 text-white dark:text-blue-300" />
             <span id="total-cards-count">{{ $board->lists->sum(fn($list) => $list->cards()->count()) }}</span> Cards
         </span>
         <button
             data-tooltip-target="reset-filters-tooltip"
             type="button"
-            class="ml-2 px-2 py-1 rounded-xl bg-white/20 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 border-2 border-white/30 dark:border-blue-400 text-xs font-semibold shadow-lg focus:ring-2 focus:ring-blue-400 transition-colors z-20 hover:bg-white/40 hover:scale-105"
+            class="ml-2 px-2 py-1 rounded-xl bg-white/20 dark:bg-blue-900/40 text-white dark:text-blue-300 border-2 border-white/30 dark:border-blue-400 text-xs font-semibold shadow-lg focus:ring-2 focus:ring-blue-400 transition-colors z-20 hover:bg-white/40 hover:scale-105"
             style="position: static; top: auto; right: auto;"
             onclick="window.dispatchEvent(new CustomEvent('reset-filters'))"
         >
