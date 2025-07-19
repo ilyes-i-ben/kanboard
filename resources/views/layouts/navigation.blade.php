@@ -21,12 +21,14 @@
                             <span>{{ __('Boards') }}</span>
                         </div>
                     </x-nav-link>
+                    @auth
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="nav-link">
                         <div class="flex items-center space-x-2">
                             <x-heroicon-o-arrow-trending-up class="w-4 h-4"/>
                             <span>{{ __('Dashboard') }}</span>
                         </div>
                     </x-nav-link>
+                    @endauth
                 </div>
             </div>
 
@@ -34,7 +36,7 @@
                 <button
                     id="theme-toggle"
                     type="button"
-                    class="inline-flex items-center px-4 py-2.5  border rounded-xl font-medium text-sm text-gray-700 dark:text-gray-300 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-200 "
+                    class="inline-flex items-center px-4 py-2.5 border rounded-xl font-medium text-sm text-gray-700 dark:text-gray-300 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-200 "
                 >
                     <x-heroicon-s-moon id="theme-toggle-dark-icon" class="hidden w-5 h-5"/>
                     <x-heroicon-s-sun id="theme-toggle-light-icon" class="hidden w-5 h-5"/>
@@ -47,16 +49,33 @@
                             style="height: 42px;"
                         >
                             <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm ">
-                                    {{ substr(Auth::user()->name, 0, 1) }}
+                                <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm
+                                    @guest bg-amber-500/20 text-amber-600 dark:text-amber-400 @endguest">
+                                    @auth
+                                        {{ substr(Auth::user()->name, 0, 1) }}
+                                    @else
+                                        <x-heroicon-o-user class="w-5 h-5" />
+                                    @endauth
                                 </div>
-                                <div class="hidden md:block">{{ Auth::user()->name }}</div>
+                                <div class="hidden md:block">
+                                    @auth
+                                        {{ Auth::user()->name }}
+                                    @else
+                                        <span class="flex items-center space-x-1">
+                                            <span class="font-semibold text-amber-600 dark:text-amber-400">Guest</span>
+                                            <span class="text-xs text-gray-500 dark:text-gray-400">(View only)</span>
+                                        </span>
+                                    @endauth
+                                </div>
+                                @auth
                                 <x-heroicon-o-chevron-down class="h-4 w-4" />
+                                @endauth
                             </div>
                         </button>
                     </x-slot>
 
                     <x-slot name="content">
+                        @auth
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
@@ -68,6 +87,17 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
+                        @else
+                        <div class="px-4 py-3 text-sm text-amber-600 dark:text-amber-400">
+                            You're viewing as a guest
+                        </div>
+                        <x-dropdown-link :href="route('login')">
+                            {{ __('Log In') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('register')">
+                            {{ __('Register') }}
+                        </x-dropdown-link>
+                        @endauth
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -85,26 +115,33 @@
 
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-white/5 backdrop-blur-sm border-t border-white/20">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('boards.index')" :active="request()->routeIs('boards.*')">
                 {{ __('Boards') }}
             </x-responsive-nav-link>
+            @auth
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            @endauth
         </div>
 
         <div class="pt-4 pb-1 border-t border-white/20">
             <div class="px-4">
+                @auth
                 <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                @else
+                <div class="font-medium text-base text-amber-600 dark:text-amber-400">Guest User</div>
+                <div class="font-medium text-sm text-gray-500">View-only access</div>
+                @endauth
             </div>
 
             <div class="mt-3 space-y-1">
+                @auth
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
-                <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <x-responsive-nav-link :href="route('logout')"
@@ -112,6 +149,14 @@
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
+                @else
+                <x-responsive-nav-link :href="route('login')">
+                    {{ __('Log In') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('register')">
+                    {{ __('Register') }}
+                </x-responsive-nav-link>
+                @endauth
             </div>
         </div>
     </div>
