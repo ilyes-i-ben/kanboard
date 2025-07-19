@@ -139,7 +139,7 @@
                     </div>
                     <x-heroicon-o-chevron-right class="w-4 h-4 text-white/70 group-hover:text-white transition-colors" />
                 </a>
-
+{{--                todo: add @can directive... --}}
                 <a
                     href="{{ route('boards.edit', $board) }}?view={{ request('view') ?: 'kanban' }}"
                     class="group flex items-center justify-center bg-white/15 backdrop-blur-lg rounded-xl w-11 h-11 hover:bg-white/25 transition-all duration-300 shadow-xl border border-white/20"
