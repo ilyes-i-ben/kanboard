@@ -37,14 +37,14 @@
                     method="POST"
                     action="{{ route('boards.members.remove', ['board' => $board, 'user' => $member]) }}"
                     class="inline-block"
-                    x-data="{ open: false }"
+                    id="remove-member-form-{{ $member->id }}"
                 >
                     @csrf
                     @method('DELETE')
                     <button
-                        type="submit"
+                        type="button"
                         class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 flex items-center transition"
-                        onclick="return confirm('sure ?');"
+                        onclick="handleRemoveMember({{ $member->id }}, '{{ $member->name }}')"
                     >
                         <x-heroicon-o-trash class="w-4 h-4 mr-1" />
                         Remove
@@ -54,3 +54,17 @@
         </div>
     </div>
 </div>
+
+<script>
+    async function handleRemoveMember(memberId, memberName) {
+        const confirmed = await window.showConfirmationModalAsync({
+            title: 'Remove Member',
+            message: `Are you sure you want to remove <b>${memberName}</b> from this board? This action cannot be undone.`
+        });
+
+        if (confirmed) {
+            const form = document.getElementById('remove-member-form-' + memberId);
+            form.submit();
+        }
+    }
+</script>
