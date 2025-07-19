@@ -1,5 +1,4 @@
 @props(['card'])
-{{--TODO: important - add the category tag on the card itself.--}}
 <div
     id="kanboard-card-{{ $card->id }}"
     x-sort:item="{{ $card->id }}"
@@ -25,6 +24,14 @@
         <p class="text-xs text-gray-600 dark:text-gray-400 mt-2 line-clamp-2">
             {{ Str::limit(strip_tags($card->description), 100) }}
         </p>
+    @endif
+
+    @if($card->category)
+        <div class="mt-2">
+            <span class="font-semibold rounded px-2 py-1 text-xs bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
+                {{ $card->category->name }}
+            </span>
+        </div>
     @endif
 
     <div
