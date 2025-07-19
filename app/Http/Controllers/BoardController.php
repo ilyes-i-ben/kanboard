@@ -14,6 +14,7 @@ class BoardController extends Controller
         private readonly BoardService $boardService,
     ) {
     }
+
     public function index()
     {
         $boards = auth()->user()->boards()
