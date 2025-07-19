@@ -5,3 +5,4 @@ import './card-update.js';
 import './card-mark-incomplete.js';
 import './card-share.js';
 import './card-open-modal.js';
+import './show-qr-code.js';

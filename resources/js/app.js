@@ -27,6 +27,8 @@ import './cards/index.js';
 import './boards/index.js';
 import './calendar-view.js';
 
+import './qrcodeUtil.js';
+
 import './toast.js';
 import './confirmationModal.js';
 

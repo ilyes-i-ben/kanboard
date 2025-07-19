@@ -20,6 +20,7 @@
     "dependencies": {
         "@alpinejs/sort": "^3.14.9",
         "flowbite": "^3.1.2",
+        "qrcode": "^1.5.4",
         "tinymce": "^7.9.0"
     }
 }

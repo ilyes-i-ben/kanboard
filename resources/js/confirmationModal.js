@@ -1,3 +1,5 @@
+import { appendQRCode } from './qrcodeUtil';
+
 class ConfirmationModalManager {
     constructor() {
         this.modal = null;
@@ -90,7 +92,7 @@ class ShareLinkModalManager {
         this.backdrop.addEventListener('click', () => this.hide());
         document.body.appendChild(this.backdrop);
 
-        // Modal
+        // modal
         this.modal = document.createElement('div');
         this.modal.className = 'fixed inset-0 flex items-center justify-center z-50';
         this.modal.style.display = 'none';
@@ -99,6 +101,9 @@ class ShareLinkModalManager {
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">Share Link</h2>
                 <div class="mb-4">
                     <a id="share-link-modal-link" href="#" target="_blank" class="text-blue-600 underline break-all"></a>
+                </div>
+                <div class="flex justify-center mb-4">
+                    <div id="share-link-qrcode" class="bg-white p-2 rounded"></div>
                 </div>
                 <div class="flex gap-3 justify-end">
                     <button id="share-link-modal-copy" type="button" class="inline-flex justify-center px-4 py-2 font-medium text-white bg-green-600 dark:bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 dark:hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150">Copy</button>
@@ -118,6 +123,10 @@ class ShareLinkModalManager {
         const linkElem = this.modal.querySelector('#share-link-modal-link');
         linkElem.href = link;
         linkElem.textContent = link;
+
+        const qrcodeContainer = this.modal.querySelector('#share-link-qrcode');
+        appendQRCode(qrcodeContainer, link);
+
         this.modal.style.display = 'flex';
         this.backdrop.style.display = 'block';
     }
