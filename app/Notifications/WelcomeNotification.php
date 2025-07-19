@@ -28,7 +28,7 @@ class WelcomeNotification extends Notification implements ShouldQueue
     public function toMail(User $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject("Kanboard, c'est parti !")
+            ->subject("Kanboard, let's go!")
             ->markdown('emails.welcome', [
                 'name' => $notifiable->name,
             ]);

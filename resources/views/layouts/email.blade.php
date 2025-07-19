@@ -185,11 +185,7 @@
             font-size: 14px;
             line-height: 1.5;
             margin: 8px 0;
-        }
-
-        .footer-text a {
-            color: #60a5fa;
-            font-weight: 500;
+            text-align: center;
         }
 
         hr {
