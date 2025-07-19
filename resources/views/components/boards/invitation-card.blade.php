@@ -33,6 +33,10 @@
                 <x-heroicon-o-clock class="w-4 h-4" />
                 <span class="text-sm">{{ $invitation->created_at->diffForHumans() }}</span>
             </div>
+            <div class="flex items-center space-x-2 text-blue-700 dark:text-white/80">
+                <x-heroicon-o-calendar class="w-4 h-4" />
+                <span class="text-sm">Expires in: {{ $invitation->expires_at ? $invitation->expires_at->diffForHumans() : '30 days' }}</span>
+            </div>
         </div>
 
         <div class="mt-4 flex space-x-2">

@@ -8,6 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\AnonymousNotifiable;
 
 class BoardInvitationNotification extends Notification implements ShouldQueue
 {
@@ -32,11 +33,18 @@ class BoardInvitationNotification extends Notification implements ShouldQueue
 
     public function toMail(object $notifiable): MailMessage
     {
-        // TODO: add when notifiable is AnonymousNotifiable.
+        $isAnonymous = $notifiable instanceof AnonymousNotifiable;
+        $inviter = $this->invitation->inviter;
+        $inviterName = $inviter ? $inviter->name : 'Someone';
+
         return (new MailMessage)
-            ->line('Invitationt to board')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+            ->subject("You're invited to join \"{$this->board->title}\" on Kanboard")
+            ->markdown('emails.board-invitation', [
+                'board' => $this->board,
+                'invitation' => $this->invitation,
+                'inviterName' => $inviterName,
+                'isAnonymous' => $isAnonymous,
+            ]);
     }
 
     public function toArray(object $notifiable): array
