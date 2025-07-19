@@ -64,7 +64,7 @@ class ConfirmationModalManager {
                 resolve(false);
             };
             this.modal.querySelector('#confirmation-modal-title').textContent = title;
-            this.modal.querySelector('#confirmation-modal-message').textContent = message;
+            this.modal.querySelector('#confirmation-modal-message').innerHTML = message;
             this.modal.style.display = 'flex';
             this.backdrop.style.display = 'block';
         });
