@@ -21,6 +21,7 @@
 
     <div class="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-purple-900/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Hero Section -->
             <div class="relative overflow-hidden bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 mb-8">
                 <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 dark:from-blue-400/5 dark:to-purple-400/5"></div>
                 <div class="relative p-8">
@@ -114,6 +115,21 @@
                                     </div>
                                 </div>
                             </div>
+
+                            @if($card->public_token)
+                                <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg">
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                                        <x-heroicon-o-qr-code class="w-5 h-5 text-blue-500" />
+                                        Quick Access
+                                    </h3>
+                                    <div class="text-center">
+                                        <div class="bg-white p-3 rounded-xl border-2 border-gray-100 dark:border-gray-600 inline-block mb-3">
+                                            <div id="card-qrcode" class="flex items-center justify-center" data-card-url="{{ route('shared-content.card', ['token' => $card->public_token]) }}"></div>
+                                        </div>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">Scan to view this card</p>
+                                    </div>
+                                </div>
+                            @endif
 
                             <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg">
                                 <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
