@@ -29,11 +29,11 @@
                             <div class="space-y-6">
                                 <div>
                                     <x-input-label for="title" :value="__('Title')" class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" />
-                                    <x-text-input
+                                    <input
                                         id="title"
                                         name="title"
                                         type="text"
-                                        class="w-full text-lg font-medium"
+                                        class="w-full rounded-md border px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg font-medium"
                                         placeholder="{{ __('Board Title') }}"
                                         value="{{ old('title', $board->title) }}"
                                         required
@@ -119,10 +119,10 @@
                         </div>
 
                         <div class="flex justify-end">
-                            <x-primary-button class="flex items-center gap-2 px-6 py-3 text-base">
+                            <button type="submit" class="flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg text-base hover:bg-blue-600 transition-colors">
                                 <x-heroicon-o-check class="w-5 h-5" />
                                 {{ __('Save Changes') }}
-                            </x-primary-button>
+                            </button>
                         </div>
                     </form>
 
