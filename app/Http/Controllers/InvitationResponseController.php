@@ -13,13 +13,13 @@ class InvitationResponseController extends Controller
         $board->members()->syncWithoutDetaching([auth()->id()]);
         $invitation->update(['status' => Invitation::STATUS_ACCEPTED]);
 
-        return redirect()->route('boards.index')->with('success', __('Invitation acceptée.'));
+        return redirect()->route('boards.index')->with('success', __('Invitation accepted.'));
     }
 
     public function decline(InvitationAnswerRequest $request, Invitation $invitation)
     {
         $invitation->update(['status' => Invitation::STATUS_DECLINED]);
-        return redirect()->route('boards.index')->with('success', __('Invitation refusée.'));
+        return redirect()->route('boards.index')->with('success', __('Invitation declined.'));
     }
 }
 

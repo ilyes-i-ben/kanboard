@@ -3,7 +3,7 @@
 <div class="max-w-7xl mx-auto px-6 lg:px-8 mb-16">
     <div class="flex items-center justify-between mb-8">
         <div class="flex items-center space-x-4">
-            <div class="w-12 h-12 rounded-xl bg-gray-900/10 dark:bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg border border-gray-900/10 dark:border-white/20">
+            <div class="w-12 h-12 rounded-xl dark:bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg border border-gray-900/10 dark:border-white/20">
                 <x-dynamic-component :component="$icon" class="w-7 h-7 {{ $iconColor }}" />
             </div>
             <div>

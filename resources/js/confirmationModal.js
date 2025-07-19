@@ -23,8 +23,8 @@ class ConfirmationModalManager {
                 <h2 id="confirmation-modal-title" class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2"></h2>
                 <p id="confirmation-modal-message" class="mb-4 text-gray-700 dark:text-gray-300"></p>
                 <div class="flex justify-end gap-3">
-                    <button id="confirmation-modal-confirm" type="button" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">Confirm</button>
-                    <button id="confirmation-modal-cancel" type="button" class="px-4 py-2 bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md">Cancel</button>
+                    <button id="confirmation-modal-confirm" type="button" class="inline-flex justify-center px-4 py-2 font-medium text-white bg-green-600 dark:bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 dark:hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150">Confirm</button>
+                    <button id="confirmation-modal-cancel" type="button" class="inline-flex justify-center px-4 py-2 font-medium text-gray-800 dark:text-gray-200 bg-gray-300 dark:bg-gray-700 border border-transparent rounded-md shadow-sm hover:bg-gray-400 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition duration-150">Cancel</button>
                 </div>
             </div>
         `;
@@ -101,8 +101,8 @@ class ShareLinkModalManager {
                     <a id="share-link-modal-link" href="#" target="_blank" class="text-blue-600 underline break-all"></a>
                 </div>
                 <div class="flex gap-3 justify-end">
-                    <button id="share-link-modal-copy" type="button" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">Copy</button>
-                    <button id="share-link-modal-close" type="button" class="px-4 py-2 bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md">Close</button>
+                    <button id="share-link-modal-copy" type="button" class="inline-flex justify-center px-4 py-2 font-medium text-white bg-green-600 dark:bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 dark:hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150">Copy</button>
+                    <button id="share-link-modal-close" type="button" class="inline-flex justify-center px-4 py-2 font-medium text-gray-800 dark:text-gray-200 bg-gray-300 dark:bg-gray-700 border border-transparent rounded-md shadow-sm hover:bg-gray-400 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition duration-150">Cancel</button>
                 </div>
             </div>
         `;
@@ -161,5 +161,19 @@ window.showConfirmationModal = function({ title, message, onConfirm }) {
 window.showShareLinkModal = function({ link }) {
     shareLinkModalManager.show(link);
 };
+
+// Add a style tag to ensure these buttons have higher specificity
+document.head.insertAdjacentHTML('beforeend', `
+    <style>
+        #confirmation-modal-confirm, #share-link-modal-copy {
+            background-color: rgb(22, 163, 74) !important; /* Green-600 */
+            color: white !important;
+        }
+
+        #confirmation-modal-confirm:hover, #share-link-modal-copy:hover {
+            background-color: rgb(21, 128, 61) !important; /* Green-700 */
+        }
+    </style>
+`);
 
 export default confirmationModalManager;
