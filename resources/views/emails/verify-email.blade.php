@@ -1,17 +1,26 @@
 @extends('layouts.email')
 
 @section('content')
-    <h1 style="text-align: center; margin-bottom: 24px;">Vérifiez votre adresse email</h1>
+    <h1>Verify Your Email 📧</h1>
 
-    <p>Salut {{ $name }},</p>
+    <p>Hi {{ $name }},</p>
 
-    <p>Merci de vous être inscrit sur Kanboard ! Avant de commencer, il ne vous reste plus qu’à confirmer votre adresse email.</p>
+    <p>Click the button below to verify your email and activate your account.</p>
 
     <div style="text-align: center; margin: 32px 0;">
-        <a href="{{ $url }}" class="btn">Vérifier mon adresse</a>
+        <a href="{{ $url }}" class="btn">Verify Email</a>
     </div>
 
-    <p>Si vous n’êtes pas à l’origine de cette inscription, vous pouvez ignorer ce message.</p>
+    <div class="card">
+        <h3>⚡ Quick & Secure</h3>
+        <p style="margin: 0;">This link expires in 60 minutes for your security.</p>
+    </div>
 
-    <p>À très vite,<br>L’équipe Kanboard</p>
+    <hr>
+
+    <p style="font-size: 13px; text-align: center;">
+        Button not working? Copy this link: <a href="{{ $url }}">{{ $url }}</a>
+    </p>
+
+    <p style="margin-top: 24px;">See you soon!<br><strong>The Kanboard Team</strong></p>
 @endsection

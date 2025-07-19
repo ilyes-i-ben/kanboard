@@ -79,7 +79,7 @@
             <div class="mb-8 relative z-10">
                 <div class="flex flex-col items-center space-y-4">
                     <div class="w-28 h-28 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-2xl border border-white/30 p-1">
-                        <img src="{{ asset('images/logo.png') }}" alt="Kanboard" class="object-contain">
+                        <x-application-logo />
                     </div>
                     <h1 class="text-4xl font-black text-white drop-shadow-lg tracking-tight">Kanboard</h1>
                     <p class="text-white/80 text-sm font-medium">Organize your projects beautifully</p>

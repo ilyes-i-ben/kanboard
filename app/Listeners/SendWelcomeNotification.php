@@ -25,6 +25,5 @@ class SendWelcomeNotification
         $user = $event->user;
 
         $user->notify(new WelcomeNotification());
-
     }
 }

@@ -21,10 +21,9 @@ Route::middleware('auth')->group(function () {
 //Route::get('/boards', [\App\Http\Controllers\BoardController::class, 'index'])->name('board.index');
 
 // for public cards...
-
 Route::get('/shared-content/card/{token}', [SharedContentController::class, 'showCard'])->name('shared-content.card');
 
-Route::get('/boards/{board}/calendar.ics', [CardCalendarController::class, 'boardCalendar'])->name('board.calendar.ics');
+Route::get('/boards/{board}/calendar.ics', [CardCalendarController::class, 'boardCalendar'])->middleware(['auth', 'verified'])->name('board.calendar.ics');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/api.php';
