@@ -16,14 +16,20 @@ class BoardInvitationController extends Controller
     {
         $email = $request->validated('email');
 
+        $invitee = User::where('email', $email)->first();
+
+        if ($invitee && $board->members()->where('user_id', $invitee->id)->exists()) {
+            return back()->withErrors(['invitation_sent' => 'Already member.'])->withInput();
+        }
+
         $validInvitation = Invitation::query()
-            ->where('board_id', $board)
+            ->where('board_id', $board->id)
             ->where('email', $email)
             ->valid()
             ->first();
 
         if (!empty($validInvitation)) {
-            return back()->withErrors(['email' => 'Already invited.'])->withInput();
+            return back()->withErrors(['invitation_sent' => 'Already invited.'])->withInput();
         }
 
         // TODO: custom expiration time.
@@ -34,8 +40,6 @@ class BoardInvitationController extends Controller
             'inviter_id' => auth()->id(),
             'expires_at' => now()->addDays(7),
         ]);
-
-        $invitee = User::where('email', $email)->first();
 
         if ($invitee) {
             $invitee->notify(new BoardInvitationNotification($board, $invitation));
