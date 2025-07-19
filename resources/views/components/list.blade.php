@@ -3,7 +3,7 @@
 <div
     id="list-id-{{ $list->id }}"
     x-data="{ showCreateCardModal: false, showEditListModal: false }"
-    class="list bg-gray-100 dark:bg-gray-800 rounded-lg shadow p-3 w-96 flex flex-col h-full"
+    class="list bg-gray-100 dark:bg-gray-800 rounded-lg shadow p-3 min-w-80 w-80 flex flex-col"
     x-sort:item="{{ $list->id }}"
 >
     <div class="flex justify-between items-center mb-3">
@@ -34,7 +34,7 @@
         x-sort:group="cards"
     >
         @if($list->cards->isEmpty())
-            <div class="empty-list flex flex-col items-center justify-center text-gray-800 dark:text-gray-400 py-8 text-sm">
+            <div class="empty-list flex flex-col items-center justify-center h-full text-gray-800 dark:text-gray-400 py-8 text-sm">
                 <x-heroicon-s-no-symbol class="w-10 h-10 mb-2" />
                 <span>
                     No cards in this list.
