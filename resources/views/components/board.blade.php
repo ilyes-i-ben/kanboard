@@ -123,7 +123,14 @@
                 >
                     <div class="flex flex-col items-start">
                         <span class="text-sm font-bold text-white">Team Members</span>
-                        <span class="text-xs text-white/80">Manage access & permissions</span>
+                        <span class="text-xs text-white/80">
+                            @can('update', $board)
+                                Manage access & permissions
+                            @endcan
+                            @cannot('update', $board)
+                                See board members
+                            @endcannot
+                        </span>
                     </div>
                     <div class="flex -space-x-2">
                         @foreach($board->members->take(4) as $member)
@@ -139,14 +146,15 @@
                     </div>
                     <x-heroicon-o-chevron-right class="w-4 h-4 text-white/70 group-hover:text-white transition-colors" />
                 </a>
-{{--                todo: add @can directive... --}}
-                <a
-                    href="{{ route('boards.edit', $board) }}?view={{ request('view') ?: 'kanban' }}"
-                    class="group flex items-center justify-center bg-white/15 backdrop-blur-lg rounded-xl w-11 h-11 hover:bg-white/25 transition-all duration-300 shadow-xl border border-white/20"
-                    title="Board Settings"
-                >
-                    <x-heroicon-o-cog-6-tooth class="w-6 h-6 text-white group-hover:rotate-180 transition-transform duration-500" />
-                </a>
+                @can('update', $board)
+                    <a
+                        href="{{ route('boards.edit', $board) }}?view={{ request('view') ?: 'kanban' }}"
+                        class="group flex items-center justify-center bg-white/15 backdrop-blur-lg rounded-xl w-11 h-11 hover:bg-white/25 transition-all duration-300 shadow-xl border border-white/20"
+                        title="Board Settings"
+                    >
+                        <x-heroicon-o-cog-6-tooth class="w-6 h-6 text-white group-hover:rotate-180 transition-transform duration-500" />
+                    </a>
+                @endcan
             </div>
         </div>
     </div>
