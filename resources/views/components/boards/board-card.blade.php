@@ -3,7 +3,7 @@
 @php
     $bgColors = [
         'owned' => 'style="background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%), linear-gradient(135deg, ' . $board->background_color . ' 0%, ' . $board->background_color . 'E6 50%, ' . $board->background_color . 'CC 100%); backdrop-filter: blur(10px);"',
-        'collaborative' => 'class="bg-gradient-to-br from-green-500/20 to-emerald-500/20 backdrop-blur-lg"'
+        'collaborative' => 'style="background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.10) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08) 0%, transparent 50%), linear-gradient(135deg, #34d399 0%, #10b981 100%); backdrop-filter: blur(10px);"'
     ];
 
     $iconColors = [
@@ -34,11 +34,9 @@
 
 <div
     class="group board-card relative overflow-hidden rounded-2xl shadow-2xl border border-gray-300/50 dark:border-white/20 hover:shadow-3xl transition-all duration-500 cursor-pointer"
-    {!! $type === 'owned' ? $bgColors['owned'] : '' !!}
-    @if($type === 'collaborative') {{ $bgColors['collaborative'] }} @endif
+    {!! $type === 'owned' ? $bgColors['owned'] : $bgColors['collaborative'] !!}
     onclick="window.location.href = '{{ route('boards.show', $board->id) }}'"
 >
-    <!-- Animated background elements -->
     <div class="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-300">
         <div class="absolute top-4 right-4 w-16 h-16 rounded-full {{ $animationColors[$type] }} blur-xl animate-pulse"></div>
         <div class="absolute bottom-4 left-4 w-12 h-12 rounded-full {{ $animationColors[$type] }} blur-lg animate-pulse delay-1000"></div>
