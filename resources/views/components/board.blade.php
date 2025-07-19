@@ -9,6 +9,7 @@
             linear-gradient(135deg, {{ $board->background_color }} 0%, {{ $board->background_color }}E6 50%, {{ $board->background_color }}CC 100%);
         backdrop-filter: blur(10px);
         position: relative;
+        min-height: 80vh;
     "
     x-data="boardComponent()"
 >
@@ -163,7 +164,7 @@
         @if ($viewType === 'kanban')
             <div
                 x-data="{ showCreateListModal: false }"
-                class="lists-container flex space-x-6 overflow-x-auto pb-6 scroll-smooth"
+                class="lists-container flex space-x-4 overflow-x-auto pb-6 scroll-smooth"
                 x-sort="updateListPosition($item, $position)"
                 x-sort:group="lists"
                 style="scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.3) transparent;"
@@ -174,7 +175,7 @@
 
                 <div
                     id="add-list-section"
-                    class="min-w-80 bg-white/15 backdrop-blur-lg rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer hover:bg-white/25 transition-colors duration-200 shadow-xl border border-white/20"
+                    class="w-80 min-w-80 bg-white/15 backdrop-blur-lg rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer hover:bg-white/25 transition-colors duration-200 shadow-xl border border-white/20"
                     @click="showCreateListModal = true"
                 >
                     <div class="text-white flex flex-col items-center space-y-3">
@@ -237,6 +238,16 @@
 
     .lists-container::-webkit-scrollbar-thumb:hover {
         background: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Ensure consistent width for lists and add-list-button */
+    .lists-container > div {
+        flex: 0 0 auto;
+    }
+
+    /* Ensure the list container maintains a minimum height */
+    .lists-container {
+        min-height: 65vh; /* Add minimum height for the lists container */
     }
 
     /* Smooth animations */

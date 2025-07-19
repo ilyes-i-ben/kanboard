@@ -5,7 +5,6 @@
                 {{ __('Dashboard') }}
             </h2>
 
-            <!-- Board Filter -->
             <div class="flex items-center space-x-4">
                 <form method="GET" action="{{ route('dashboard') }}" class="flex items-center space-x-2">
                     <label for="board_id" class="text-sm font-medium text-gray-700 dark:text-gray-300">Filter by Board:</label>

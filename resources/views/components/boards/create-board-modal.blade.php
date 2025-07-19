@@ -8,7 +8,7 @@
     x-transition:leave="transition ease-in duration-200"
     x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0"
-    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/70 dark:bg-black/70 backdrop-blur-sm"
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/40 dark:bg-black/40"
     @click.self="showCreateModal = false"
 >
     <div
@@ -18,27 +18,24 @@
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100 scale-100"
         x-transition:leave-end="opacity-0 scale-95"
-        class="bg-white/95 dark:bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl border border-gray-300/50 dark:border-white/20 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
     >
         <div class="p-8">
             <div class="text-center">
-                <div class="w-16 h-16 rounded-2xl bg-gray-900/10 dark:bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 shadow-lg">
-                    <x-heroicon-o-squares-plus class="w-8 h-8 text-gray-900 dark:text-white" />
-                </div>
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white drop-shadow-lg mb-2">{{ __('Create New Board') }}</h2>
-                <p class="text-gray-700 dark:text-white/80">{{ __('Start organizing your next project') }}</p>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">{{ __('Create New Board') }}</h2>
+                <p class="text-gray-700 dark:text-gray-300">{{ __('Start organizing your next project') }}</p>
             </div>
 
             <form method="POST" action="{{ route('boards.store') }}" class="space-y-6">
                 @csrf
-                <div class="bg-gray-100/80 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-6 space-y-4">
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 space-y-4">
                     <div>
                         <label for="title" class="block text-sm font-semibold text-gray-900 dark:text-white mb-2">{{ __('Board Title') }}</label>
                         <input
                             id="title"
                             name="title"
                             type="text"
-                            class="w-full bg-white/90 dark:bg-white/10 backdrop-blur-sm border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-white/30 focus:border-blue-400 dark:focus:border-white/40"
+                            class="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-700 focus:border-blue-400 dark:focus:border-blue-700"
                             placeholder="{{ __('Enter board title...') }}"
                             value="{{ old('title') ?? '' }}"
                             required
@@ -55,10 +52,10 @@
                                 id="background_color"
                                 name="background_color"
                                 type="color"
-                                class="w-16 h-12 rounded-xl border-2 border-gray-300 dark:border-white/20 cursor-pointer bg-transparent"
+                                class="w-16 h-12 rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer bg-transparent"
                                 value="{{ old('background_color') ?? '#4C008A' }}"
                             >
-                            <span class="text-gray-600 dark:text-white/80 text-sm">{{ __('Choose your board\'s theme color') }}</span>
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">{{ __('Choose your board\'s theme color') }}</span>
                         </div>
                     </div>
 
@@ -68,7 +65,7 @@
                             id="description"
                             name="description"
                             rows="4"
-                            class="w-full bg-white/90 dark:bg-white/10 backdrop-blur-sm border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-white/30 focus:border-blue-400 dark:focus:border-white/40 resize-none"
+                            class="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-700 focus:border-blue-400 dark:focus:border-blue-700 resize-none"
                             placeholder="{{ __('Describe your board...') }}"
                         >{{ old('description') ?? '' }}</textarea>
                         @error('description')
@@ -77,13 +74,13 @@
                     </div>
                 </div>
 
-                <div class="bg-gray-100/80 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-3">
                     <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-8 h-8 rounded-lg bg-gray-900/10 dark:bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <div class="w-8 h-8 rounded bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
                             <x-heroicon-o-tag class="w-5 h-5 text-gray-900 dark:text-white" />
                         </div>
                         <h3 class="text-lg font-bold text-gray-900 dark:text-white">{{ __('Categories') }}</h3>
-                        <span class="text-sm text-gray-600 dark:text-white/60">{{ __('(Optional)') }}</span>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">{{ __('(Optional)') }}</span>
                     </div>
 
                     <div id="categories-list" class="space-y-3">
@@ -91,12 +88,12 @@
                             <input
                                 type="text"
                                 name="categories[]"
-                                class="flex-1 bg-white/90 dark:bg-white/10 backdrop-blur-sm border border-gray-300 dark:border-white/20 rounded-xl px-4 py-2 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-white/30 focus:border-blue-400 dark:focus:border-white/40"
+                                class="flex-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-700 focus:border-blue-400 dark:focus:border-blue-700"
                                 placeholder="{{ __('Category name...') }}"
                             />
                             <button
                                 type="button"
-                                class="remove-category p-2 rounded-xl bg-red-500/20 backdrop-blur-sm text-red-600 dark:text-red-300 hover:bg-red-500/30 transition-colors opacity-0"
+                                class="remove-category p-2 rounded-lg bg-red-100 text-red-600 dark:text-red-300 hover:bg-red-200 transition-colors opacity-0"
                                 title="{{ __('Remove') }}"
                             >
                                 <x-heroicon-o-x-mark class="w-5 h-5" />
@@ -107,7 +104,7 @@
                     <button
                         type="button"
                         id="add-category"
-                        class="mt-4 flex items-center space-x-2 bg-gray-200/50 dark:bg-white/15 backdrop-blur-sm rounded-xl px-4 py-2 text-gray-900 dark:text-white hover:bg-gray-300/50 dark:hover:bg-white/20 transition-colors"
+                        class="mt-4 flex items-center space-x-2 bg-gray-100 dark:bg-gray-700 rounded-lg px-4 py-2 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
                     >
                         <x-heroicon-o-plus class="w-5 h-5" />
                         <span>{{ __('Add Category') }}</span>
@@ -118,13 +115,13 @@
                     <button
                         type="button"
                         @click="showCreateModal = false"
-                        class="px-6 py-3 bg-gray-200/50 dark:bg-white/10 backdrop-blur-sm rounded-xl text-gray-600 dark:text-white hover:bg-gray-300/50 dark:hover:bg-white/20 transition-colors"
+                        class="px-6 py-3 bg-gray-100 dark:bg-gray-700 rounded-lg text-gray-600 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
                     >
                         {{ __('Cancel') }}
                     </button>
                     <button
                         type="submit"
-                        class="px-8 py-3 bg-blue-500/20 dark:bg-white/20 backdrop-blur-sm rounded-xl text-blue-700 dark:text-white font-semibold hover:bg-blue-500/30 dark:hover:bg-white/30 transition-colors shadow-lg"
+                        class="px-8 py-3 bg-blue-100 dark:bg-blue-900 rounded-lg text-blue-700 dark:text-white font-semibold hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
                     >
                         {{ __('Create Board') }}
                     </button>
