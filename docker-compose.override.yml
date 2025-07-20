@@ -2,6 +2,15 @@ services:
   traefik:
     image: traefik:v3.0
     container_name: traefik-proxy
+    init: true
+    user: "root"
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        touch /letsencrypt/acme.json
+        chmod 600 /letsencrypt/acme.json
+        exec traefik
     command:
       # Enable API and Dashboard (secure)
       - --api.dashboard=true
