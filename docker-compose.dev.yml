@@ -1,0 +1,61 @@
+services:
+    laravel.test:
+        build:
+            context: ./docker/8.4
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP:-1000}'
+        image: 'sail-8.4/app'
+        ports:
+            - '${APP_PORT:-80}:80'
+            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+        environment:
+            WWWUSER: '${WWWUSER:-1000}'
+            LARAVEL_SAIL: 1
+            IGNITION_LOCAL_SITES_PATH: '${PWD}'
+        volumes:
+            - .:/var/www/html
+        networks:
+            - kanboard
+        depends_on:
+            - mysql
+        restart: unless-stopped
+    mysql:
+        image: 'mysql/mysql-server:8.0'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        volumes:
+            - kanboard-mysql:/var/lib/mysql
+        networks:
+            - kanboard
+        restart: unless-stopped
+
+    phpmyadmin:
+        image: 'phpmyadmin:5.2'
+        ports:
+            - '8888:80'
+        environment:
+            PMA_HOST: mysql
+            PMA_USER: '${DB_USERNAME}'
+            PMA_PASSWORD: '${DB_PASSWORD}'
+            UPLOAD_LIMIT: '512M'
+        depends_on:
+            - mysql
+        networks:
+            - kanboard
+        restart: unless-stopped
+
+networks:
+    kanboard:
+        driver: bridge
+
+volumes:
+    kanboard-mysql:
+        driver: local
