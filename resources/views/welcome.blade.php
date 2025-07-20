@@ -16,6 +16,15 @@
         <meta name="twitter:description" content="Transform your project management with Kanboard. Powerful kanban boards, seamless team collaboration, and intuitive task organization.">
         <link rel="canonical" href="{{ url('/') }}">
 
+        <!-- PWA Meta Tags -->
+        <meta name="theme-color" content="#1f2937">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="apple-mobile-web-app-title" content="Kanboard">
+        <meta name="msapplication-TileColor" content="#1f2937">
+        <link rel="manifest" href="{{ asset('build/manifest.webmanifest') }}">
+        <link rel="apple-touch-icon" href="{{ asset('pwa-192x192.png') }}">
+
         <title>Kanboard - Modern Project Management Made Simple</title>
 
         <link rel="preconnect" href="https://fonts.bunny.net">

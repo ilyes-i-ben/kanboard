@@ -12,6 +12,18 @@ import 'tinymce/models/dom/model';
 import sort from '@alpinejs/sort'
 import Alpine from 'alpinejs';
 
+if ('serviceWorker' in navigator && !import.meta.env.DEV) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/build/sw.js')
+            .then((registration) => {
+                console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+                console.log('SW registration failed: ', registrationError);
+            });
+    });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
     tinymce.init({
         selector: 'textarea',
