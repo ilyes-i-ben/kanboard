@@ -8,8 +8,8 @@ services:
       - /bin/sh
       - -c
       - |
-        touch /letsencrypt/acme.json
-        chmod 600 /letsencrypt/acme.json
+        touch /letsencrypt/acme.json &&
+        chmod 600 /letsencrypt/acme.json &&
         exec traefik
     command:
       # Enable API and Dashboard (secure)
