@@ -1,0 +1,50 @@
+services:
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik-proxy
+    command:
+      # Enable API and Dashboard
+      - --api.dashboard=true
+      - --api.insecure=true
+
+      # Entry points (HTTP only for local development)
+      - --entrypoints.web.address=:80
+
+      # Docker provider
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --providers.docker.network=kanboard_kanboard
+
+      # Logging
+      - --log.level=INFO
+      - --accesslog=true
+    ports:
+      - "80:80"
+      - "8080:8080"  # Traefik dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - kanboard
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.kanboard.info`)"
+      - "traefik.http.routers.traefik.service=api@internal"
+
+  nginx:
+    ports: []  # Override to remove all port mappings
+    labels:
+      - "traefik.enable=true"
+
+      # App routing - simplified to use only app.kanboard.info
+      - "traefik.http.routers.kanboard-app.rule=Host(`app.kanboard.info`)"
+      - "traefik.http.routers.kanboard-app.service=kanboard-app"
+      - "traefik.http.services.kanboard-app.loadbalancer.server.port=80"
+
+  phpmyadmin:
+    ports: []
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.phpmyadmin.rule=Host(`db.kanboard.info`)"
+      - "traefik.http.routers.phpmyadmin.service=phpmyadmin"
+      - "traefik.http.services.phpmyadmin.loadbalancer.server.port=80"
