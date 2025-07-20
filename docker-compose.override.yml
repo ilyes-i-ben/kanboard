@@ -2,15 +2,7 @@ services:
   traefik:
     image: traefik:v3.0
     container_name: traefik-proxy
-    init: true
-    user: "root"
-    entrypoint:
-      - /bin/sh
-      - -c
-      - |
-        touch /letsencrypt/acme.json &&
-        chmod 600 /letsencrypt/acme.json &&
-        exec traefik
+    user: "1001:1001"
     command:
       # Enable API and Dashboard (secure)
       - --api.dashboard=true
@@ -43,7 +35,7 @@ services:
       - "8080:8080"  # Traefik dashboard
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./letsencrypt:/letsencrypt
+      - ./letsencrypt:/letsencrypt:ro
     networks:
       - kanboard
     restart: unless-stopped
