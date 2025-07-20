@@ -1,31 +1,50 @@
 services:
-    laravel.test:
+    laravel:
         build:
-            context: './vendor/laravel/sail/runtimes/8.4'
+            context: ./docker/8.4
             dockerfile: Dockerfile
             args:
-                WWWGROUP: '${WWWGROUP}'
-        image: 'sail-8.4/app'
-        extra_hosts:
-            - 'host.docker.internal:host-gateway'
-        ports:
-            - '${APP_PORT:-80}:80'
-            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+                WWWGROUP: '${WWWGROUP:-1001}'
+                NODE_VERSION: '${NODE_VERSION:-22}'
+        image: 'app-8.4-fpm'
+        container_name: laravel-app
         environment:
-            WWWUSER: '${WWWUSER}'
+            WWWUSER: '${WWWUSER:-1001}'
             LARAVEL_SAIL: 1
-            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
-            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
             IGNITION_LOCAL_SITES_PATH: '${PWD}'
+            APP_ENV: '${APP_ENV:-production}'
+            APP_DEBUG: '${APP_DEBUG:-false}'
+        user: ${UID:-1001}:${GID:-1001}
         volumes:
-            - '.:/var/www/html'
-        networks:
-            - kanboard
+            - .:/var/www/html
+            - ./docker/8.4/php.ini:/etc/php/8.4/fpm/conf.d/99-custom.ini:ro
+            - ./docker/8.4/php.ini:/etc/php/8.4/cli/conf.d/99-custom.ini:ro
         depends_on:
             - mysql
+        networks:
+            - kanboard
         restart: unless-stopped
+
+    nginx:
+        image: 'nginx:alpine'
+        container_name: nginx-server
+        volumes:
+            - .:/var/www/html:ro
+            - ./docker/8.4/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+        depends_on:
+            - laravel
+        networks:
+            - kanboard
+        restart: unless-stopped
+        healthcheck:
+            test: ["CMD-SHELL", "curl --fail http://localhost || exit 1"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+
     mysql:
-        image: 'mysql/mysql-server:8.0'
+        image: 'mysql:8.0'
+        container_name: mysql-db
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
@@ -36,19 +55,11 @@ services:
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
         volumes:
-            - 'kanboard-mysql:/var/lib/mysql'
-            - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
+            - kanboard-mysql:/var/lib/mysql
         networks:
             - kanboard
-        healthcheck:
-            test:
-                - CMD
-                - mysqladmin
-                - ping
-                - '-p${DB_PASSWORD}'
-            retries: 3
-            timeout: 5s
         restart: unless-stopped
+
     phpmyadmin:
         image: 'phpmyadmin:5.2'
         ports:
@@ -58,16 +69,16 @@ services:
             PMA_USER: '${DB_USERNAME}'
             PMA_PASSWORD: '${DB_PASSWORD}'
             UPLOAD_LIMIT: '512M'
-        volumes:
-            - /home/ibenameur/School/blueberry:/var/www/html/themes/blueberry
         depends_on:
             - mysql
         networks:
             - kanboard
         restart: unless-stopped
-networks:
-    kanboard:
-        driver: bridge
+
 volumes:
     kanboard-mysql:
         driver: local
+
+networks:
+    kanboard:
+        driver: bridge
