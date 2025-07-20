@@ -12,8 +12,8 @@ services:
             WWWUSER: '${WWWUSER:-1001}'
             LARAVEL_SAIL: 1
             IGNITION_LOCAL_SITES_PATH: '${PWD}'
-            APP_ENV: '${APP_ENV:-production}'
-            APP_DEBUG: '${APP_DEBUG:-false}'
+            APP_ENV: '${APP_ENV:-local}'
+            APP_DEBUG: '${APP_DEBUG:-true}'
         user: ${UID:-1001}:${GID:-1001}
         volumes:
             - .:/var/www/html
