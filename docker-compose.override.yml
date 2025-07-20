@@ -50,12 +50,22 @@ services:
     ports: []
     labels:
       - "traefik.enable=true"
-      # App routing: HTTPS only
+
+      # HTTP router (redirects to HTTPS)
+      - "traefik.http.routers.kanboard-app-http.rule=Host(`app.kanboard.info`) || Host(`kanboard.info`) || Host(`www.kanboard.info`)"
+      - "traefik.http.routers.kanboard-app-http.entrypoints=web"
+      - "traefik.http.routers.kanboard-app-http.middlewares=redirect-to-https"
+
+      # HTTPS router
       - "traefik.http.routers.kanboard-app.rule=Host(`app.kanboard.info`) || Host(`kanboard.info`) || Host(`www.kanboard.info`)"
       - "traefik.http.routers.kanboard-app.service=kanboard-app"
       - "traefik.http.services.kanboard-app.loadbalancer.server.port=80"
       - "traefik.http.routers.kanboard-app.entrypoints=websecure"
       - "traefik.http.routers.kanboard-app.tls.certresolver=le"
+
+      # Redirect middleware
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
 
   phpmyadmin:
     ports: []
