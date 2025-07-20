@@ -32,12 +32,12 @@ services:
       - "traefik.http.routers.traefik.service=api@internal"
 
   nginx:
-    ports: []  # Override to remove all port mappings
+    ports: []
     labels:
       - "traefik.enable=true"
 
       # App routing - simplified to use only app.kanboard.info
-      - "traefik.http.routers.kanboard-app.rule=Host(`app.kanboard.info`)"
+      - "traefik.http.routers.kanboard-app.rule=Host(`app.kanboard.info`) || Host(`kanboard.info`) || Host(`www.kanboard.info`)"
       - "traefik.http.routers.kanboard-app.service=kanboard-app"
       - "traefik.http.services.kanboard-app.loadbalancer.server.port=80"
 
