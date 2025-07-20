@@ -1,0 +1,72 @@
+services:
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik-proxy
+    command:
+      # Enable API and Dashboard (secure)
+      - --api.dashboard=true
+      - --api.insecure=false
+
+      # Entry points for HTTPS (production)
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+
+      # Docker provider
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --providers.docker.network=kanboard_kanboard
+
+      # Logging
+      - --log.level=INFO
+      - --accesslog=true
+
+      # Let's Encrypt - automatic SSL generation & renewal
+      - --certificatesresolvers.le.acme.email=bilyesc@gmail.com
+      - --certificatesresolvers.le.acme.storage=/letsencrypt/acme.json
+      - --certificatesresolvers.le.acme.tlschallenge=true
+      # Uncomment for production if you want to use HTTP challenge instead:
+      # - --certificatesresolvers.le.acme.httpchallenge=true
+      # - --certificatesresolvers.le.acme.httpchallenge.entrypoint=web
+
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"  # Traefik dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./letsencrypt:/letsencrypt
+    networks:
+      - kanboard
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      # Dashboard: HTTPS only
+      - "traefik.http.routers.traefik.rule=Host(`traefik.kanboard.info`)"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls.certresolver=le"
+
+  nginx:
+    ports: []
+    labels:
+      - "traefik.enable=true"
+      # App routing: HTTPS only
+      - "traefik.http.routers.kanboard-app.rule=Host(`app.kanboard.info`) || Host(`kanboard.info`) || Host(`www.kanboard.info`)"
+      - "traefik.http.routers.kanboard-app.service=kanboard-app"
+      - "traefik.http.services.kanboard-app.loadbalancer.server.port=80"
+      - "traefik.http.routers.kanboard-app.entrypoints=websecure"
+      - "traefik.http.routers.kanboard-app.tls.certresolver=le"
+
+  phpmyadmin:
+    ports: []
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.phpmyadmin.rule=Host(`db.kanboard.info`)"
+      - "traefik.http.routers.phpmyadmin.service=phpmyadmin"
+      - "traefik.http.services.phpmyadmin.loadbalancer.server.port=80"
+      - "traefik.http.routers.phpmyadmin.entrypoints=websecure"
+      - "traefik.http.routers.phpmyadmin.tls.certresolver=le"
+
+networks:
+  kanboard:
+    external: true
