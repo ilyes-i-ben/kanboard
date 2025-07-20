@@ -1,2 +1,18 @@
 #!/bin/bash
-exec supervisord -c /etc/supervisor/conf.d/supervisord.conf
+
+set -e
+
+# Create .npm directory if it doesn't exist and set proper ownership
+mkdir -p /var/www/.npm
+chown -R 1001:1001 /var/www/html /var/www/.npm
+chmod -R 775 /var/www/html /var/www/.npm
+
+# Create PHP-FPM log directory and set ownership to 1001:1001
+mkdir -p /var/log/php
+touch /var/log/php/php8.4-fpm.log
+chown -R 1001:1001 /var/log/php
+
+cd /var/www/html
+
+# Start PHP-FPM only (nginx runs in separate container)
+exec php-fpm8.4 --fpm-config /etc/php/8.4/fpm/php-fpm.conf --nodaemonize
