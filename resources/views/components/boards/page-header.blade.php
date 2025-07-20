@@ -1,5 +1,6 @@
 <!-- Header -->
-<div class="relative z-10 pt-8 pb-12">
+<x-slot name="header" class="max-w-7xl mx-auto py-0 px-0 sm:px-0 lg:px-0"></x-slot>
+<div class="relative z-10 pt-8 pb-12 -mt-6 -mx-4 sm:-mx-6 lg:-mx-8">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-12">
             <div class="flex justify-center mb-6">
