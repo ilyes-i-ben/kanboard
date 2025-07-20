@@ -28,10 +28,6 @@ services:
     nginx:
         image: 'nginx:alpine'
         container_name: nginx-server
-        ports:
-            - '${APP_PORT:-80}:80'
-            - '${VITE_PORT:-5173}:5173'
-            - '443:443'
         volumes:
             - .:/var/www/html:ro
             - ./docker/8.4/nginx.conf:/etc/nginx/conf.d/default.conf:ro
