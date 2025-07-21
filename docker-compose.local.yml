@@ -37,7 +37,7 @@ services:
       - "traefik.enable=true"
 
       # App routing - simplified to use only app.kanboard.info
-      - "traefik.http.routers.kanboard-app.rule=Host(`app.kanboard.info`)"
+      - "traefik.http.routers.kanboard-app.rule=Host(`app.kanboard.info`) || Host(`code`)"
       - "traefik.http.routers.kanboard-app.service=kanboard-app"
       - "traefik.http.services.kanboard-app.loadbalancer.server.port=80"
 
@@ -48,3 +48,7 @@ services:
       - "traefik.http.routers.phpmyadmin.rule=Host(`db.kanboard.info`)"
       - "traefik.http.routers.phpmyadmin.service=phpmyadmin"
       - "traefik.http.services.phpmyadmin.loadbalancer.server.port=80"
+
+  laravel:
+    ports:
+      - "5173:5173"
