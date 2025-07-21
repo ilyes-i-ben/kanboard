@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('boards', function (Blueprint $table) {
-            // TODO: turn into ->id() so that it's consistent...
-            $table->integer('id', true);
+            $table->id();
             $table->string('title');
             $table->string('background_color', 50)->default('gray');
             $table->unsignedBigInteger('created_by');

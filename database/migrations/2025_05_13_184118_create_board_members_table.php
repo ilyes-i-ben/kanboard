@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('board_members', function (Blueprint $table) {
-            $table->integer('board_id');
+            $table->unsignedBigInteger('board_id');
             $table->unsignedBigInteger('user_id')->index('user_id');
             $table->enum('role', ['owner', 'admin', 'member'])->default('member');
             $table->dateTime('created_at')->useCurrent();

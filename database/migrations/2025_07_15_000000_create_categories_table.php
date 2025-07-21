@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('board_id');
+            $table->unsignedBigInteger('board_id');
             $table->timestamps();
 
             $table->foreign('board_id')->references('id')->on('boards')->onDelete('cascade');
