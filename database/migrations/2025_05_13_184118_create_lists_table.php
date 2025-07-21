@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('lists', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('board_id')->index('board_id');
+            $table->unsignedBigInteger('board_id');
             $table->string('title');
             $table->double('position');
             $table->dateTime('created_at')->useCurrent();
