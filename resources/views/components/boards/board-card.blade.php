@@ -34,7 +34,7 @@
 
 <div
     class="group board-card relative overflow-hidden rounded-2xl shadow-2xl border border-gray-300/50 dark:border-white/20 hover:shadow-3xl transition-all duration-500 cursor-pointer"
-    {!! $type === 'owned' ? $bgColors['owned'] : $bgColors['collaborative'] !!}
+    {!! $bgColors['owned'] !!}
     onclick="window.location.href = '{{ route('boards.show', $board->id) }}'"
 >
     <div class="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-300">
@@ -42,7 +42,7 @@
         <div class="absolute bottom-4 left-4 w-12 h-12 rounded-full {{ $animationColors[$type] }} blur-lg animate-pulse delay-1000"></div>
     </div>
 
-    <div class="relative p-6 h-48 flex flex-col justify-between">
+    <div class="relative mb-4 p-6 h-48 flex flex-col justify-between">
         <div>
             <div class="flex items-center justify-between mb-4">
                 <div class="w-10 h-10 rounded-xl {{ $iconColors[$type] }} backdrop-blur-sm flex items-center justify-center shadow-lg">
