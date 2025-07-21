@@ -4,7 +4,7 @@ use App\Http\Controllers\Api\CardController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\BoardController;
 
-Route::prefix('api')->middleware(['auth', 'verified'])->group(function () {
+Route::prefix('api')->middleware(['auth', 'verified', 'throttle:60,1'])->group(function () {
     Route::put('/cards/move', [CardController::class, 'move'])
         ->name('cards.move');
 
