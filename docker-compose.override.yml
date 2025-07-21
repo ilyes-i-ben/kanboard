@@ -1,4 +1,6 @@
 services:
+  laravel:
+    env_file: ".env.prod"
   traefik:
     image: traefik:v3.0
     container_name: traefik-proxy
