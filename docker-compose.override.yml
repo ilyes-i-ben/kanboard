@@ -52,6 +52,10 @@ services:
       - "traefik.http.routers.traefik.entrypoints=websecure"
       - "traefik.http.routers.traefik.tls.certresolver=le"
 
+      # wordpress vulnerability blocking middleware
+      - "traefik.http.middlewares.block-wp-attacks.replacepathregex.regex=^/(wp-admin|wp-content|wp-includes|wp-login|xmlrpc\\.php|wp-config\\.php|atomlib\\.php|bless\\.php|class\\.php|mail\\.php|themes\\.php|wp-conflg\\.php|readme\\.html|license\\.txt|\\.well-known/.*\\.php).*"
+      - "traefik.http.middlewares.block-wp-attacks.replacepathregex.replacement=/404"
+
   nginx:
     ports: []
     labels:
@@ -61,13 +65,14 @@ services:
       - "traefik.http.routers.kanboard-app-http.rule=Host(`app.kanboard.info`) || Host(`kanboard.info`) || Host(`www.kanboard.info`)"
       - "traefik.http.routers.kanboard-app-http.entrypoints=web"
       - "traefik.http.routers.kanboard-app-http.service=kanboard-app"
-      - "traefik.http.routers.kanboard-app-http.middlewares=redirect-to-https"
+      - "traefik.http.routers.kanboard-app-http.middlewares=block-wp-attacks,redirect-to-https"
 
       # HTTPS router
       - "traefik.http.routers.kanboard-app.rule=Host(`app.kanboard.info`) || Host(`kanboard.info`) || Host(`www.kanboard.info`)"
       - "traefik.http.routers.kanboard-app.service=kanboard-app"
       - "traefik.http.routers.kanboard-app.entrypoints=websecure"
       - "traefik.http.routers.kanboard-app.tls.certresolver=le"
+      - "traefik.http.routers.kanboard-app.middlewares=block-wp-attacks"
 
       # Service definition (shared by both HTTP and HTTPS routers)
       - "traefik.http.services.kanboard-app.loadbalancer.server.port=80"
