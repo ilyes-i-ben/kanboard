@@ -65,6 +65,10 @@ class BoardController extends Controller
      */
     public function show(Board $board)
     {
+        if (!auth()->user()->can('see', $board)) {
+            abort(403, 'You are not a member of this board.');
+        }
+
         $view = request()->query('view', 'kanban');
 
         $board = Board::with([

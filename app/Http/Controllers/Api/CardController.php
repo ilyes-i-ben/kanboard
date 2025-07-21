@@ -105,6 +105,10 @@ class CardController extends Controller
      */
     public function show(Card $card)
     {
+        if (!auth()->user()->can('see', $card)) {
+            abort(403, 'You can\'t see the card');
+        }
+
         return view('card.show', compact('card'));
     }
 
