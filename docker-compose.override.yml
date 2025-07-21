@@ -2,6 +2,9 @@ services:
   laravel:
     volumes:
       - ./.env.prod:/var/www/html/.env
+    environment:
+      APP_ENV: "production"
+      APP_DEBUG: "false"
   traefik:
     image: traefik:v3.0
     container_name: traefik-proxy
