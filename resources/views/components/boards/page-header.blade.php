@@ -1,5 +1,5 @@
 <!-- Header -->
-<x-slot name="header" class="max-w-7xl mx-auto py-0 px-0 sm:px-0 lg:px-0"></x-slot>
+<x-slot name="header" class="hidden flex items-center"></x-slot>
 <div class="relative z-10 pt-8 pb-12 -mt-6 -mx-4 sm:-mx-6 lg:-mx-8">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-12">
@@ -11,6 +11,9 @@
             <h1 class="text-5xl font-black text-gray-900 dark:text-white drop-shadow-lg mb-4 tracking-tight">
                 {{ $title ?? __('Your Boards') }}
             </h1>
+            <p class="text-lg text-gray-600 dark:text-white/70 mb-2">
+                👋 Hey, {{ auth()->user()->name }}!
+            </p>
             <p class="text-xl text-gray-700 dark:text-white/80 max-w-2xl mx-auto leading-relaxed">
                 {{ $subtitle ?? __('Organize your projects with beautiful, powerful boards') }}
             </p>
