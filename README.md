@@ -66,7 +66,7 @@
 ## 📸 Screenshots
 ![Board View](board-view.png)
 ![Boards Index](boards-index.png)
-![Manage Members](manage-memebers.png)
+![Manage Members](manage-members.png)
 ![Single Card View](single-card-view.png)
 ---
 
