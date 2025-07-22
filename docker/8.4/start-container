@@ -14,5 +14,9 @@ chown -R 1001:1001 /var/log/php
 
 cd /var/www/html
 
-# Start PHP-FPM only (nginx runs in separate container)
-exec php-fpm8.4 --fpm-config /etc/php/8.4/fpm/php-fpm.conf --nodaemonize
+# to support queue worker & laravel web container
+if [ "$#" -gt 0 ]; then
+    exec "$@"
+else
+    exec php-fpm8.4 --fpm-config /etc/php/8.4/fpm/php-fpm.conf --nodaemonize
+fi
