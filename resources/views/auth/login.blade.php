@@ -8,6 +8,7 @@
     </div>
 
     <form method="POST" action="{{ route('login') }}" class="space-y-6">
+        @honeypot
         @csrf
 
         <!-- Email Address -->
