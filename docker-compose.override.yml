@@ -5,6 +5,35 @@ services:
     environment:
       APP_ENV: "production"
       APP_DEBUG: "false"
+
+  queue-worker:
+    build:
+      context: ./docker/8.4
+      dockerfile: Dockerfile
+      args:
+        WWWGROUP: '${WWWGROUP:-1001}'
+        NODE_VERSION: '${NODE_VERSION:-22}'
+    image: 'app-8.4-fpm'
+    container_name: laravel-queue-worker
+    user: ${UID:-1001}:${GID:-1001}
+    environment:
+      WWWUSER: '${WWWUSER:-1001}'
+      LARAVEL_SAIL: 1
+      IGNITION_LOCAL_SITES_PATH: '${PWD}'
+      APP_ENV: "production"
+      APP_DEBUG: "false"
+    command: php artisan queue:work --sleep=3 --tries=3 --timeout=90
+    volumes:
+      - .:/var/www/html
+      - ./docker/8.4/php.ini:/etc/php/8.4/fpm/conf.d/99-custom.ini:ro
+      - ./docker/8.4/php.ini:/etc/php/8.4/cli/conf.d/99-custom.ini:ro
+      - ./.env.prod:/var/www/html/.env
+    depends_on:
+      - mysql
+    networks:
+      - kanboard
+    restart: unless-stopped
+
   traefik:
     image: traefik:v3.0
     container_name: traefik-proxy
