@@ -33,21 +33,23 @@
                         <x-heroicon-o-trash class="w-6 h-6" />
                     </button>
                 @endcan
-                <button
-                    id="mark-as-incomplete-button-{{ $card->id }}"
-                    class="@if ($card->finished_at === null) hidden @endif rounded-full p-2 text-yellow-400 hover:text-yellow-700 dark:text-yellow-400 dark:hover:text-yellow-300 transition"
-                    title="Mark as Incomplete"
-                    @click="window.dispatchEvent(new CustomEvent('mark-as-incomplete', { detail: { cardId: {{ $card->id }} } }))"
-                >
-                    <x-heroicon-o-exclamation-circle class="w-6 h-6" />
-                </button>
-                <button
-                    @click="showEditCardModal = true"
-                    class="rounded-full p-2 text-blue-400 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition"
-                    title="Edit"
-                >
-                    <x-heroicon-o-pencil-square class="w-6 h-6" />
-                </button>
+                @can('update', $card)
+                    <button
+                        id="mark-as-incomplete-button-{{ $card->id }}"
+                        class="@if ($card->finished_at === null) hidden @endif rounded-full p-2 text-yellow-400 hover:text-yellow-700 dark:text-yellow-400 dark:hover:text-yellow-300 transition"
+                        title="Mark as Incomplete"
+                        @click="window.dispatchEvent(new CustomEvent('mark-as-incomplete', { detail: { cardId: {{ $card->id }} } }))"
+                    >
+                        <x-heroicon-o-exclamation-circle class="w-6 h-6" />
+                    </button>
+                    <button
+                        @click="showEditCardModal = true"
+                        class="rounded-full p-2 text-blue-400 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition"
+                        title="Edit"
+                    >
+                        <x-heroicon-o-pencil-square class="w-6 h-6" />
+                    </button>
+                @endcan
             @endif
                 <button
                     id="share-card-modal-button-{{ $card->id }}"
