@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/images/logo.svg" width="200" alt="Kanboard Logo">
+  <img src="public/images/logo.svg" width="200" alt="Kanboard Logo" style="background:white; padding:12px; border-radius:8px;">  
   
   # Kanboard
   
